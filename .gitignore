@@ -1,0 +1,13 @@
+# Ignore build artifacts
+bin/
+obj/
+*.exe
+*.dll
+*.pdb
+*.user
+*.suo
+*.cache
+*.vs/
+
+# Ignore package dependencies
+packages/

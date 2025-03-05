@@ -21,3 +21,4 @@ C:\Users\mecha\Learning to Program\watchYourToes\watchYourToes\bin\Debug\net8.0\
 C:\Users\mecha\Learning to Program\watchYourToes\watchYourToes\bin\Debug\net8.0\ZstdSharp.dll
 C:\Users\mecha\Learning to Program\watchYourToes\watchYourToes\obj\Debug\net8.0\watchYourToes.csproj.AssemblyReference.cache
 C:\Users\mecha\Learning to Program\watchYourToes\watchYourToes\obj\Debug\net8.0\watchYou.066B0038.Up2Date
+C:\Users\mecha\Learning to Program\watchYourToes\watchyourtoes\obj\Debug\net8.0\watchYourToes.sourcelink.json

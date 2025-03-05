@@ -1,0 +1,14 @@
+dotnet add package MongoDB.Driver
+dotnet list package
+
+
+
+mongo admin info:
+Username: mechamit000
+Password: 1FhnVwbO6e54fLRa
+
+Base Connection String:
+mongodb+srv://mechamit000:<db_password>@character.btcp0.mongodb.net/?retryWrites=true&w=majority&appName=character
+
+Read Connection String:
+mongodb+srv://mechamit000:1FhnVwbO6e54fLRa@character.btcp0.mongodb.net/?retryWrites=true&w=majority&appName=character

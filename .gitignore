@@ -4,10 +4,9 @@ obj/
 *.exe
 *.dll
 *.pdb
-*.user
-*.suo
-*.cache
-*.vs/
+*.json
+*.deps.json
+*.runtimeconfig.json
 
 # Ignore package dependencies
 packages/

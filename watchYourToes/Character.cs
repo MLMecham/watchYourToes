@@ -306,6 +306,17 @@ public void UnequipAllItems()
     Console.WriteLine("All equipped items have been unequipped and returned to inventory.");
 }
 
+
+public void PrintBaseStats()
+{
+    Stats.PrintBaseStats();
+}
+
+public void PrintCurrentStats()
+{
+    Stats.PrintCurrentStats();
+}
+
     
 
     

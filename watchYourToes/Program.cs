@@ -113,7 +113,6 @@ class Program
 Character character = new Character("Hero");
 
 // Create gear items
-// Create gear items with appropriate stat changes
 Gear sword = new Gear(
     name: "Sword",
     description: "A sharp sword.",
@@ -123,7 +122,18 @@ Gear sword = new Gear(
     defenseChange: 1,     // +1 defense
     magicAttackChange: 1, // +1 magic attack
     magicDefenseChange: 1, // +1 magic defense
-    speedChange: 1        // +1 speed
+    speedChange: 100        // +1 speed
+);
+Gear BigSword = new Gear(
+    name: "Giant Sword",
+    description: "A sharp sword.",
+    slot: "weapon",
+    healthChange: 30,      // +1 health
+    attackChange: 1,      // +1 attack
+    defenseChange: 40,     // +1 defense
+    magicAttackChange: 1, // +1 magic attack
+    magicDefenseChange: 1, // +1 magic defense
+    speedChange: 100        // +1 speed
 );
 
 Gear shield = new Gear(
@@ -141,26 +151,36 @@ Gear shield = new Gear(
 // Add items to inventory
 character.AddItemToInventory(sword);
 character.AddItemToInventory(shield);
+character.AddItemToInventory(BigSword);
+
+character.MoveAllInventoryToStorage();
+
+Console.WriteLine("\n-- Inventory Updated --\n");
 
 // Equip sword (removes it from inventory)
 character.Equip(sword);
-Console.WriteLine("Sword equipped.");
+Console.WriteLine("\nSword equipped.\n");
 
 // Equip shield (removes it from inventory)
 character.Equip(shield);
-Console.WriteLine("Shield equipped.");
-
+Console.WriteLine("\nShield equipped.\n");
 
 character.PrintEquippedItems();
+Console.WriteLine();
+character.PrintBaseStats();
+character.PrintCurrentStats();
+Console.WriteLine();
 
 // Remove sword (returns it to inventory)
 character.RemoveItem("weapon");
-Console.WriteLine("Sword removed from equipment.");
+Console.WriteLine("\nSword removed from equipment.\n");
 
-// Print inventory
 character.PrintInventory();
-
+Console.WriteLine();
 character.PrintEquippedItems();
-
+Console.WriteLine();
+character.PrintBaseStats();
+character.PrintCurrentStats();
+Console.WriteLine();
     }
 }

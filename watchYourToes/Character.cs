@@ -274,6 +274,42 @@ public void RemoveItem(string slot)
         Equipment.PrintEquippedItems();
     }
 
+    public void MoveAllInventoryToStorage()
+{
+    if (Inventory.Count == 0)
+    {
+        Console.WriteLine("Your inventory is empty. Nothing to move.");
+        return;
+    }
+
+    // Move all inventory items to storage
+    Storage.AddRange(Inventory);
+    Inventory.Clear();
+    Console.WriteLine("All items have been moved from inventory to storage.");
+}
+
+public void UnequipAllItems()
+{
+    var equippedItems = Equipment.GetAllEquippedItems(); // Assume this method returns a list of equipped gear
+
+    if (equippedItems.Count == 0)
+    {
+        Console.WriteLine("No items are equipped.");
+        return;
+    }
+
+    foreach (var item in equippedItems)
+    {
+        RemoveItem(item.Slot); // Unequip item and put it back into inventory
+    }
+
+    Console.WriteLine("All equipped items have been unequipped and returned to inventory.");
+}
+
+    
+
+    
+
 
     
 

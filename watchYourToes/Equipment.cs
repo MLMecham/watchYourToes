@@ -118,4 +118,18 @@ public class Equipment
     Console.WriteLine($"Toes: {(Toes != null ? Toes.Name : "Empty")}");
     Console.WriteLine($"Weapon: {(Weapon != null ? Weapon.Name : "Empty")}");
 }
+
+// Method to get all equipped items
+    public List<Gear> GetAllEquippedItems()
+    {
+        List<Gear> equippedItems = new List<Gear>();
+
+        if (Head != null) equippedItems.Add(Head);
+        if (Shoulders != null) equippedItems.Add(Shoulders);
+        if (Knees != null) equippedItems.Add(Knees);
+        if (Toes != null) equippedItems.Add(Toes);
+        if (Weapon != null) equippedItems.Add(Weapon);
+
+        return equippedItems;
+    }
 }

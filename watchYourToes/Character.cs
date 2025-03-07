@@ -5,6 +5,7 @@ using System.Text.Json.Serialization;
 public class Character
 {
     public string Name { get; set; }
+    public string ClassName { get; set; }  //class name
     public int Level { get; set; }
     public int Exp { get; set; }
     public Stats Stats { get; set; }
@@ -17,14 +18,18 @@ public class Character
     public List<Item> Inventory { get; set; }
     public List<Item> Storage { get; set; }
 
+    
+
+
     // Virtual property that subclasses can override to define bonus points
     public virtual int BonusPoints { get; } = 3; // Default bonus points (e.g., 3)
 
     
 
-    public Character(string name)
+    public Character(string name, string className)
     {
         Name = name;
+        ClassName = className;
         Level = 1;
         Exp = 0;
         Stats = new Stats();
@@ -317,14 +322,19 @@ public void PrintCurrentStats()
     Stats.PrintCurrentStats();
 }
 
-    
+//method to load character from db
+public static Character CreateCharacter(BsonDocument characterData)
+{
+    string className = characterData["className"].AsString;
+    return className switch
+    {
+        "Archer" => new Archer(characterData["Name"].AsString),
+        "Mage" => new Mage(characterData["Name"].AsString),
+        "Warrior" => new Warrior(characterData["Name"].AsString),
+        _ => new Character(characterData["Name"].AsString, className)
 
-    
+    };
 
 
-    
-
-
-
-    
+}
 }

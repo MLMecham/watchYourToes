@@ -110,7 +110,8 @@ class Program
         // Console.WriteLine($"Speed: {character.Stats.CurrentStats.Speed}\n");
 
         // Create a character
-Character character = new Character("Hero");
+Character character = new Mage("Harold"); 
+
 
 // Create gear items
 Gear sword = new Gear(
@@ -147,6 +148,9 @@ Gear shield = new Gear(
     magicDefenseChange: 0,
     speedChange: 0
 );
+
+
+character.LevelUp();
 
 // Add items to inventory
 character.AddItemToInventory(sword);

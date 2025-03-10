@@ -1,10 +1,12 @@
+using MongoDB.Driver;
 using MongoDB.Bson;
+using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Attributes;
-using System.Text.Json.Serialization;
 
 public class Character
 {
     public string Name { get; set; }
+    public string ClassName { get; set; }
     public int Level { get; set; }
     public int Exp { get; set; }
     public Stats Stats { get; set; }
@@ -12,23 +14,35 @@ public class Character
     public bool InDungeon { get; set; }  // Whether the character is in the dungeon
     public int Days { get; set; }  // Number of days the character has spent in the dungeon
     public int LowestFloor { get; set; }  // The lowest floor the character has reached
+    public int Gold { get; set; }
 
     // Inventory and storage as lists
     public List<Item> Inventory { get; set; }
     public List<Item> Storage { get; set; }
+
+
+    /// MongoDB connection and database
+    private static readonly string connectionString = "mongodb+srv://mechamit000:1FhnVwbO6e54fLRa@character.btcp0.mongodb.net/?retryWrites=true&w=majority&appName=character";
+    private static readonly MongoClient client = new MongoClient(connectionString);
+    private static readonly IMongoDatabase database = client.GetDatabase("touchyourtoes");
+    private static readonly IMongoCollection<BsonDocument> charactersCollection = database.GetCollection<BsonDocument>("characters");
+
+
+
 
     // Virtual property that subclasses can override to define bonus points
     public virtual int BonusPoints { get; } = 3; // Default bonus points (e.g., 3)
 
     
 
-    public Character(string name)
+    public Character(string name, string className)
     {
         Name = name;
         Level = 1;
         Exp = 0;
         Stats = new Stats();
         InDungeon = false;  // Initialize as not in the dungeon
+        ClassName = className;
         Days = 0;  // Initialize days to 0
         LowestFloor = 1;  // Initialize lowest floor as the first floor
         Equipment = new Equipment();
@@ -36,7 +50,57 @@ public class Character
         // Initialize inventory and storage as empty lists
         Inventory = new List<Item>();
         Storage = new List<Item>();
+        Gold = 0;
     }
+
+
+    public async Task<bool> SaveCharacter()
+{
+    try
+    {
+        // Convert the Character object to a BsonDocument for MongoDB storage
+        BsonDocument characterDoc = new BsonDocument
+        {
+            { "_id", Name },  // Set the _id field to the Name of the character
+            { "Name", Name },
+            { "ClassName", ClassName },
+            { "Level", Level },
+            { "Exp", Exp },
+            { "Stats", BsonSerializer.Deserialize<BsonDocument>(Stats.ToJson()) },
+            { "Equipment", BsonSerializer.Deserialize<BsonDocument>(Equipment.ToJson()) },
+            { "InDungeon", InDungeon },
+            { "Days", Days },
+            { "LowestFloor", LowestFloor },
+            { "Gold", Gold },
+            { "Inventory", new BsonArray(Inventory.Select(item => BsonSerializer.Deserialize<BsonDocument>(item.ToJson()))) },
+            { "Storage", new BsonArray(Storage.Select(item => BsonSerializer.Deserialize<BsonDocument>(item.ToJson()))) }
+        };
+
+        // Insert or replace the character in the MongoDB collection
+        var filter = Builders<BsonDocument>.Filter.Eq("_id", Name); // Use _id as the unique field now
+        var updateOptions = new UpdateOptions { IsUpsert = true }; // This will insert a new document if none exists
+        var update = new BsonDocument("$set", characterDoc);
+
+        var result = await charactersCollection.UpdateOneAsync(filter, update, updateOptions); // Use UpdateOneAsync for async operation
+
+        if (result.ModifiedCount > 0 || result.UpsertedId != null)
+        {
+            Console.WriteLine($"Character {Name} saved successfully.");
+            return true;
+        }
+        else
+        {
+            Console.WriteLine($"Character {Name} was not saved.");
+            return false;
+        }
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Error saving character {Name}: {ex.Message}");
+        return false;
+    }
+}
+
 
     // Base LevelUp method with dynamic bonus points
     public virtual void LevelUp()

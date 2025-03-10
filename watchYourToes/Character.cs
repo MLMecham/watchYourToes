@@ -22,7 +22,7 @@ public class Character
 
 
     // Virtual property that subclasses can override to define bonus points
-    public virtual int BonusPoints { get; } = 3; // Default bonus points (e.g., 3)
+    public virtual int BonusPoints { get; } = 3; // Default bonus points (e.g., 3) //OVERRIDE THIS FOR EACH ARCHTYPE (CLASS TYPES)
 
     
 
@@ -58,7 +58,7 @@ public class Character
             Stats.BaseStats.Defense += 2;
 
             // Allow the player to distribute extra points
-            DistributeExtraPoints();
+            DistributeExtraPoints(); 
 
             Stats.CurrentStats.Health = Stats.BaseStats.Health;
 

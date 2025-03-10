@@ -9,6 +9,7 @@ public class Mage : Character
     {
         base.LevelUp(); // Call the base LevelUp method
         Stats.BaseStats.MagicAttack += 3; // Mage gains more Magic Attack on level-up
+        //ADD THE REST OF THE STATS EVEN IF ITS 0 LOL
         Console.WriteLine($"{Name} (Mage) leveled up! Magic Attack increased.");
     }
 }

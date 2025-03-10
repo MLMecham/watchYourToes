@@ -7,6 +7,6 @@ obj/
 *.json
 *.deps.json
 *.runtimeconfig.json
-
+.env
 # Ignore package dependencies
 packages/

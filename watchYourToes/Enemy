@@ -1,0 +1,31 @@
+using System;
+
+public class Enemy : Stats{
+    // for boss: it creates 5 different types of enemies and append them into the array
+    public int exp { get; set; }
+    public List<Gear> enemyGears { get; set; }
+    public float possibilityOfDrop { get; set; }
+
+    public Enemy(List<Gear> enemyGears){
+        this.exp = 3;
+        this.enemyGears = enemyGears;
+        this.possibilityOfDrop = 0.9f;
+    }
+
+    public Enemy(int hp, int atk, int def, int matk, int mdef, int spd, int exp, List<Gear> enemyGears, float possibilityOfDrop) : base(hp, atk, def, matk, mdef, spd){
+        this.exp = exp;
+        this.enemyGears = enemyGears;
+        this.possibilityOfDrop = possibilityOfDrop;
+    }
+
+    public List<Gear> DropLoot(){
+        Random random = new Random();
+        List<Gear> droppedGears = new List<Gear>();
+        foreach (Gear gear in enemyGears){
+            if (random.Nextfloat() <= possibilityOfDrop){
+                droppedGears.Add(gear);
+            }
+        } return droppedGears;
+    }
+
+}

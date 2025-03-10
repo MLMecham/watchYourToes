@@ -36,7 +36,7 @@ public class Stat
 
     
 
-    public Stat()
+    public Stat() // default stats
     {
         Health = 100;
         Attack = 10;

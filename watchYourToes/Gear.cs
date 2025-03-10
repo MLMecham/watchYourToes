@@ -5,7 +5,7 @@ public class Gear : Item
     public int AttackChange { get; set; }        // Stat change for Attack
     public int DefenseChange { get; set; }       // Stat change for Defense
     public int MagicAttackChange { get; set; }   // Stat change for Magic Attack
-    public int MagicDefenseChange { get; set; }  // Stat change for Magic Defense
+    public int MagicDefenseChange { get; set; }  // Stat change for Magic Defense   
     public int SpeedChange { get; set; }         // Stat change for Speed
 
     public Gear(string name, string description, string slot, int healthChange = 0, int attackChange = 0,

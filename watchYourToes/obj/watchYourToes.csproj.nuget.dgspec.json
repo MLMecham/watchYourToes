@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\mecha\\Learning to Program\\watchYourToes\\watchYourToes\\watchYourToes.csproj": {}
+    "C:\\Users\\mecha\\Learning to Program\\watchYourToes\\watchyourtoes\\watchYourToes.csproj": {}
   },
   "projects": {
-    "C:\\Users\\mecha\\Learning to Program\\watchYourToes\\watchYourToes\\watchYourToes.csproj": {
+    "C:\\Users\\mecha\\Learning to Program\\watchYourToes\\watchyourtoes\\watchYourToes.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mecha\\Learning to Program\\watchYourToes\\watchYourToes\\watchYourToes.csproj",
+        "projectUniqueName": "C:\\Users\\mecha\\Learning to Program\\watchYourToes\\watchyourtoes\\watchYourToes.csproj",
         "projectName": "watchYourToes",
-        "projectPath": "C:\\Users\\mecha\\Learning to Program\\watchYourToes\\watchYourToes\\watchYourToes.csproj",
+        "projectPath": "C:\\Users\\mecha\\Learning to Program\\watchYourToes\\watchyourtoes\\watchYourToes.csproj",
         "packagesPath": "C:\\Users\\mecha\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\mecha\\Learning to Program\\watchYourToes\\watchYourToes\\obj\\",
+        "outputPath": "C:\\Users\\mecha\\Learning to Program\\watchYourToes\\watchyourtoes\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\mecha\\AppData\\Roaming\\NuGet\\NuGet.Config"

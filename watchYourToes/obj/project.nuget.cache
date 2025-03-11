@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "vV2X/ARqv+vlopjVkavkPHMiA76V0A6trBxx3+R7+FL8Y2bCywOF5t4xz4AYaTrqHKn3hAyg3GOwCxw2uyyssg==",
+  "dgSpecHash": "kyp7SBSFt7aSWX0vFA+2on6YJjO6bWd5Nvp0KgyPVUrbwDx9v9ZbQPPAg910b9FGjYPkCmxAgFwq1R32EwGX2A==",
   "success": true,
-  "projectFilePath": "C:\\Users\\mecha\\Learning to Program\\watchYourToes\\watchYourToes\\watchYourToes.csproj",
+  "projectFilePath": "C:\\Users\\mecha\\Learning to Program\\watchYourToes\\watchyourtoes\\watchYourToes.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\mecha\\.nuget\\packages\\dnsclient\\1.6.1\\dnsclient.1.6.1.nupkg.sha512",
     "C:\\Users\\mecha\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\2.0.0\\microsoft.extensions.logging.abstractions.2.0.0.nupkg.sha512",

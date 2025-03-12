@@ -8,7 +8,7 @@ app = FastAPI()
 
 # Claude bc i ran out of free calls from openai :( AI API endpoint and API key
 base_url = "https://api.aimlapi.com/v1"
-api_key = "97d401ef2d974e1e9fea84852dec918b"
+api_key = os.getenv("open_api_key")
 
 # Initialize OpenAI API client with Claude's base URL and API key
 api = OpenAI(api_key=api_key, base_url=base_url)

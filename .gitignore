@@ -1,4 +1,5 @@
 # Ignore build artifacts
+.env
 bin/
 obj/
 *.exe

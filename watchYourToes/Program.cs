@@ -159,14 +159,14 @@ class Program
                         // {
                         //     Console.WriteLine("Character added to user successfully!");
                         // }
-                        isCharacterCreatedOrSelected = true;
+                        
                     }
                     else
                     {
                         Console.WriteLine("Failed to save character.");
                         
                     }
-                    return;
+                    break;
 
                 case "2":
                     // Show the list of existing characters from the database
@@ -224,6 +224,45 @@ class Program
             }
         }
 
+        //=== ITEMS Creation ===
+
+        // Create gear items
+        Gear sword = new Gear(
+            name: "Sword",
+            description: "A sharp sword.",
+            slot: "weapon",
+            healthChange: 1,      // +1 health
+            attackChange: 1,      // +1 attack
+            defenseChange: 1,     // +1 defense
+            magicAttackChange: 1, // +1 magic attack
+            magicDefenseChange: 1, // +1 magic defense
+            speedChange: 100        // +1 speed
+        );
+        Gear BigSword = new Gear(
+            name: "Giant Sword",
+            description: "A sharp sword.",
+            slot: "weapon",
+            healthChange: 30,      // +1 health
+            attackChange: 1,      // +1 attack
+            defenseChange: 40,     // +1 defense
+            magicAttackChange: 1, // +1 magic attack
+            magicDefenseChange: 1, // +1 magic defense
+            speedChange: 100        // +1 speed
+        );
+
+        Gear shield = new Gear(
+            name: "Shield",
+            description: "A sturdy shield.",
+            slot: "shoulders",
+            healthChange: 0,
+            attackChange: 2,      // +2 attack
+            defenseChange: 3,     // +3 defense
+            magicAttackChange: 0,
+            magicDefenseChange: 0,
+            speedChange: 0
+        );
+
+
         //=== Character Stats  ===
         Console.WriteLine();
         myCharacter.PrintBaseStats();
@@ -243,18 +282,26 @@ class Program
             Console.Write(".");
         }
 
-        Thread.Sleep(1000);
+        Thread.Sleep(500);
         Console.Clear();
 
         Console.WriteLine("Welcome, traveler. A peaceful village lies nestled between towering mountains and endless forests, a sanctuary for adventurers seeking respite from the perils of the world. Yet, beyond the village walls, whispers speak of a dark dungeon, an ancient ruin filled with treasures, mysteries, and unspeakable dangers.");
         
-
         Thread.Sleep(3000); 
         Console.Clear();
 
-        //character stats
+        
 
+        //TEST 
 
+        // Add items to inventory
+        myCharacter.AddItemToInventory(sword);
+        myCharacter.AddItemToInventory(shield);
+        myCharacter.AddItemToInventory(BigSword);
+
+        myCharacter.MoveAllInventoryToStorage();
+        await db.UpdateCharacter(myCharacter);
+        Console.WriteLine("\n-- Inventory Updated and Saved --\n");
 
 
     }
@@ -278,44 +325,6 @@ class Program
 
 
 
-        // Create a character
-// Character character = new Character("Hero", "archer");
-
-// // Create gear items
-// Gear sword = new Gear(
-//     name: "Sword",
-//     description: "A sharp sword.",
-//     slot: "weapon",
-//     healthChange: 1,      // +1 health
-//     attackChange: 1,      // +1 attack
-//     defenseChange: 1,     // +1 defense
-//     magicAttackChange: 1, // +1 magic attack
-//     magicDefenseChange: 1, // +1 magic defense
-//     speedChange: 100        // +1 speed
-// );
-// Gear BigSword = new Gear(
-//     name: "Giant Sword",
-//     description: "A sharp sword.",
-//     slot: "weapon",
-//     healthChange: 30,      // +1 health
-//     attackChange: 1,      // +1 attack
-//     defenseChange: 40,     // +1 defense
-//     magicAttackChange: 1, // +1 magic attack
-//     magicDefenseChange: 1, // +1 magic defense
-//     speedChange: 100        // +1 speed
-// );
-
-// Gear shield = new Gear(
-//     name: "Shield",
-//     description: "A sturdy shield.",
-//     slot: "shoulders",
-//     healthChange: 0,
-//     attackChange: 2,      // +2 attack
-//     defenseChange: 3,     // +3 defense
-//     magicAttackChange: 0,
-//     magicDefenseChange: 0,
-//     speedChange: 0
-// );
 
 // // Add items to inventory
 // character.AddItemToInventory(sword);

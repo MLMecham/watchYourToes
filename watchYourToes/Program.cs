@@ -8,113 +8,113 @@ using System.Linq;
 
 class Program
 {
-    static void ShowMenu()
-    {
-        Console.Clear();
-        Console.WriteLine("Welcome to the Main Menu!");
-        Console.WriteLine("1. Option 1");
-        Console.WriteLine("2. Option 2");
-        Console.WriteLine("3. Logout");
+    // static void ShowMenu()
+    // {
+    //     Console.Clear();
+    //     Console.WriteLine("Welcome to the Main Menu!");
+    //     Console.WriteLine("1. Option 1");
+    //     Console.WriteLine("2. Option 2");
+    //     Console.WriteLine("3. Logout");
         
-        Console.Write("Choose an option: ");
-        Console.ReadLine();
-    }
+    //     Console.Write("Choose an option: ");
+    //     Console.ReadLine();
+    // }
 
     // This method checks if the username exists
-    public static async Task<bool> CheckIfUsernameExists(string username, dbConnection db)
-    {
-        var user = await db.GetUser(username);
-        return user != null; // Returns true if the username already exists
-    }
+    // public static async Task<bool> CheckIfUsernameExists(string username, dbConnection db)
+    // {
+    //     var user = await db.GetUser(username);
+    //     return user != null; // Returns true if the username already exists
+    // }
 
     static async Task Main()
     {
-        HttpClient client = new HttpClient();
-        string apiUrl = "http://127.0.0.1:8000/level-up"; // FastAPI URL
-
         dbConnection db = new dbConnection(); // Create an instance of dbConnection
+        Character myCharacter = null; // Declaring character  outside the loop
 
-        bool isLoggedIn = false;
-        User currentUser = null; // Store the current logged-in user
 
-        while (!isLoggedIn)
-        {
-            Console.WriteLine("1. Create Account");
-            Console.WriteLine("2. Login");
-            Console.WriteLine("3. Exit");
-            Console.Write("Choose an option: ");
+        // bool isLoggedIn = false;
+        // User currentUser = null; // Store the current logged-in user
 
-            string choice = Console.ReadLine();
+        // while (!isLoggedIn)
+        // {
+        //     Console.WriteLine("1. Create Account");
+        //     Console.WriteLine("2. Login");
+        //     Console.WriteLine("3. Exit");
+        //     Console.Write("Choose an option: ");
 
-            switch (choice)
-            {
-                case "1":
-                    // Create Account
-                    string createUsername;
-                    bool usernameExists;
-                    do
-                    {
-                        Console.Write("Enter username: ");
-                        createUsername = Console.ReadLine().ToLower(); // Convert to lowercase
+        //     string choice = Console.ReadLine();
 
-                        // Check if the username already exists
-                        usernameExists = await CheckIfUsernameExists(createUsername, db);
-                        if (usernameExists)
-                        {
-                            Console.WriteLine("Username already exists. Please choose another one.");
-                        }
-                    } while (usernameExists);
+        //     switch (choice)
+        //     {
+        //         case "1":
+        //             // Create Account
+        //             string createUsername;
+        //             bool usernameExists;
+        //             do
+        //             {
+        //                 Console.Write("Enter username: ");
+        //                 createUsername = Console.ReadLine().ToLower(); // Convert to lowercase
 
-                    Console.Write("Enter password: ");
-                    string createPassword = Console.ReadLine();
+        //                 // Check if the username already exists
+        //                 usernameExists = await CheckIfUsernameExists(createUsername, db);
+        //                 if (usernameExists)
+        //                 {
+        //                     Console.WriteLine("Username already exists. Please choose another one.");
+        //                 }
+        //             } while (usernameExists);
 
-                    bool userCreated = await db.CreateUser(createUsername, createPassword);
-                    if (userCreated)
-                    {
-                        Console.WriteLine("Account created successfully!");
-                    }
-                    else
-                    {
-                        Console.WriteLine("Error creating account.");
-                    }
-                    break;
+        //             Console.Write("Enter password: ");
+        //             string createPassword = Console.ReadLine();
 
-                case "2":
-                    // Login
-                    Console.Write("Enter username: ");
-                    string loginUsername = Console.ReadLine().ToLower(); // Convert to lowercase
-                    Console.Write("Enter password: ");
-                    string loginPassword = Console.ReadLine();
+        //             bool userCreated = await db.CreateUser(createUsername, createPassword);
+        //             if (userCreated)
+        //             {
+        //                 Console.WriteLine("Account created successfully!");
+        //             }
+        //             else
+        //             {
+        //                 Console.WriteLine("Error creating account.");
+        //             }
+        //             break;
 
-                    User user = await db.GetUser(loginUsername);
+        //         case "2":
+        //             // Login
+        //             Console.Write("Enter username: ");
+        //             string loginUsername = Console.ReadLine().ToLower(); // Convert to lowercase
+        //             Console.Write("Enter password: ");
+        //             string loginPassword = Console.ReadLine();
 
-                    if (user != null && db.VerifyPassword(loginPassword, user.Password))
-                    {
-                        Console.WriteLine("Login successful!");
-                        currentUser = user;
-                        isLoggedIn = true;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Invalid username or password.");
-                    }
-                    break;
+        //             User user = await db.GetUser(loginUsername);
 
-                case "3":
-                    // Exit
-                    Console.WriteLine("Exiting...");
-                    return;
+        //             if (user != null && db.VerifyPassword(loginPassword, user.Password))
+        //             {
+        //                 Console.WriteLine("Login successful!");
+        //                 currentUser = user;
+        //                 isLoggedIn = true;
+        //             }
+        //             else
+        //             {
+        //                 Console.WriteLine("Invalid username or password.");
+        //             }
+        //             break;
 
-                default:
-                    Console.WriteLine("Invalid option. Please try again.");
-                    break;
-            }
-        }
+        //         case "3":
+        //             // Exit
+        //             Console.WriteLine("Exiting...");
+        //             return;
 
-        // After the user logs in, allow character creation or selection
+        //         default:
+        //             Console.WriteLine("Invalid option. Please try again.");
+        //             break;
+        //     }
+        // }
+
+        // Character creation or selection
         bool isCharacterCreatedOrSelected = false;
         while (!isCharacterCreatedOrSelected)
         {
+            Console.WriteLine("----WatchYourToes----");
             Console.WriteLine("1. Create New Character");
             Console.WriteLine("2. Select Existing Character");
             Console.WriteLine("3. Exit to Main Menu");
@@ -132,8 +132,8 @@ class Program
                         Console.Write("Enter character name: ");
                         characterName = Console.ReadLine();
 
-                        // Check if the character name already exists for the user
-                        characterExists = await db.CheckIfCharacterExistsForUser(currentUser.Username, characterName);
+                        // Check if the character name already exists in the collection
+                        characterExists = await db.CheckIfCharacterExists( characterName);
                         if (characterExists)
                         {
                             Console.WriteLine("Character name already exists. Please choose another name.");
@@ -148,42 +148,59 @@ class Program
 
                     // Save the character to the database
                     bool isSaved = await newCharacter.SaveCharacter();
+
                     if (isSaved)
                     {
                         Console.WriteLine("Character created and saved successfully!");
 
                         // Add the character name to the user's list of characters in the database
-                        bool isCharacterAssigned = await db.AssignCharacterToUser(currentUser.Username, newCharacter.Name);
-                        if (isCharacterAssigned)
-                        {
-                            Console.WriteLine("Character added to user successfully!");
-                        }
+                        //bool isCharacterAssigned = await db.AssignCharacterToUser(currentUser.Username, newCharacter.Name);
+                        // if (isCharacterAssigned)
+                        // {
+                        //     Console.WriteLine("Character added to user successfully!");
+                        // }
                         isCharacterCreatedOrSelected = true;
                     }
                     else
                     {
                         Console.WriteLine("Failed to save character.");
+                        
                     }
-                    break;
+                    return;
 
                 case "2":
-                    // Show the list of existing characters and allow the user to select one
-                    if (currentUser.Characters.Count > 0)
+                    // Show the list of existing characters from the database
+                    List<Character> allCharacters = await db.GetAllCharacters();
+                    if (allCharacters.Count > 0)
                     {
-                        Console.WriteLine("Select a character:");
+                        Console.WriteLine("\nSelect a character:");
 
-                        for (int i = 0; i < currentUser.Characters.Count; i++)
+                        for (int i = 0; i < allCharacters.Count; i++)
                         {
-                            Console.WriteLine($"{i + 1}. {currentUser.Characters[i]}");
+                            Console.WriteLine($"{i + 1}. {allCharacters[i].Name}");
                         }
 
                         Console.Write("Choose a character by number: ");
                         string selection = Console.ReadLine();
-                        if (int.TryParse(selection, out int selectedIndex) && selectedIndex >= 1 && selectedIndex <= currentUser.Characters.Count)
+                        if (int.TryParse(selection, out int selectedIndex) && selectedIndex >= 1 && selectedIndex <= allCharacters.Count)
                         {
-                            string selectedCharacterName = currentUser.Characters[selectedIndex - 1].Name;
+                            string selectedCharacterName = allCharacters[selectedIndex - 1].Name;
+                            Console.Clear();
                             Console.WriteLine($"Character '{selectedCharacterName}' selected.");
+
+                            myCharacter = await db.LoadCharacter(selectedCharacterName); // Load and assing the selected character
+                            if (myCharacter != null)
+                            {
+                                Console.WriteLine($"Character loaded: {myCharacter.Name}, Level: {myCharacter.Level}");
+                            }
+                            else
+                            {
+                                Console.WriteLine("Character not found.");
+                            }
+                    
                             isCharacterCreatedOrSelected = true;
+
+                            
                         }
                         else
                         {
@@ -198,7 +215,7 @@ class Program
 
                 case "3":
                     // Exit to Main Menu
-                    Console.WriteLine("Returning to main menu...");
+                    Console.WriteLine("Exiting...");
                     return;
 
                 default:
@@ -206,6 +223,40 @@ class Program
                     break;
             }
         }
+
+        //=== Character Stats  ===
+        Console.WriteLine();
+        myCharacter.PrintBaseStats();
+        Console.WriteLine();
+        myCharacter.PrintEquippedItems();
+        Console.WriteLine("\nPress SPACE to continue...");
+        while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
+
+        Console.Clear(); // Clears the screen before the next scene
+
+
+        //=== Intro Sequence after Character Selection ===
+        Console.Write("Loading");
+        for (int i = 0; i < 3; i++)
+        {
+            Thread.Sleep(1000);
+            Console.Write(".");
+        }
+
+        Thread.Sleep(1000);
+        Console.Clear();
+
+        Console.WriteLine("Welcome, traveler. A peaceful village lies nestled between towering mountains and endless forests, a sanctuary for adventurers seeking respite from the perils of the world. Yet, beyond the village walls, whispers speak of a dark dungeon, an ancient ruin filled with treasures, mysteries, and unspeakable dangers.");
+        
+
+        Thread.Sleep(3000); 
+        Console.Clear();
+
+        //character stats
+
+
+
+
     }
 }
 

@@ -4,7 +4,10 @@ using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Attributes;
 
 public class Character
+
 {
+    [BsonId] 
+    public string Id { get; set; } // _id field as a string
     public string Name { get; set; }
     public string ClassName { get; set; }
     public int Level { get; set; }
@@ -53,8 +56,7 @@ public class Character
         Gold = 0;
     }
 
-
-    public async Task<bool> SaveCharacter()
+      public async Task<bool> SaveCharacter()
 {
     try
     {
@@ -101,7 +103,9 @@ public class Character
     }
 }
 
+   
 
+    
     // Base LevelUp method with dynamic bonus points
     public virtual void LevelUp()
     {

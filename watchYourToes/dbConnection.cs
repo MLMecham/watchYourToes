@@ -102,6 +102,28 @@ public async Task<bool> CheckIfUsernameExists(string username)
             return false;
         }
     }
+    // Checks if a character already exists in the database
+    public async Task<bool> CheckIfCharacterExists(string characterName)
+    {
+        var character = await _characterCollection.Find(c => c.Name == characterName).FirstOrDefaultAsync();
+        return character != null;
+    }
+    // Retrieves all characters from the database
+    public async Task<List<Character>> GetAllCharacters()
+    {
+        return await _characterCollection.Find(_ => true).ToListAsync();
+    }
+    
+    public async Task<Character> LoadCharacter(string characterName)
+    {
+        var filter = Builders<Character>.Filter.Eq("_id", characterName);
+        var character = await _characterCollection.Find(filter).FirstOrDefaultAsync();
+        
+        return character;
+    }
+
+
+
 
     // Other methods like CreateUser, GetUser, etc.
 }

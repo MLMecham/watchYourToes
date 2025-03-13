@@ -2,6 +2,7 @@ using MongoDB.Driver;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Attributes;
+using System.Threading.Tasks;
 
 public class Character
 
@@ -107,7 +108,7 @@ public class Character
 
     
     // Base LevelUp method with dynamic bonus points
-    public virtual void LevelUp()
+    public virtual async Task LevelUp()
     {
         double requiredExp = 100 * Math.Pow(Level, 1.5);
         while (Exp >= requiredExp)
@@ -127,7 +128,10 @@ public class Character
 
             requiredExp = 100 * Math.Pow(Level, 1.5);
         }
-    }
+        // Save changes to the database
+        dbConnection db = new dbConnection();
+        await db.UpdateCharacter(this);
+        }
 
     // Allow user to distribute extra points (using the inherited BonusPoints)
     public void DistributeExtraPoints()

@@ -31,6 +31,7 @@ class Program
     {
         dbConnection db = new dbConnection(); // Create an instance of dbConnection
         Character myCharacter = null; // Declaring character  outside the loop
+        string characterName = ""; // Declaring character  outside the loop
 
 
         // bool isLoggedIn = false;
@@ -125,7 +126,7 @@ class Program
             {
                 case "1":
                     // Create a new character
-                    string characterName;
+                    // string characterName;
                     bool characterExists;
                     do
                     {
@@ -191,7 +192,7 @@ class Program
                             myCharacter = await db.LoadCharacter(selectedCharacterName); // Load and assing the selected character
                             if (myCharacter != null)
                             {
-                                Console.WriteLine($"Character loaded: {myCharacter.Name}, Level: {myCharacter.Level}");
+                                Console.WriteLine($"Character loaded: {myCharacter.Name},Id: {myCharacter.Id}, Class Name: {myCharacter.ClassName}, Level: {myCharacter.Level}");
                             }
                             else
                             {
@@ -268,11 +269,36 @@ class Program
         myCharacter.PrintBaseStats();
         Console.WriteLine();
         myCharacter.PrintEquippedItems();
+        Console.WriteLine();
+        // Console.WriteLine("\nPress SPACE to continue...");
+        // while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
+
+        // Console.Clear(); // Clears the screen before the next scene
+
+
+        //TEST !!
+        // Adding items to inventory test
+        Console.WriteLine("\n-- Adding Items to Inventory ... --\n");
+        myCharacter.AddItemToInventory(sword);
+        myCharacter.AddItemToInventory(shield);
+        myCharacter.AddItemToInventory(BigSword);
+        await db.UpdateCharacter(myCharacter); //save new info to db
+    
+        Console.WriteLine("\n-- Level Up Test... --\n");
+        //Level Up test
+        await myCharacter.LevelUp();
+        // Fetch the character again from DB to verify update
+        await db.LoadCharacter(myCharacter.Name);
+        Console.WriteLine("\nAfter Level Up:");
+        myCharacter.PrintBaseStats();
+        
+
+        
+
+
         Console.WriteLine("\nPress SPACE to continue...");
         while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
-
-        Console.Clear(); // Clears the screen before the next scene
-
+        
 
         //=== Intro Sequence after Character Selection ===
         Console.Write("Loading");
@@ -292,16 +318,6 @@ class Program
 
         
 
-        //TEST 
-
-        // Add items to inventory
-        myCharacter.AddItemToInventory(sword);
-        myCharacter.AddItemToInventory(shield);
-        myCharacter.AddItemToInventory(BigSword);
-
-        myCharacter.MoveAllInventoryToStorage();
-        await db.UpdateCharacter(myCharacter);
-        Console.WriteLine("\n-- Inventory Updated and Saved --\n");
 
 
     }

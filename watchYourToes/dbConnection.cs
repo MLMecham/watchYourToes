@@ -114,19 +114,50 @@ public class dbConnection
         return await _characterCollection.Find(_ => true).ToListAsync();
     }
     
-    public async Task<Character> LoadCharacter(string characterName)
+    public async Task<Character> LoadCharacter(string name)
     {
-        var filter = Builders<Character>.Filter.Eq("_id", characterName);
+        var filter = Builders<Character>.Filter.Eq("_id", name);
         var character = await _characterCollection.Find(filter).FirstOrDefaultAsync();
         
-        return character;
+
+
+        if (character == null)
+        {
+            return null; // Character not found
+        }
+
+
+        // Instantiate the correct subclass based on ClassName
+        return character.ClassName.ToLowerInvariant() switch
+        {
+            "warrior" => new Warrior(character),
+            "mage" => new Mage(character),
+            "archer" => new Archer(character),
+            _ => character // Default to base Character?
+        };
     }
 
-    public async Task UpdateCharacter(Character updatedCharacter)
+
+   public async Task UpdateCharacter(Character updatedCharacter)
+{
+    
+
+    Console.WriteLine($"🔄 Updating character with ID: {updatedCharacter.Id}");
+
+    var filter = Builders<Character>.Filter.Eq("_id", updatedCharacter.Id);
+    
+    // Debug: Check if character exists in the database before updating
+    var existingCharacter = await _characterCollection.Find(filter).FirstOrDefaultAsync();
+    if (existingCharacter == null)
     {
-        var filter = Builders<Character>.Filter.Eq(c => c.Id, updatedCharacter.Id);
-        await _characterCollection.ReplaceOneAsync(filter, updatedCharacter);
+        Console.WriteLine($"❌ No character found with ID: {updatedCharacter.Id}. Update aborted.");
+        return;
     }
+
+    var result = await _characterCollection.ReplaceOneAsync(filter, updatedCharacter);
+
+    Console.WriteLine($"✅ Update Result - Matched Count: {result.MatchedCount}, Modified Count: {result.ModifiedCount}");
+}
 
 
 

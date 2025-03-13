@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/valeriabisso/Desktop/BYUI/cse310/wyt/watchYourToes/watchYourToes.csproj": {}
+    "/Users/valeriabisso/Desktop/BYUI/cse310/watchYourToes/watchYourToes/watchYourToes.csproj": {}
   },
   "projects": {
-    "/Users/valeriabisso/Desktop/BYUI/cse310/wyt/watchYourToes/watchYourToes.csproj": {
+    "/Users/valeriabisso/Desktop/BYUI/cse310/watchYourToes/watchYourToes/watchYourToes.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/valeriabisso/Desktop/BYUI/cse310/wyt/watchYourToes/watchYourToes.csproj",
+        "projectUniqueName": "/Users/valeriabisso/Desktop/BYUI/cse310/watchYourToes/watchYourToes/watchYourToes.csproj",
         "projectName": "watchYourToes",
-        "projectPath": "/Users/valeriabisso/Desktop/BYUI/cse310/wyt/watchYourToes/watchYourToes.csproj",
+        "projectPath": "/Users/valeriabisso/Desktop/BYUI/cse310/watchYourToes/watchYourToes/watchYourToes.csproj",
         "packagesPath": "/Users/valeriabisso/.nuget/packages/",
-        "outputPath": "/Users/valeriabisso/Desktop/BYUI/cse310/wyt/watchYourToes/obj/",
+        "outputPath": "/Users/valeriabisso/Desktop/BYUI/cse310/watchYourToes/watchYourToes/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/valeriabisso/.nuget/NuGet/NuGet.Config"

@@ -1,19 +1,31 @@
 public class Warrior : Character
 {
     public Warrior(string name) : base(name, "Warrior") { }
-    
+
+    // Constructor to load an existing character from DB
+    public Warrior(Character character) : base(character.Name, "Warrior")
+    {
+        this.Id = character.Id;
+        this.Level = character.Level;
+        this.Exp = character.Exp;
+        this.Stats = character.Stats;
+    }
+
     public override int BonusPoints { get; } = 4;
 
-
-    public override void LevelUp()
+    public override async Task LevelUp()
     {
         base.LevelUp();
-        Stats.BaseStats.Attack += 3; // Warrior gains more attack
+        Stats.BaseStats.Attack += 3;
         Stats.BaseStats.MagicAttack += 0;
-        Stats.BaseStats.MagicDefense +=0;
+        Stats.BaseStats.MagicDefense += 0;
         Stats.BaseStats.Speed += 1;
         Stats.BaseStats.Defense += 2;
         Stats.BaseStats.Health += 5;
         Console.WriteLine($"{Name} (Warrior) leveled up!");
+
+        // Save the updated character to the database
+        var db = new dbConnection();
+        await db.UpdateCharacter(this);
     }
 }

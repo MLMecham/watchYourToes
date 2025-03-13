@@ -4,11 +4,19 @@ public class Mage : Character
     public Mage(string name) : base(name, "Mage")
     {
     }
-    
+    // Constructor to load an existing character from DB
+    public Mage(Character character) : base(character.Name, "Mage")
+    {
+        this.Id = character.Id;
+        this.Level = character.Level;
+        this.Exp = character.Exp;
+        this.Stats = character.Stats;
+    }
+
     public override int BonusPoints { get; } = 5; // Mages get 5 bonus points
 
 
-    public override void LevelUp()
+    public override async Task LevelUp()
     {
         base.LevelUp();
         Stats.BaseStats.MagicAttack += 3; // Mage gains more Magic Attack
@@ -18,5 +26,8 @@ public class Mage : Character
         Stats.BaseStats.Health += 1;
         Stats.BaseStats.Attack +=0;
         Console.WriteLine($"{Name} (Mage) leveled up!");
+        // Update the database with new stats
+        var db = new dbConnection(); // Ensure you have access to your DB connection
+        await db.UpdateCharacter(this);
     }
 }

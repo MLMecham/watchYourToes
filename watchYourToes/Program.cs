@@ -488,7 +488,24 @@ class Program
         case ConsoleKey.NumPad6:
             if (ConfirmAction("Are you sure you want to enter the dungeon?"))
             {
-                Dungeon start_dungeon = new Dungeon();
+                // Prompt the player to select a floor number
+                Console.WriteLine($"There are {myCharacter.LowestFloor} floors in the dungeon.");
+                Console.WriteLine("Which floor would you like to enter? (1 to " + myCharacter.LowestFloor + ")");
+                
+                int chosenFloor;
+                while (true)
+                {
+                    if (int.TryParse(Console.ReadLine(), out chosenFloor) && chosenFloor >= 1 && chosenFloor <= myCharacter.LowestFloor)
+                    {
+                        break; // Exit the loop if a valid floor is selected
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid floor. Please enter a number between 1 and " + myCharacter.LowestFloor + ".");
+                    }
+                }
+
+                Dungeon start_dungeon = new Dungeon(chosenFloor);
                 start_dungeon.FindBossRoom(start_dungeon.startRoom);
                 start_dungeon.SetRooms();
                 Console.WriteLine("The voice of Magar echoes in your ears as you enter the dungeon,\n 'Find the biggest baddie and bash him in! Only then can you continue into dungeons dim!");

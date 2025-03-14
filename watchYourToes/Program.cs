@@ -505,10 +505,10 @@ class Program
                     }
                 }
 
-                Dungeon start_dungeon = new Dungeon(chosenFloor);
+                Dungeon start_dungeon = new Dungeon(myCharacter, chosenFloor);
                 start_dungeon.FindBossRoom(start_dungeon.startRoom);
                 start_dungeon.SetRooms();
-                Console.WriteLine("The voice of Magar echoes in your ears as you enter the dungeon,\n 'Find the biggest baddie and bash him in! Only then can you continue into dungeons dim!");
+                Console.WriteLine("The voice of Malgor echoes in your ears as you enter the dungeon,\n 'Find the biggest baddie and bash him in! Only then can you continue into dungeons dim!");
                 while (start_dungeon.currentCoord != start_dungeon.bossRoom || start_dungeon.QuitDungeon == false)
                 {
                     start_dungeon.Action();

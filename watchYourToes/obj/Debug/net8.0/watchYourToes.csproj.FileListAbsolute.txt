@@ -70,3 +70,30 @@ C:/Users/mecha/Learning to Program/watchYourToes/watchyourtoes/obj/Debug/net8.0/
 /Users/valeriabisso/Desktop/BYUI/cse310/watchYourToes/watchYourToes/obj/Debug/net8.0/watchYourToes.pdb
 /Users/valeriabisso/Desktop/BYUI/cse310/watchYourToes/watchYourToes/obj/Debug/net8.0/watchYourToes.genruntimeconfig.cache
 /Users/valeriabisso/Desktop/BYUI/cse310/watchYourToes/watchYourToes/obj/Debug/net8.0/ref/watchYourToes.dll
+<<<<<<< HEAD
+=======
+/Users/loganlay/Documents/watchYourToes/watchYourToes/bin/Debug/net8.0/watchYourToes
+/Users/loganlay/Documents/watchYourToes/watchYourToes/bin/Debug/net8.0/watchYourToes.deps.json
+/Users/loganlay/Documents/watchYourToes/watchYourToes/bin/Debug/net8.0/watchYourToes.runtimeconfig.json
+/Users/loganlay/Documents/watchYourToes/watchYourToes/bin/Debug/net8.0/watchYourToes.dll
+/Users/loganlay/Documents/watchYourToes/watchYourToes/bin/Debug/net8.0/watchYourToes.pdb
+/Users/loganlay/Documents/watchYourToes/watchYourToes/bin/Debug/net8.0/DnsClient.dll
+/Users/loganlay/Documents/watchYourToes/watchYourToes/bin/Debug/net8.0/Microsoft.Extensions.Logging.Abstractions.dll
+/Users/loganlay/Documents/watchYourToes/watchYourToes/bin/Debug/net8.0/MongoDB.Bson.dll
+/Users/loganlay/Documents/watchYourToes/watchYourToes/bin/Debug/net8.0/MongoDB.Driver.dll
+/Users/loganlay/Documents/watchYourToes/watchYourToes/bin/Debug/net8.0/SharpCompress.dll
+/Users/loganlay/Documents/watchYourToes/watchYourToes/bin/Debug/net8.0/Snappier.dll
+/Users/loganlay/Documents/watchYourToes/watchYourToes/bin/Debug/net8.0/ZstdSharp.dll
+/Users/loganlay/Documents/watchYourToes/watchYourToes/obj/Debug/net8.0/watchYourToes.csproj.AssemblyReference.cache
+/Users/loganlay/Documents/watchYourToes/watchYourToes/obj/Debug/net8.0/watchYourToes.GeneratedMSBuildEditorConfig.editorconfig
+/Users/loganlay/Documents/watchYourToes/watchYourToes/obj/Debug/net8.0/watchYourToes.AssemblyInfoInputs.cache
+/Users/loganlay/Documents/watchYourToes/watchYourToes/obj/Debug/net8.0/watchYourToes.AssemblyInfo.cs
+/Users/loganlay/Documents/watchYourToes/watchYourToes/obj/Debug/net8.0/watchYourToes.csproj.CoreCompileInputs.cache
+/Users/loganlay/Documents/watchYourToes/watchYourToes/obj/Debug/net8.0/watchYourToes.sourcelink.json
+/Users/loganlay/Documents/watchYourToes/watchYourToes/obj/Debug/net8.0/watchYou.066B0038.Up2Date
+/Users/loganlay/Documents/watchYourToes/watchYourToes/obj/Debug/net8.0/watchYourToes.dll
+/Users/loganlay/Documents/watchYourToes/watchYourToes/obj/Debug/net8.0/refint/watchYourToes.dll
+/Users/loganlay/Documents/watchYourToes/watchYourToes/obj/Debug/net8.0/watchYourToes.pdb
+/Users/loganlay/Documents/watchYourToes/watchYourToes/obj/Debug/net8.0/watchYourToes.genruntimeconfig.cache
+/Users/loganlay/Documents/watchYourToes/watchYourToes/obj/Debug/net8.0/ref/watchYourToes.dll
+>>>>>>> Main

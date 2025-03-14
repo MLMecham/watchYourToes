@@ -24,7 +24,8 @@ class Dungeon
     public int RoomCount; //Amount of rooms to be made in the grid
     public int Floor; //The floor that the player is on.
 
-    public Dungeon(int floor = 1, int roomCount = 10, int length = 10, int width = 10)
+    //Pass in character to get stats
+    public Dungeon(Character myCharacter, int floor = 1, int roomCount = 10, int length = 10, int width = 10)
     {
         Console.OutputEncoding = System.Text.Encoding.UTF8;
         Length = length;
@@ -326,10 +327,19 @@ class Dungeon
         Console.WriteLine("What will you do:");
         Console.WriteLine("1. Move");
         Console.WriteLine("2. Inventory");
-        Console.WriteLine("3. Exit Dungeon");
+        if (currentCoord == bossRoom)
+        {
+             Console.WriteLine("3. Exit Dungeon");
+        }
         Console.Write("Enter a number: ");
         string input = Console.ReadLine();
 
+        //Also connect Rooms and make them do stuff
+        //Movment
+        //Inventory
+        //Equipment
+        //Status
+        //Exit only in Boss Room
         switch (input)
         {
             case "1":

@@ -434,6 +434,91 @@ class Program
         Console.Clear();
 
         // Start village loop
+        // myCharacter.Days++;
+        // Console.WriteLine("You wake up to another day. How do You feel?");
+        // myCharacter.PrintCurrentStats();
+        // while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
+        // Console.Clear(); 
+
+
+        while (true)
+{
+    Console.Clear();
+    Console.WriteLine($"Day {myCharacter.Days}: You wake up to another day in the village.");
+    Console.WriteLine("What would you like to do?");
+    Console.WriteLine("1. See Stats");
+    Console.WriteLine("2. See Inventory");
+    Console.WriteLine("3. See Storage");
+    Console.WriteLine("4. Visit Store");
+    Console.WriteLine("5. See Equipment");
+    Console.WriteLine("6. Enter Dungeon");
+    Console.WriteLine("7. Rest (Full Heal / End Day)");
+
+    ConsoleKey choice = Console.ReadKey(true).Key;
+    Console.Clear();
+
+    switch (choice)
+    {
+        case ConsoleKey.D1:
+        case ConsoleKey.NumPad1:
+            myCharacter.PrintCurrentStats();
+            break;
+
+        case ConsoleKey.D2:
+        case ConsoleKey.NumPad2:
+            myCharacter.PrintInventory();
+            break;
+
+        case ConsoleKey.D3:
+        case ConsoleKey.NumPad3:
+            myCharacter.PrintStorage();
+            break;
+
+        case ConsoleKey.D4:
+        case ConsoleKey.NumPad4:
+            Console.WriteLine("not built yet"); // Placeholder for store functionality
+            break;
+
+        case ConsoleKey.D5:
+        case ConsoleKey.NumPad5:
+            myCharacter.PrintEquippedItems(); // Display equipped items
+            break;
+
+        case ConsoleKey.D6:
+        case ConsoleKey.NumPad6:
+            if (ConfirmAction("Are you sure you want to enter the dungeon?"))
+            {
+                Console.WriteLine("not built yet"); // Placeholder for dungeon functionality
+            }
+            break;
+
+        case ConsoleKey.D7:
+        case ConsoleKey.NumPad7:
+            Console.WriteLine("You decide to rest and prepare for another loop.");
+            myCharacter.Stats.CurrentStats = myCharacter.Stats.BaseStats;
+            myCharacter.Days++;
+            break;
+
+        default:
+            Console.WriteLine("Invalid choice. Please select a valid option.");
+            break;
+    }
+
+    Console.WriteLine("\nPress SPACE to continue...");
+    while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { }
+}
+
+// Function to confirm major actions
+bool ConfirmAction(string message)
+{
+    Console.WriteLine(message + " (Y/N)");
+    ConsoleKey response = Console.ReadKey(true).Key;
+    return response == ConsoleKey.Y;
+}
+
+
+        
+        
 
         // Let player go to shops / save / change class / go to storage / heal
         // Let players go into the dungeon

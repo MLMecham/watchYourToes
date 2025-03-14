@@ -141,48 +141,63 @@ public class Character
 
         // Example of how to allocate points: Let the user input values for each stat
         while (pointsToDistribute > 0)
-        {
-            Console.WriteLine("Which stat would you like to increase?");
-            Console.WriteLine("1. Health");
-            Console.WriteLine("2. Attack");
-            Console.WriteLine("3. Defense");
-            Console.WriteLine("4. Magic Attack");
-            Console.WriteLine("5. Magic Defense");
-            Console.WriteLine("6. Speed");
+{
+    Console.WriteLine("Which stat would you like to increase?");
+    Console.WriteLine($"1. Health:        {Stats.BaseStats.Health}");
+    Console.WriteLine($"2. Attack:        {Stats.BaseStats.Attack}");
+    Console.WriteLine($"3. Defense:       {Stats.BaseStats.Defense}");
+    Console.WriteLine($"4. Magic Attack:  {Stats.BaseStats.MagicAttack}");
+    Console.WriteLine($"5. Magic Defense: {Stats.BaseStats.MagicDefense}");
+    Console.WriteLine($"6. Speed:         {Stats.BaseStats.Speed}");
 
-            int choice = int.Parse(Console.ReadLine());
+    ConsoleKey choice = Console.ReadKey(true).Key;
+    Console.Clear();
 
-            switch (choice)
-            {
-                case 1:
-                    Stats.BaseStats.Health += 5;  // Set health bonus should be more than one
-                    pointsToDistribute--;
-                    break;
-                case 2:
-                    Stats.BaseStats.Attack++;
-                    pointsToDistribute--;
-                    break;
-                case 3:
-                    Stats.BaseStats.Defense++;
-                    pointsToDistribute--;
-                    break;
-                case 4:
-                    Stats.BaseStats.MagicAttack++;
-                    pointsToDistribute--;
-                    break;
-                case 5:
-                    Stats.BaseStats.MagicDefense++;
-                    pointsToDistribute--;
-                    break;
-                case 6:
-                    Stats.BaseStats.Speed++;
-                    pointsToDistribute--;
-                    break;
-                default:
-                    Console.WriteLine("Invalid choice, try again.");
-                    break;
-            }
-        }
+    switch (choice)
+    {
+        case ConsoleKey.D1:
+        case ConsoleKey.NumPad1:
+            Stats.BaseStats.Health += 5; // More than 1 for health
+            pointsToDistribute--;
+            break;
+
+        case ConsoleKey.D2:
+        case ConsoleKey.NumPad2:
+            Stats.BaseStats.Attack++;
+            pointsToDistribute--;
+            break;
+
+        case ConsoleKey.D3:
+        case ConsoleKey.NumPad3:
+            Stats.BaseStats.Defense++;
+            pointsToDistribute--;
+            break;
+
+        case ConsoleKey.D4:
+        case ConsoleKey.NumPad4:
+            Stats.BaseStats.MagicAttack++;
+            pointsToDistribute--;
+            break;
+
+        case ConsoleKey.D5:
+        case ConsoleKey.NumPad5:
+            Stats.BaseStats.MagicDefense++;
+            pointsToDistribute--;
+            break;
+
+        case ConsoleKey.D6:
+        case ConsoleKey.NumPad6:
+            Stats.BaseStats.Speed++;
+            pointsToDistribute--;
+            break;
+
+        default:
+            Console.WriteLine("Invalid choice, please select a valid stat.");
+            break;
+    }
+}
+
+        Stats.CurrentStats = Stats.BaseStats;
     }
 
     // Equip the item and update stats accordingly
@@ -315,9 +330,9 @@ public void RemoveItem(string slot)
         else
         {
             Console.WriteLine("Storage Items:");
-            foreach (var item in Storage)
+            for (int i = 0; i < Storage.Count; i++)
             {
-                Console.WriteLine($"Name: {item.Name}, Description: {item.Description}");
+                Console.WriteLine($"{i + 1}. Name: {Storage[i].Name}, Description: {Storage[i].Description}");
             }
         }
     }
@@ -332,9 +347,9 @@ public void RemoveItem(string slot)
         else
         {
             Console.WriteLine("Inventory Items:");
-            foreach (var item in Inventory)
+            for (int i = 0; i < Inventory.Count; i++)
             {
-                Console.WriteLine($"Name: {item.Name}, Description: {item.Description}");
+                Console.WriteLine($"{i + 1}. Name: {Inventory[i].Name}, Description: {Inventory[i].Description}");
             }
         }
     }

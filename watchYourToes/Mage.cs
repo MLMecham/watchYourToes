@@ -34,7 +34,10 @@ public class Mage : Character
         
         Console.WriteLine($"{Name} (Mage) leveled up!");
 
+        // let the player add stats
         DistributeExtraPoints();
+
+
         // Update the database with new stats
         var db = new dbConnection(); // Ensure you have access to your DB connection
         await db.UpdateCharacter(this);

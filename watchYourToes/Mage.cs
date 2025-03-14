@@ -18,14 +18,23 @@ public class Mage : Character
 
     public override async Task LevelUp()
     {
-        base.LevelUp();
+        // base.LevelUp(); /// I believe that this base part doesn't do anything
+
+        Level++; //We forgot to add this so the characters were gaining stats, but staying at level one. Infinite stat glitch.
+
+
+
+        // Let's always have the stats increase in this order. Health, Atk, Def, Matk, Mdef, Spd. This will make it easier for us later.
+        Stats.BaseStats.Health += 1;
+        Stats.BaseStats.Attack +=0;
+        Stats.BaseStats.Defense += 1;
         Stats.BaseStats.MagicAttack += 3; // Mage gains more Magic Attack
         Stats.BaseStats.MagicDefense += 3;
         Stats.BaseStats.Speed += 1;
-        Stats.BaseStats.Defense += 1;
-        Stats.BaseStats.Health += 1;
-        Stats.BaseStats.Attack +=0;
+        
         Console.WriteLine($"{Name} (Mage) leveled up!");
+
+        DistributeExtraPoints();
         // Update the database with new stats
         var db = new dbConnection(); // Ensure you have access to your DB connection
         await db.UpdateCharacter(this);

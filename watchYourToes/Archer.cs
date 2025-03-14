@@ -16,6 +16,9 @@ public class Archer : Character
     public override async Task LevelUp()
     {
         base.LevelUp();
+
+        
+
         Stats.BaseStats.Speed += 3; // Archer gains more Agility
         Stats.BaseStats.MagicAttack += 0;
         Stats.BaseStats.MagicDefense+=0;

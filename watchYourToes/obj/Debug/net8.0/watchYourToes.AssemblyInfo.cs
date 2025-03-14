@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("watchYourToes")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cbe0f65e046abfcd4fa06ecbbe954ad64cde4796")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9a2ac86392d81709fe48c03e5a31f1ea3f3d649a")]
 [assembly: System.Reflection.AssemblyProductAttribute("watchYourToes")]
 [assembly: System.Reflection.AssemblyTitleAttribute("watchYourToes")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

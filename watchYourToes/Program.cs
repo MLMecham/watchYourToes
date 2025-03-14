@@ -311,14 +311,140 @@ class Program
         Thread.Sleep(500);
         Console.Clear();
 
-        Console.WriteLine("Welcome, traveler. A peaceful village lies nestled between towering mountains and endless forests, a sanctuary for adventurers seeking respite from the perils of the world. Yet, beyond the village walls, whispers speak of a dark dungeon, an ancient ruin filled with treasures, mysteries, and unspeakable dangers.");
+        Console.WriteLine("Welcome, traveler. A peaceful village lies nestled between towering mountains and endless forests, a sanctuary for adventurers seeking respite from the perils of the world. Yet, under the village walls, whispers speak of a dark dungeon, an ancient ruin filled with treasures, mysteries, and unspeakable dangers.");
         
+        
+        Console.WriteLine("You, having lived in this village your whole life, never felt the urge to delve into that wretched pit.");  
+        Console.WriteLine("Adventurers spoke of its horrors over tankards of ale,");  
+        Console.WriteLine("spinning tales of valiant warriors who ventured in, only to return as twisted husks of their former selves.");  
+        Console.WriteLine("The dungeon did not just kill—it corrupted, warping even the bravest into mindless horrors.");  
+        Console.WriteLine("The village residents knew better than to set foot near its cursed entrance.");  
+        Console.WriteLine("And so, you lived in peace, content to let the dungeon remain a nightmare for a future generation."); 
+        while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
+        Console.Clear();  
+        Console.WriteLine("Until the sky split open.");  
+        while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
+        Console.Clear();  
+        Console.WriteLine("A voice, deep and resonant with malice, thundered from the heavens, shaking the very earth beneath your feet.");  
+        while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
+        Console.Clear();  
+        Console.WriteLine("\"Foolish mortals! I am Malgor, and your time is mine to command!");  
+        Console.WriteLine("In the depths of the dungeon lies that which I seek.");  
+        Console.WriteLine("You will retrieve it today… or suffer eternity within my grasp!\"");  
+        while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed  
+        Console.Clear();  
+        Console.WriteLine("Darkness swallowed the sky, and then—just as suddenly—it was gone.");  
+        Console.WriteLine("The village stood still, breathless, gripped by an invisible force.");  
+        while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed  
+        Console.Clear();  
+        Console.WriteLine("That night, terror fell upon you all.");  
+        Console.WriteLine("Some tried to flee the village, but the roads were blocked, as if an unseen wall pressed down upon them.");  
+        Console.WriteLine("The gates of the village, once open and welcoming, now stood firmly closed, no matter how hard the villagers tried to open them.");  
+        Console.WriteLine("No one could escape. The air itself felt thick, stifling, as though the world held its breath.");  
+        Console.WriteLine("Some locked their doors in a futile attempt to keep the evil at bay.");  
+        Console.WriteLine("Others huddled together in the tavern, whispering frantic prayers, their eyes darting nervously toward the door.");  
+        Console.WriteLine("It didn’t matter. Death came for everyone. The flames. The shadows. The unearthly wails.");  
+        Console.WriteLine("And as midnight approached, the village grew eerily quiet, save for the muffled cries of those who knew the end was near.");  
+        Console.WriteLine("At the stroke of midnight, the village began to burn. Not from flames—but from the very air itself, turning to ash.");  
+        Console.WriteLine("The shadows moved with a life of their own, creeping into homes, dragging those inside into the darkness.");  
+        Console.WriteLine("One by one, the villagers fell to the curse. And then, as if it had all been a dream.");  
+  
+        while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
+        Console.Clear();  
+        Console.WriteLine("You woke up.");  
+        while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
+        Console.Clear();  
+        Console.WriteLine("In your bed.");  
+        while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
+        Console.Clear();  
+        Console.WriteLine("Again.");  
+        while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
+        Console.Clear();  
+        Console.WriteLine("You ran into the streets. Others had already gathered, their faces pale, eyes wide with disbelief.");  
+        Console.WriteLine("They remembered. Every single person.");  
+        while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
+        Console.WriteLine("You all waited for the sky to open.");  
+        while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
+        Console.Clear();  
+        Console.WriteLine("A voice, deep and resonant with malice, thundered from the heavens, shaking the very earth beneath your feet.");  
+        while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
+        Console.Clear();  
+        Console.WriteLine("\"Foolish mortals! I am Malgor, and your time is mine to command!");  
+        Console.WriteLine("In the depths of the dungeon lies that which I seek.");  
+        Console.WriteLine("You will retrieve it today… or suffer eternity within my grasp!\"");  
+        while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed  
+        Console.Clear();  
+        Console.WriteLine("Darkness swallowed the sky, and then—just as suddenly—it was gone.");  
+        Console.WriteLine("The village stood still, breathless, gripped by an invisible force.");  
+        while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed  
+        Console.Clear();  
+
+// Malgor's speech with added emphasis on stopping the loop
+        Console.WriteLine("\"The curse is simple. Retrieve what I seek from the dungeon, and the cycle will end.\"");
+        Console.WriteLine("\"Fail, and you will relive this moment, again and again, until the end of time.\"");
+        while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed  
+        Console.Clear();  
+
+        Console.Clear();  
+        Console.WriteLine("The town square became a place of madness.");  
+        Console.WriteLine("Some fell to their knees in despair.");  
+        Console.WriteLine("Some laughed hysterically, unable to comprehend the horror of it.");  
+        Console.WriteLine("Others raged, screaming into the sky, cursing Malgor’s name.");  
+        while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
+        Console.Clear();  
+        Console.WriteLine("Then night fell.");  
+        while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
+        Console.Clear();  
+        Console.WriteLine("And you all died.");  
+        while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
+        Console.Clear();  
+        Console.WriteLine("Again.");  
+        while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
+        Console.Clear();  
+        Console.WriteLine("And again.");  
+        while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
+        Console.Clear();  
+        Console.WriteLine("And again.");  
+        while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
+        Console.Clear();  
+        Console.WriteLine("The blacksmith, once a steady and calm man, smashed apart his own forge,");  
+        Console.WriteLine("declaring he would build a weapon mighty enough to kill a god.");  
+        Console.WriteLine("The baker stopped making bread, convinced there was no point in feeding the doomed.");  
+        Console.WriteLine("The children no longer played. The elders wept openly.");  
+        while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
+        Console.Clear();  
+        Console.WriteLine("Some people threw themselves into the dungeon in desperation, hoping to break the cycle.");  
+        Console.WriteLine("They never returned. But when the day reset, they were back in the village, their eyes hollow, their bodies shaking.");  
+        Console.WriteLine("They would not speak of what they had seen.");  
+        while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
+        Console.Clear();  
+        Console.WriteLine("It became clear: there was no escape. Not from the loop. Not from the dungeon.");  
+        while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
+        Console.Clear();  
+        Console.WriteLine("Malgor had bound you all to this fate.");  
+        while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
+        Console.Clear();  
+        Console.WriteLine("You had to enter the ruin. You had to retrieve whatever it was he wanted.");  
+        Console.WriteLine("No matter how long it took. No matter how many times you perished.");  
+        while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
+        Console.Clear(); 
+        Console.WriteLine("But how many cycles could you endure before losing yourself completely?");  
+
         Thread.Sleep(3000); 
         Console.Clear();
 
-        
+        // Start village loop
+
+        // Let player go to shops / save / change class / go to storage / heal
+        // Let players go into the dungeon
+
+            // dungeon stuff
+            // dungeon stuff
+            // dungeon stuff
+            // dungeon stuff
 
 
+        // When the player dies or finishes the dungeon, they wake up at the start of the village loop.
 
     }
 }

@@ -1,8 +1,8 @@
-public class Archer : Character
+public class Ninja : Character
 {
-    public Archer(string name) : base(name, "Archer") { }
+    public Ninja(string name) : base(name, "Ninja") { }
     // Constructor to load an existing character from DB
-    public Archer(Character character) : base(character.Name, "Archer")
+    public Ninja(Character character) : base(character.Name, "Ninja")
     {
         this.Id = character.Id;
         this.Level = character.Level;
@@ -10,20 +10,20 @@ public class Archer : Character
         this.Stats = character.Stats;
     }
 
-    public override int BonusPoints { get; } = 4;
+    public override int BonusPoints { get; } = 5;
 
 
     public override async Task LevelUp()
     {
         Level++;
-        Stats.BaseStats.Health += 2;
-        Stats.BaseStats.Attack +=2;
-        Stats.BaseStats.Defense += 1;
+        Stats.BaseStats.Health += 1;
+        Stats.BaseStats.Attack +=3;
+        Stats.BaseStats.Defense += 3;
         Stats.BaseStats.MagicAttack += 0; 
         Stats.BaseStats.MagicDefense += 0;
-        Stats.BaseStats.Speed += 3;
+        Stats.BaseStats.Speed += 4;
 
-        Console.WriteLine($"{Name} (Archer) leveled up!.");
+        Console.WriteLine($"{Name} (Ninja) leveled up!.");
 
         // let the player add stats
         DistributeExtraPoints();

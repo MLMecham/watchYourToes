@@ -1,8 +1,7 @@
-public class Archer : Character
+public class CustomClass : Character
 {
-    public Archer(string name) : base(name, "Archer") { }
     // Constructor to load an existing character from DB
-    public Archer(Character character) : base(character.Name, "Archer")
+    public CustomClass(Character character) : base(character.Name, character.ClassName)
     {
         this.Id = character.Id;
         this.Level = character.Level;
@@ -10,23 +9,24 @@ public class Archer : Character
         this.Stats = character.Stats;
     }
 
-    public override int BonusPoints { get; } = 4;
+    // Default minimal bonus 3 from Character class
 
 
     public override async Task LevelUp()
     {
+
         Level++;
-        Stats.BaseStats.Health += 2;
-        Stats.BaseStats.Attack +=2;
-        Stats.BaseStats.Defense += 1;
+        Stats.BaseStats.Health += 0;
+        Stats.BaseStats.Attack +=0;
+        Stats.BaseStats.Defense += 0;
         Stats.BaseStats.MagicAttack += 0; 
         Stats.BaseStats.MagicDefense += 0;
-        Stats.BaseStats.Speed += 3;
+        Stats.BaseStats.Speed += 0;
 
-        Console.WriteLine($"{Name} (Archer) leveled up!.");
+        Console.WriteLine($"{Name} {ClassName} doesn't level up, sorry.");
 
         // let the player add stats
-        DistributeExtraPoints();
+        //DistributeExtraPoints();
 
         // Update the database with new stats
         var db = new dbConnection(); // Ensure you have access to your DB connection

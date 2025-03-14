@@ -11,19 +11,22 @@ public class Warrior : Character
         this.Stats = character.Stats;
     }
 
-    public override int BonusPoints { get; } = 4;
+    public override int BonusPoints { get; } = 6;
 
     public override async Task LevelUp()
     {
-        base.LevelUp();
-        Stats.BaseStats.Attack += 3;
-        Stats.BaseStats.MagicAttack += 0;
+        Level++;
+
+        Stats.BaseStats.Health += 5;
+        Stats.BaseStats.Attack +=3;
+        Stats.BaseStats.Defense += 2;
+        Stats.BaseStats.MagicAttack += 0; 
         Stats.BaseStats.MagicDefense += 0;
         Stats.BaseStats.Speed += 1;
-        Stats.BaseStats.Defense += 2;
-        Stats.BaseStats.Health += 5;
+        
         Console.WriteLine($"{Name} (Warrior) leveled up!");
-
+        // let the player add stats
+        DistributeExtraPoints();
         // Save the updated character to the database
         var db = new dbConnection();
         await db.UpdateCharacter(this);

@@ -70,6 +70,8 @@ C:/Users/mecha/Learning to Program/watchYourToes/watchyourtoes/obj/Debug/net8.0/
 /Users/valeriabisso/Desktop/BYUI/cse310/watchYourToes/watchYourToes/obj/Debug/net8.0/watchYourToes.pdb
 /Users/valeriabisso/Desktop/BYUI/cse310/watchYourToes/watchYourToes/obj/Debug/net8.0/watchYourToes.genruntimeconfig.cache
 /Users/valeriabisso/Desktop/BYUI/cse310/watchYourToes/watchYourToes/obj/Debug/net8.0/ref/watchYourToes.dll
+<<<<<<< HEAD
+=======
 /Users/loganlay/Documents/watchYourToes/watchYourToes/bin/Debug/net8.0/watchYourToes
 /Users/loganlay/Documents/watchYourToes/watchYourToes/bin/Debug/net8.0/watchYourToes.deps.json
 /Users/loganlay/Documents/watchYourToes/watchYourToes/bin/Debug/net8.0/watchYourToes.runtimeconfig.json
@@ -94,3 +96,4 @@ C:/Users/mecha/Learning to Program/watchYourToes/watchyourtoes/obj/Debug/net8.0/
 /Users/loganlay/Documents/watchYourToes/watchYourToes/obj/Debug/net8.0/watchYourToes.pdb
 /Users/loganlay/Documents/watchYourToes/watchYourToes/obj/Debug/net8.0/watchYourToes.genruntimeconfig.cache
 /Users/loganlay/Documents/watchYourToes/watchYourToes/obj/Debug/net8.0/ref/watchYourToes.dll
+>>>>>>> Main

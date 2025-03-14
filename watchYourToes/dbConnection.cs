@@ -133,9 +133,9 @@ public class dbConnection
             "warrior" => new Warrior(character),
             "mage" => new Mage(character),
             "archer" => new Archer(character),
-            _ => character // Default to base Character?
-        };
-    }
+            _ => new CustomClass(character) // custom character class (aka jobless)
+        }
+        ;}
 
 
    public async Task UpdateCharacter(Character updatedCharacter)

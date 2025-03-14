@@ -488,7 +488,14 @@ class Program
         case ConsoleKey.NumPad6:
             if (ConfirmAction("Are you sure you want to enter the dungeon?"))
             {
-                Console.WriteLine("not built yet"); // Placeholder for dungeon functionality
+                Dungeon start_dungeon = new Dungeon();
+                start_dungeon.FindBossRoom(start_dungeon.startRoom);
+                start_dungeon.SetRooms();
+                Console.WriteLine("The voice of Magar echoes in your ears as you enter the dungeon,\n 'Find the biggest baddie and bash him in! Only then can you continue into dungeons dim!");
+                while (start_dungeon.currentCoord != start_dungeon.bossRoom || start_dungeon.QuitDungeon == false)
+                {
+                    start_dungeon.Action();
+                }
             }
             break;
 

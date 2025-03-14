@@ -599,19 +599,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\mecha\\.nuget\\packages\\": {}
+    "/Users/loganlay/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\mecha\\Learning to Program\\watchYourToes\\watchYourToes\\watchYourToes.csproj",
+      "projectUniqueName": "/Users/loganlay/Documents/watchYourToes/watchYourToes/watchYourToes.csproj",
       "projectName": "watchYourToes",
-      "projectPath": "C:\\Users\\mecha\\Learning to Program\\watchYourToes\\watchYourToes\\watchYourToes.csproj",
-      "packagesPath": "C:\\Users\\mecha\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\mecha\\Learning to Program\\watchYourToes\\watchYourToes\\obj\\",
+      "projectPath": "/Users/loganlay/Documents/watchYourToes/watchYourToes/watchYourToes.csproj",
+      "packagesPath": "/Users/loganlay/.nuget/packages/",
+      "outputPath": "/Users/loganlay/Documents/watchYourToes/watchYourToes/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\mecha\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "/Users/loganlay/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -661,7 +661,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.401/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

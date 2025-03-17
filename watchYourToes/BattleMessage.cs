@@ -4,8 +4,14 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-public class BattleMessage{
+
+public class BattleMessage : Battle{
+
+    public BattleMessage(Character character, List<Enemy> enemies) : base(character, enemies) { }
+
+
     public string name { get; set; } // character's name
     public string action { get; set; } // character's action
     public string enemy { get; set; } // enemy's name
 }
+

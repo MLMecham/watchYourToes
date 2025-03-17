@@ -1,5 +1,5 @@
 public class Stats
-{
+{   
     public Stat BaseStats { get; set; }
     public Stat CurrentStats { get; set; }
 
@@ -33,9 +33,6 @@ public class Stat
     public int MagicDefense { get; set; }
     public int Speed { get; set; }
 
-
-    
-
     public Stat() // default stats
     {
         Health = 100;
@@ -44,6 +41,16 @@ public class Stat
         MagicAttack = 5;
         MagicDefense = 5;
         Speed = 5;
+    }
+
+    public Stat(int health, int attack, int defense, int magicAttack, int magicDefense, int speed)
+    {
+        Health = health;
+        Attack = attack;
+        Defense = defense;
+        MagicAttack = magicAttack;
+        MagicDefense = magicDefense;
+        Speed = speed;
     }
 
     public void PrintStats()

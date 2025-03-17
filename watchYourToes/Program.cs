@@ -182,5 +182,9 @@ Console.WriteLine();
 character.PrintBaseStats();
 character.PrintCurrentStats();
 Console.WriteLine();
+
+    EnemyRoom enemyroom = new EnemyRoom(1);
+    enemyroom.fight();
+
     }
 }

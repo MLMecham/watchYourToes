@@ -1,85 +1,78 @@
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+
 public class Battle
 {
-    private List<Enemy> enemies; 
-    private Character character; 
-    private int currentEnemyIndex = 0; // Tracks which enemy is attacking
+    private Character character;
+    private List<Enemy> enemies;
+    private Random random = new Random();
 
-    public Battle(Character character, List<string> enemies)
+    public Battle(Character character, List<Enemy> enemies)
     {
         this.character = character;
-        this.enemies = new List<Enemy>(enemies); // Copy enemy list
+        this.enemies = enemies;
     }
 
     public async Task StartBattle()
     {
-        Console.WriteLine($"⚔️ {character.Name} has entered battle!");
-        
-        while (character.Stats.CurrentStats.Health> 0 && enemies.Count > 0)
+        Console.WriteLine($"Battle starts! {character.Name} vs {enemies.Count} enemie(s)!");
+
+        while (character.Stats.BaseStats.Health > 0 && enemies.Count > 0)
         {
-            Console.WriteLine("\n--- New Turn ---");
+            await PlayerTurn();
 
-            // Character's turn
-            CharacterAttack();
-
-            // Check if enemies are still alive before their turn
-            if (enemies.Count == 0)
+            if (enemies.Count > 0)
             {
-                Console.WriteLine($"🏆 {character.Name} has won the battle!");
-                return;
+                await EnemiesTurn();
             }
-
-            // Enemies' turn (each enemy gets a turn)
-            EnemyTurn();
-
-            // Display battle status
-            DisplayStatus();
-            await Task.Delay(1000); // Add delay for readability
         }
 
-        // Check if the character lost
-        if (character.Stats.CurrentHealth <= 0)
+        if (character.Stats.BaseStats.Health <= 0)
         {
-            Console.WriteLine($"💀 {character.Name} was defeated...");
+            Console.WriteLine($"{character.Name} has been defeated...");
+        }
+        else
+        {
+            Console.WriteLine($"Victory! {character.Name} defeated all enemies!");
         }
     }
 
-    private void CharacterAttack()
+    private async Task PlayerTurn()
     {
-        if (enemies.Count == 0) return;
+        Console.WriteLine($"{character.Name}'s turn!");
 
         Enemy target = enemies[0]; // Attack the first enemy in the list
         int damage = character.Stats.BaseStats.Attack;
-        target.TakeDamage(damage); //take damage should be a method in Enemy class
-        Console.WriteLine($"{character.Name} attacks {target.Name} for {damage} damage!");
+        target.TakeDamage(damage);
 
-        // Remove enemy if defeated
-        if (target.IsDefeated)
+        if (target.IsDefeated())
         {
-            Console.WriteLine($"{target.Name} has been defeated!");
+            Console.WriteLine($"{target.name} has been defeated!");
             enemies.Remove(target);
         }
+
+        await Task.Delay(1000);
     }
 
-    private void EnemyTurn()
+    private async Task EnemiesTurn()
     {
-        foreach (var enemy in enemies)
-        {
-            int damage = enemy.Attack();
-            character.TakeDamage(damage);
-            Console.WriteLine($"{enemy.Name} attacks {character.Name} for {damage} damage!");
+        Console.WriteLine("Enemies' turn!");
 
-            // Stop if the character is defeated
-            if (character.Stats.CurrentHealth <= 0)
-                return;
-        }
-    }
-
-    private void DisplayStatus()
-    {
-        Console.WriteLine($"\n{character.Name} - HP: {character.Stats.CurrentHealth}");
-        foreach (var enemy in enemies)
+        foreach (Enemy enemy in enemies)
         {
-            Console.WriteLine($"{enemy.Name} - HP: {enemy.CurrentHealth}");
+            if (enemy.IsDefeated()) continue; // Skip defeated enemies
+
+            int damage = enemy.stat.Attack - character.Stats.BaseStats.Defense;
+            if (damage < 1) damage = 1; // Ensure at least 1 damage is dealt
+
+            character.Stats.BaseStats.Health -= damage;
+            Console.WriteLine($"{enemy.name} attacks {character.Name} for {damage} damage! Remaining HP: {character.Stats.BaseStats.Health}");
+
+            if (character.Stats.BaseStats.Health <= 0) break; // Stop if player is defeated
         }
+
+        await Task.Delay(1000);
     }
 }

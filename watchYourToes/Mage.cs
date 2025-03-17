@@ -42,4 +42,9 @@ public class Mage : Character
         var db = new dbConnection(); // Ensure you have access to your DB connection
         await db.UpdateCharacter(this);
     }
+
+    public override void Attack()
+    {
+        // Console.WriteLine("The mage flips a table.");
+    }
 }

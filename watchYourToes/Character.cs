@@ -4,7 +4,7 @@ using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Attributes;
 using System.Threading.Tasks;
 
-public class Character
+public class Character : Combatant
 
 {
     [BsonId] 
@@ -404,14 +404,17 @@ public void PrintCurrentStats()
     Stats.PrintCurrentStats();
 }
 
-    
-
-    
-
-
-    
+public override void Attack()
+{
+    Console.WriteLine("the character doesn't know how to fight!");
+}
 
 
 
-    
+
+
+
+
+
+
 }

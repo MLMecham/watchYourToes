@@ -184,7 +184,7 @@ character.PrintCurrentStats();
 Console.WriteLine();
 
     EnemyRoom enemyroom = new EnemyRoom();
-    enemyroom.getEnemyList(1);
+    enemyroom.getEnemyList(5);
 
     }
 }

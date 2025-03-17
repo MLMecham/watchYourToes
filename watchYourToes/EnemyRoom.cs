@@ -76,9 +76,9 @@ public class EnemyRoom{
             Console.WriteLine("Error: Cannot read enemy data");
         }
 
-        foreach (Enemy enemy in enemies)
+        foreach (Enemy enemy in enemiesList)
         {
-            Console.WriteLine($"You are fighting an emeny--{enemy.Name} with " + enemy.hp + " HP, " + enemy.atk + " ATK, " + enemy.def + " DEF, " + enemy.matk + " MATK, " + enemy.mdef + " MDEF, " + enemy.spd + " SPD");
+            Console.WriteLine($"You are fighting an emeny--{enemy.name} with " + enemy.stat.Health + " HP, " + enemy.stat.Attack + " ATK, " + enemy.stat.Defense + " DEF, " + enemy.stat.MagicAttack + " MATK, " + enemy.stat.MagicDefense + " MDEF, " + enemy.stat.Speed + " SPD");
         }
     }
 }

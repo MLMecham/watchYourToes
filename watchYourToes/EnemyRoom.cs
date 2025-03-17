@@ -39,8 +39,11 @@ public class EnemyRoom{
         int enemyNumber = random.Next(1, floorNumber + 1);
 
         try
-        {
-            string jsonString = File.ReadAllText("EnemyData.json"); // get all of the enemy json
+        {   
+            string jsonFilePath = Path.Combine(Directory.GetCurrentDirectory(), "EnemyTable.json");
+            Console.WriteLine($"Looking for file at: {jsonFilePath}");
+            
+            string jsonString = File.ReadAllText("EnemyTable.json"); // get all of the enemy json
             EnemyData enemyData = JsonSerializer.Deserialize<EnemyData>(jsonString) ?? new EnemyData(); // handle null list
 
             if (enemyData.EnemyDict == null || !enemyData.EnemyDict.Any())
@@ -49,7 +52,7 @@ public class EnemyRoom{
             }
 
             // Convert dictionary entries to a list, shuffle them, and take a random number
-            var enemyEntries = enemyData.EnemyDict.Values.ToList();
+            var enemyEntries = (enemyData.EnemyDict ?? new Dictionary<string, EnemyEntry>()).Values.ToList();
             var selectedEnemies = enemyEntries
                     .OrderBy(x => random.Next()) // change the amount of the enemy according to the floor number later
                     .Take(enemyNumber)
@@ -71,9 +74,9 @@ public class EnemyRoom{
                     this.floorNumber));
             }
         }
-        catch (Exception)
+        catch (Exception e)
         {
-            Console.WriteLine("Error: Cannot read enemy data");
+            Console.WriteLine(e.Message);
         }
 
         foreach (Enemy enemy in enemiesList)

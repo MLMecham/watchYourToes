@@ -40,11 +40,11 @@ public class EnemyRoom{
 
         try
         {   
-            string jsonFilePath = Path.Combine(Directory.GetCurrentDirectory(), "EnemyTable.json");
-            Console.WriteLine($"Looking for file at: {jsonFilePath}");
-            
+            // string jsonFilePath = Path.Combine(Directory.GetCurrentDirectory(), "EnemyTable.json");
+            // Console.WriteLine($"Looking for file at: {jsonFilePath}");
+
             string jsonString = File.ReadAllText("EnemyTable.json"); // get all of the enemy json
-            EnemyData enemyData = JsonSerializer.Deserialize<EnemyData>(jsonString) ?? new EnemyData(); // handle null list
+            EnemyData enemyData = JsonSerializer.Deserialize<EnemyData>(jsonString); // handle null list
 
             if (enemyData.EnemyDict == null || !enemyData.EnemyDict.Any())
             {
@@ -76,7 +76,7 @@ public class EnemyRoom{
         }
         catch (Exception e)
         {
-            Console.WriteLine(e.Message);
+            Console.WriteLine(e.Message + "!!!!");
         }
 
         foreach (Enemy enemy in enemiesList)

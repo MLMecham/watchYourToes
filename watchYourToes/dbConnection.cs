@@ -133,6 +133,7 @@ public class dbConnection
             "warrior" => new Warrior(character),
             "mage" => new Mage(character),
             "archer" => new Archer(character),
+            "ninja" => new Ninja(character),
             _ => new CustomClass(character) // custom character class (aka jobless)
         }
         ;}

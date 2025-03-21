@@ -3,6 +3,7 @@ using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Attributes;
 using System.Threading.Tasks;
+using watchYourToes;
 
 public class Character : Combatant
 
@@ -23,6 +24,7 @@ public class Character : Combatant
     // Inventory and storage as lists
     public List<Item> Inventory { get; set; }
     public List<Item> Storage { get; set; }
+    public HashSet<Effect> ActiveEffects { get; set; }
 
 
     /// MongoDB connection and database
@@ -55,6 +57,7 @@ public class Character : Combatant
         Inventory = new List<Item>();
         Storage = new List<Item>();
         Gold = 0;
+        ActiveEffects = new HashSet<Effect>();
     }
 
       public async Task<bool> SaveCharacter()

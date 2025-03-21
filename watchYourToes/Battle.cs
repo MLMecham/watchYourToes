@@ -63,11 +63,12 @@ public class Battle
 
         }
 
-        while (character.Stats.BaseStats.Health > 0 && enemies.Count > 0){
+        // Battle loop
+        while (character.Stats.BaseStats.Health > 0 && enemies.Count > 0){ // while character is alive and there are enemies left
             
-            foreach (var combatant in combatants.ToList())//copy of combatants list
+            foreach (var combatant in combatants.ToList()) //copy of combatants list
             {
-            if (character.Stats.BaseStats.Health <= 0 || enemies.Count == 0) break;  //stops battle if over
+            if (character.Stats.BaseStats.Health <= 0 || combatants.Count == 1) break;  //stops battle if over
 
             if (combatant is Character charCombatant)
                 {
@@ -78,8 +79,12 @@ public class Battle
                     await EnemyTurn(enemy);
                 }
 
-            //removes enemies from the turns list
+            //removes dead enemies from combatants & enemies list
+            // It's better to remove enemy here instead of in character's turn to avoid modifying the list while iterating
+            // it also has the flexibility if the enemy can receive damage from other sources (e.g., effect, etc.)
             combatants = combatants.Where(c => !(c is Enemy e && e.IsDefeated())).ToList();
+            enemies = enemies.Where(e => !e.IsDefeated()).ToList();
+            
             }
         }
 
@@ -87,6 +92,9 @@ public class Battle
         if (character.Stats.BaseStats.Health <= 0)
         {
             Console.WriteLine($"{character.Name} has been defeated...");
+            // 1. The character will be send back to the village
+            // 2. Update the character's inventory to null
+            // 3. Update the character's current stats to the base stats
         }
         else
         {
@@ -108,27 +116,41 @@ public class Battle
         }
 
         int choice;
+        int rawDamage; // the raw attack value before defense is applied
+        int attackChoice; // 1 for normal attack, 2 for magic attack
         while (true)
         {
             Console.Write("Enter the number of the enemy you want to attack: ");
             if (int.TryParse(Console.ReadLine(), out choice) && choice >= 1 && choice <= enemies.Count)
-            {
+            {   
+                while (true)
+                {
+                    Console.WriteLine($"Which attack you want to use on {enemies[choice - 1].Name} ?\nNormal Attack -> 1\nMagic Attack -> 2");
+                    if (int.TryParse(Console.ReadLine(), out attackChoice) && (attackChoice == 1 || attackChoice == 2))
+                    {
+                        // Use the chosen attack type
+                        rawDamage = (attackChoice == 1) ? charCombatant.Stats.BaseStats.Attack : charCombatant.Stats.BaseStats.MagicAttack;
+                        break; // Exit the loop if valid choice is made
+                    }
+                    Console.WriteLine("Invalid attack choice. Try again.");
+                }
                 break;
+
             }
             Console.WriteLine("Invalid choice. Try again.");
         }
 
-        Enemy target = enemies[choice - 1];
-        int damage = charCombatant.Stats.BaseStats.Attack;
-        
+        Enemy target = enemies[choice - 1]; 
+        String attackType = (attackChoice == 1) ? "Normal" : "Magic";
 
-        Console.WriteLine($"{charCombatant.Name} attacks {target.Name} for {damage} damage!");
-        target.TakeDamage(damage);
+        int damage = rawDamage - target.CurrentStat.Defense;
+        damage = Math.Max(damage, 1); // apply target's defense to the damage and ensure at least 1 damage is dealt
+        Console.WriteLine($"{charCombatant.Name} uses {attackType} attack on {target.Name} for {damage} damage!");
+        target.TakeDamage(damage); 
 
         if (target.IsDefeated())
         {
             Console.WriteLine($"{target.Name} has been defeated!");
-            enemies.Remove(target);
             Console.WriteLine($"Remaining enemies: {enemies.Count}");
         }
 
@@ -138,13 +160,13 @@ public class Battle
     //enemy just attacks character, no choice
     public async Task EnemyTurn(Enemy enemy)
     {
-        if (character.Stats.BaseStats.Health <= 0) return;  //if they are dead already
-
+        if (character.Stats.BaseStats.Health <= 0) {
+            // the dead emeny already gets removed in the Battle loop
+            return;
+        }
         int damage = enemy.CurrentStat.Attack - character.Stats.BaseStats.Defense;
         damage = Math.Max(damage, 1); // Ensures at least 1 damage is dealt
-
-        character.Stats.BaseStats.Health -= damage;
-        Console.WriteLine($"{enemy.Name} attacks {character.Name} for {damage} damage! Remaining HP: {character.Stats.BaseStats.Health}");
+        character.TakeDamage(damage);
 
         await Task.Delay(1000);
     }

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-class Room
+public class Room
 {
     public string Description {get; protected set;}
 

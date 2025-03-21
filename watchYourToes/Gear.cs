@@ -20,4 +20,5 @@ public class Gear : Item
         MagicDefenseChange = magicDefenseChange;
         SpeedChange = speedChange;
     }
+
 }

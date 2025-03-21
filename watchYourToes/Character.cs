@@ -124,7 +124,18 @@ public class Character : Combatant
             // Allow the player to distribute extra points
             DistributeExtraPoints();
 
-            Stats.CurrentStats.Health = Stats.BaseStats.Health;
+            Stats.CurrentStats = Stats.BaseStats;
+
+            // Get total equipment buffs
+            Stat equipmentBonus = Equipment.GetEquipmentStats();
+
+            // Apply equipment buffs after leveling up
+            Stats.CurrentStats.Health += equipmentBonus.Health;
+            Stats.CurrentStats.Attack += equipmentBonus.Attack;
+            Stats.CurrentStats.Defense += equipmentBonus.Defense;
+            Stats.CurrentStats.MagicAttack += equipmentBonus.MagicAttack;
+            Stats.CurrentStats.MagicDefense += equipmentBonus.MagicDefense;
+            Stats.CurrentStats.Speed += equipmentBonus.Speed;
 
             requiredExp = 100 * Math.Pow(Level, 1.5);
         }
@@ -217,7 +228,7 @@ public void Equip(Gear gear)
         Gear itemToRemove = Equipment.GetItem(gear.Slot);
         RemoveItem(gear.Slot); // Remove the currently equipped item from equipment
         // Add the removed item back to inventory
-        Inventory.Add(itemToRemove);
+        // Inventory.Add(itemToRemove);
     }
 
     // Equip the new gear to the corresponding slot

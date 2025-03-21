@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = watchYourToes
-build_property.ProjectDir = C:\Users\calla\桌面\programming\Academic\CSE 310 Applied Programming\watchYourToes\watchYourToes\
+build_property.ProjectDir = /Users/loganlay/Documents/watchYourToes/watchYourToes/
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 

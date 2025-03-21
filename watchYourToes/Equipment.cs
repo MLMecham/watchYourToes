@@ -132,4 +132,31 @@ public class Equipment
 
         return equippedItems;
     }
+
+    public Stat GetEquipmentStats()
+{
+    Stat totalChanges = new Stat
+    {
+        Health = 0,
+        Attack = 0,
+        Defense = 0,
+        MagicAttack = 0,
+        MagicDefense = 0,
+        Speed = 0
+    };
+
+    List<Gear> equippedItems = GetAllEquippedItems();
+
+    foreach (var item in equippedItems)
+    {
+        totalChanges.Health += item.HealthChange;
+        totalChanges.Attack += item.AttackChange;
+        totalChanges.Defense += item.DefenseChange;
+        totalChanges.MagicAttack += item.MagicAttackChange;
+        totalChanges.MagicDefense += item.MagicDefenseChange;
+        totalChanges.Speed += item.SpeedChange;
+    }
+
+    return totalChanges;
+}
 }

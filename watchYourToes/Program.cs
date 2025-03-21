@@ -257,9 +257,9 @@ class Program
             slot: "shoulders",
             healthChange: 0,
             attackChange: 2,      // +2 attack
-            defenseChange: 3,     // +3 defense
+            defenseChange: 50,     // +3 defense
             magicAttackChange: 0,
-            magicDefenseChange: 0,
+            magicDefenseChange: 50,
             speedChange: 0
         );
 
@@ -295,17 +295,17 @@ class Program
 
         //BATTLE TEST!!!!!
        
-        Console.WriteLine("\n-- Battle Test... --\n");
-        List<Enemy> enemies = new List<Enemy>
-        {
-            new Enemy("Goblin", 10, 5, 2, 0, 1, 3, 10, new List<Gear>(), 0.5f, 1),
-            new Enemy("Orc", 20, 8, 5, 0, 2, 100, 20, new List<Gear>(), 0.5f, 1),
-            new Enemy("Skeleton", 15, 6, 3, 0, 1, 4, 15, new List<Gear>(), 0.5f, 1)
-        };
+        // Console.WriteLine("\n-- Battle Test... --\n");
+        // List<Enemy> enemies = new List<Enemy>
+        // {
+        //     new Enemy("Goblin", 10, 5, 2, 0, 1, 3, 10, new List<Gear>(), 0.5f, 1),
+        //     new Enemy("Orc", 20, 8, 5, 0, 2, 100, 20, new List<Gear>(), 0.5f, 1),
+        //     new Enemy("Skeleton", 15, 6, 3, 0, 1, 4, 15, new List<Gear>(), 0.5f, 1)
+        // };
 
-        // Start the battle
-        Battle battle = new Battle(myCharacter, enemies);
-        await battle.StartBattle();
+        // // Start the battle
+        // Battle battle = new Battle(myCharacter, enemies);
+        // await battle.StartBattle();
 
 
 
@@ -477,14 +477,98 @@ class Program
             myCharacter.PrintCurrentStats();
             break;
 
-        case ConsoleKey.D2:
+        case ConsoleKey.D2: 
         case ConsoleKey.NumPad2:
-            myCharacter.PrintInventory();
+            while (true)
+            {
+                Console.Clear();
+                myCharacter.PrintInventory(); // Show inventory
+
+                Console.WriteLine("\nSelect an item to:");
+                Console.WriteLine("E - Equip Item");
+                Console.WriteLine("S - Send to Storage");
+                Console.WriteLine("Enter - Exit Inventory");
+
+                ConsoleKeyInfo keyInfo = Console.ReadKey(true);
+                if (keyInfo.Key == ConsoleKey.Enter)
+                    break;
+
+                Console.Clear();
+                myCharacter.PrintInventory(); // Refresh inventory display
+
+                Console.Write("\nEnter item number (1-N) or 0 to cancel: ");
+                if (int.TryParse(Console.ReadLine(), out int itemIndex) && itemIndex > 0 && itemIndex <= myCharacter.Inventory.Count)
+                {
+                    Item selectedItem = myCharacter.Inventory[itemIndex - 1];
+
+                    if (keyInfo.Key == ConsoleKey.E) // Equip Item
+                    {
+                        if (selectedItem is Gear gearItem)
+                        {
+                            myCharacter.Equip(gearItem);
+                            Console.WriteLine($"{gearItem.Name} equipped!");
+                        }
+                        else
+                        {
+                            Console.WriteLine("You can only equip gear items.");
+                        }
+                    }
+                    else if (keyInfo.Key == ConsoleKey.S) // Store Item
+                    {
+                        myCharacter.StoreItemInStorage(selectedItem);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid choice.");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Invalid selection.");
+                }
+
+                Console.WriteLine("\nPress any key to continue...");
+                Console.ReadKey(true);
+            }
             break;
 
         case ConsoleKey.D3:
         case ConsoleKey.NumPad3:
-            myCharacter.PrintStorage();
+            while (true)
+            {
+                Console.Clear();
+                myCharacter.PrintStorage(); // Show storage
+
+                if (myCharacter.Storage.Count == 0)
+                {
+                    Console.WriteLine("\nStorage is empty. Press any key to return...");
+                    Console.ReadKey(true);
+                    break;
+                }
+                
+            
+                Console.Write("\nEnter nothing to Exit.\nEnter item number (1-N) to retrieve or 0 to cancel: ");
+                if (int.TryParse(Console.ReadLine(), out int itemIndex) && itemIndex > 0 && itemIndex <= myCharacter.Storage.Count)
+                {
+                    Item selectedItem = myCharacter.Storage[itemIndex - 1];
+
+                    myCharacter.Storage.Remove(selectedItem);
+                    myCharacter.Inventory.Add(selectedItem);
+
+                    Console.WriteLine($"{selectedItem.Name} has been moved to inventory!");
+                }
+                else if (itemIndex == 0)
+                {
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid selection.");
+                }
+
+                Console.WriteLine("\nPress any key to continue...");
+                Console.ReadKey(true);
+            }
             break;
 
         case ConsoleKey.D4:
@@ -494,7 +578,58 @@ class Program
 
         case ConsoleKey.D5:
         case ConsoleKey.NumPad5:
-            myCharacter.PrintEquippedItems(); // Display equipped items
+            while (true)
+            {
+                Console.Clear();
+                myCharacter.PrintEquippedItems(); // Display all equipped items
+
+                // Show total equipment stat changes
+                Stat totalChanges = myCharacter.Equipment.GetEquipmentStats();
+                Console.WriteLine("\nTotal Equipment Stat Changes:");
+                totalChanges.PrintStats();
+
+                Console.WriteLine("\nPress 1-5 to view specific item stats, or press Enter to exit.");
+                Console.WriteLine("1 - Head, 2 - Shoulders, 3 - Knees, 4 - Toes, 5 - Weapon");
+
+                ConsoleKeyInfo keyInfo = Console.ReadKey(true);
+
+                if (keyInfo.Key == ConsoleKey.Enter)
+                    break;
+
+                string slot = keyInfo.Key switch
+                {
+                    ConsoleKey.D1 or ConsoleKey.NumPad1 => "head",
+                    ConsoleKey.D2 or ConsoleKey.NumPad2 => "shoulders",
+                    ConsoleKey.D3 or ConsoleKey.NumPad3 => "knees",
+                    ConsoleKey.D4 or ConsoleKey.NumPad4 => "toes",
+                    ConsoleKey.D5 or ConsoleKey.NumPad5 => "weapon",
+                    _ => null
+                };
+
+                if (slot != null)
+                {
+                    Gear item = myCharacter.Equipment.GetItem(slot);
+                    if (item != null)
+                    {
+                        Console.Clear();
+                        Console.WriteLine($"Item: {item.Name}");
+                        Console.WriteLine($"Description: {item.Description}");
+                        Console.WriteLine($"Health Change: {item.HealthChange}");
+                        Console.WriteLine($"Attack Change: {item.AttackChange}");
+                        Console.WriteLine($"Defense Change: {item.DefenseChange}");
+                        Console.WriteLine($"Magic Attack Change: {item.MagicAttackChange}");
+                        Console.WriteLine($"Magic Defense Change: {item.MagicDefenseChange}");
+                        Console.WriteLine($"Speed Change: {item.SpeedChange}");
+                    }
+                    else
+                    {
+                        Console.Clear();
+                        Console.WriteLine("No item equipped in this slot.");
+                    }
+                    Console.WriteLine("\nPress any key to return...");
+                    Console.ReadKey(true);
+                }
+            }
             break;
 
         case ConsoleKey.D6:
@@ -534,6 +669,10 @@ class Program
             Console.WriteLine("You decide to rest and prepare for another loop.");
             myCharacter.Stats.CurrentStats = myCharacter.Stats.BaseStats;
             myCharacter.Days++;
+
+
+            // For now, you level up when you do this
+            await myCharacter.LevelUp();
             break;
 
         default:

@@ -4,6 +4,7 @@ using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Transactions;
+using watchYourToes;
 class Dungeon
 {
     public Dictionary<(int,int),Room> grid = new Dictionary<(int, int), Room>();
@@ -24,6 +25,8 @@ class Dungeon
     public int RoomCount; //Amount of rooms to be made in the grid
     public int Floor; //The floor that the player is on.
 
+    Character character;
+
     //Pass in character to get stats
     public Dungeon(Character myCharacter, int floor = 1, int roomCount = 10, int length = 10, int width = 10)
     {
@@ -33,6 +36,7 @@ class Dungeon
         RoomCount = roomCount;
         Floor = floor;
         int i = Floor;
+        character = myCharacter;
         for (; i > 1; i-=2)
         {
             randomNumber = rand.Next(1, 11);
@@ -143,7 +147,7 @@ class Dungeon
                 
                 if (chance < 0.55)
                 {
-                    grid[entry.Key] = new EnemyRoom(Floor); // needs to put the floor number;
+                    grid[entry.Key] = new EnemyRoom();
                 }
                 else if (chance < 0.75)
                 {
@@ -319,7 +323,7 @@ class Dungeon
 
     }
 
-    public void Action()
+public void Action()
     {
         Console.Clear();
         Console.WriteLine( grid[currentCoord].Description);
@@ -327,30 +331,59 @@ class Dungeon
         Console.WriteLine("What will you do:");
         Console.WriteLine("1. Move");
         Console.WriteLine("2. Inventory");
+        Console.WriteLine("3. Equipment");
+        Console.WriteLine("4. Stats");
+        foreach (Effect effect in character.ActiveEffects)
+        {
+            Console.WriteLine(effect.Name);
+        }
+
         if (currentCoord == bossRoom)
         {
-             Console.WriteLine("3. Exit Dungeon");
+            Console.WriteLine("5. Deeper into the Dungeon");
+            Console.WriteLine("6. Exit Dungeon");
         }
-        Console.Write("Enter a number: ");
-        string input = Console.ReadLine();
+        ConsoleKey input = Console.ReadKey(true).Key;
+        Console.Clear();
 
         //Also connect Rooms and make them do stuff
-        //Movment
-        //Inventory
-        //Equipment
-        //Status
-        //Exit only in Boss Room
+
         switch (input)
         {
-            case "1":
+            case ConsoleKey.D1:
+            case ConsoleKey.NumPad1: // Move through the dungeon
                 Console.Clear();
                 Movement();
                 break;
-            case "2":
+            case ConsoleKey.D2:
+            case ConsoleKey.NumPad2: // Access Inventory
                 Console.Clear();
-                // inventory.DisplayInventory();
+                character.PrintInventory();
                 break;
-            case "3":
+            case ConsoleKey.D3:
+            case ConsoleKey.NumPad3: // Access Equipped Items
+                Console.Clear();
+                character.PrintEquippedItems();
+                break;
+            case ConsoleKey.D4:
+            case ConsoleKey.NumPad4: // Access Equipped Items
+                Console.Clear();
+                character.PrintCurrentStats();
+                break;
+            case ConsoleKey.D5:
+            case ConsoleKey.NumPad5: // Generate a new Dungeon
+                Console.Clear();
+                Dungeon start_dungeon = new Dungeon(character, Floor++);
+                start_dungeon.FindBossRoom(start_dungeon.startRoom);
+                start_dungeon.SetRooms();
+                Console.WriteLine("The voice of Malgor echoes in your ears as you enter the dungeon,\n 'Find the biggest baddie and bash him in! Only then can you continue into dungeons dim!");
+                while (start_dungeon.currentCoord != start_dungeon.bossRoom || start_dungeon.QuitDungeon == false)
+                {
+                    start_dungeon.Action();
+                }
+                break;
+            case ConsoleKey.D6:
+            case ConsoleKey.NumPad6:
                 Console.Clear();
                 Console.WriteLine("Goodbye!");
                 QuitDungeon = true;
@@ -360,6 +393,12 @@ class Dungeon
                 Console.Clear();
                 Console.WriteLine("Invalid choice!");
                 break;
+        
+        }
+        if (input != ConsoleKey.D6 && input != ConsoleKey.NumPad6)
+        {
+            Console.WriteLine("\nPress SPACE to continue...");
+            while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { }
         }
     }
 }

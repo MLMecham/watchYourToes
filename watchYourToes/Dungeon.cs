@@ -143,7 +143,7 @@ class Dungeon
                 
                 if (chance < 0.55)
                 {
-                    grid[entry.Key] = new EnemyRoom();
+                    grid[entry.Key] = new EnemyRoom(Floor); // needs to put the floor number;
                 }
                 else if (chance < 0.75)
                 {

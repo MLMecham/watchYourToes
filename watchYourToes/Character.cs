@@ -107,9 +107,14 @@ public class Character : Combatant
     }
 }
 
+   // Take damage method
+    public void TakeDamage(int damage)
+    {
+        Stats.CurrentStats.Health -= damage;
+        if (Stats.CurrentStats.Health < 0) Stats.CurrentStats.Health = 0;
+        Console.WriteLine($"Character {Name} took {damage} damage! Remaining HP: {Stats.CurrentStats.Health}");
+    }
    
-
-    
     // Base LevelUp method with dynamic bonus points
     public virtual async Task LevelUp()
     {
@@ -422,13 +427,5 @@ public override void Attack()
 {
     Console.WriteLine("the character doesn't know how to fight!");
 }
-
-
-
-
-
-
-
-
 
 }

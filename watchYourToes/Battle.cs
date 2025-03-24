@@ -1,6 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Text.Json;
+using System.Net.Http;
+using System.Linq;
+using System.Text;
 
 
 public class Battle
@@ -9,6 +13,8 @@ public class Battle
     private List<Enemy> enemies;
     public List<Combatant> combatants = new List<Combatant>();
     private Random random = new Random();
+    private static readonly HttpClient client = new HttpClient { BaseAddress = new Uri("http://127.0.0.1:8000/") };
+
 
     public Battle(Character character, List<Enemy> enemies)
     {
@@ -145,8 +151,11 @@ public class Battle
 
         int damage = rawDamage - target.CurrentStat.Defense;
         damage = Math.Max(damage, 1); // apply target's defense to the damage and ensure at least 1 damage is dealt
-        Console.WriteLine($"{charCombatant.Name} uses {attackType} attack on {target.Name} for {damage} damage!");
+        //Console.WriteLine($"{charCombatant.Name} uses {attackType} attack on {target.Name} for {damage} damage!");
+        await PrintBattleMessage(charCombatant.Name, charCombatant.ClassName, attackType, target.Name, target.Name);
+        await Task.Delay(1000); 
         target.TakeDamage(damage); 
+        
 
         if (target.IsDefeated())
         {
@@ -166,12 +175,35 @@ public class Battle
         }
         int damage = enemy.CurrentStat.Attack - character.Stats.BaseStats.Defense;
         damage = Math.Max(damage, 1); // Ensures at least 1 damage is dealt
-        character.TakeDamage(damage);
-
+        
+        await PrintBattleMessage(enemy.Name,enemy.Name, "Attack", character.Name, character.ClassName);
         await Task.Delay(1000);
+        character.TakeDamage(damage);
     }
         
-      
+    public async Task PrintBattleMessage(string name, string name_class, string action, string target, string target_class)
+    {
+        BattleMessage battleMessage = new BattleMessage(name, name_class,action, target, target_class);
+        
+        string jsonMessage = JsonSerializer.Serialize(battleMessage);
+        StringContent content = new StringContent(jsonMessage, Encoding.UTF8, "application/json");
+
+        try
+        {
+            HttpResponseMessage response = await client.PostAsync("battle-ai", content);
+            response.EnsureSuccessStatusCode();
+            string result = await response.Content.ReadAsStringAsync();
+            Console.WriteLine("Battle AI Response: " + result);
+        }
+        catch (HttpRequestException e)
+        {
+            Console.WriteLine("Error communicating with Battle AI: " + e.Message);
+        }
+    }
+
+
+
+
 
 
 

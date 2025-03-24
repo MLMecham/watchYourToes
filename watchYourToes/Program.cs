@@ -141,8 +141,14 @@ class Program
                         }
                     } while (characterExists);
 
-                    Console.Write("Enter character class: ");
+                    Console.Write("Select character class:\n");
+                    Console.WriteLine("1. Archer\n2.Mage\n3.Ninja\n4.Warrior\n5.Custom Class");
                     string characterClass = Console.ReadLine();
+                    if(characterClass == "5")
+                    {
+                        Console.Write("Enter Class Name: ");
+                        characterClass = Console.ReadLine();
+                    }
 
                     // Create the character object with default Level and Stats set in the constructor
                     Character newCharacter = new Character(characterName, characterClass);
@@ -295,17 +301,17 @@ class Program
 
         //BATTLE TEST!!!!!
        
-        // Console.WriteLine("\n-- Battle Test... --\n");
-        // List<Enemy> enemies = new List<Enemy>
-        // {
-        //     new Enemy("Goblin", 10, 5, 2, 0, 1, 3, 10, new List<Gear>(), 0.5f, 1),
-        //     new Enemy("Orc", 20, 8, 5, 0, 2, 100, 20, new List<Gear>(), 0.5f, 1),
-        //     new Enemy("Skeleton", 15, 6, 3, 0, 1, 4, 15, new List<Gear>(), 0.5f, 1)
-        // };
+        Console.WriteLine("\n-- Battle Test... --\n");
+        List<Enemy> enemies = new List<Enemy>
+        {
+            new Enemy("Goblin", 10, 5, 2, 0, 1, 3, 10, new List<Gear>(), 0.5f, 1),
+            new Enemy("Orc", 20, 8, 5, 0, 2, 100, 20, new List<Gear>(), 0.5f, 1),
+            new Enemy("Skeleton", 15, 6, 3, 0, 1, 4, 15, new List<Gear>(), 0.5f, 1)
+        };
 
-        // // Start the battle
-        // Battle battle = new Battle(myCharacter, enemies);
-        // await battle.StartBattle();
+        // Start the battle
+        Battle battle = new Battle(myCharacter, enemies);
+        await battle.StartBattle();
 
 
 

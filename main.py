@@ -6,7 +6,7 @@ from fastapi.responses import JSONResponse
 
 app = FastAPI()
 
-# Claude bc i ran out of free calls from openai :( AI API endpoint and API key
+# Claude 
 base_url = "https://api.aimlapi.com/v1"
 api_key = os.getenv("open_api_key")
 
@@ -15,16 +15,18 @@ api = OpenAI(api_key=api_key, base_url=base_url)
 
 # Define the BattleMessage schema
 class BattleMessage(BaseModel):
-    name: str
-    action: str  # attack, defend, use item
-    enemy: str  # enemy name
+    Name: str 
+    Name_Class: str
+    Action: str
+    Target: str 
+    Target_Class: str
 
 
 @app.post("/battle-ai")
 async def battle_ai(message: BattleMessage):
     # Prepare the prompt for Claude AI
     system_prompt = "You are an AI battle guide in a fantasy RPG."
-    user_prompt = f"The player is fighting a {message.enemy}. The player chooses to {message.action}. Provide a smart and engaging battle response."
+    user_prompt = f"{message.Name}, a {message.Name_Class}  is fighting {message.Target} a {message.Target_Class}. {message.Name} chooses to {message.Action} {message.Target}. Provide a smart and engaging battle response."
     
     try:
         # Call Claude AI API to generate a battle response

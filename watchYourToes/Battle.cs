@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
+using Microsoft.VisualBasic;
 
 
 public class Battle
@@ -164,18 +166,15 @@ public class Battle
             // the dead emeny already gets removed in the Battle loop
             return;
         }
+        Console.WriteLine($"It's {enemy.Name} turn!");
         int damage = enemy.CurrentStat.Attack - character.Stats.BaseStats.Defense;
         damage = Math.Max(damage, 1); // Ensures at least 1 damage is dealt
+        Console.WriteLine($"{enemy.Name} uses its {enemy.PrintGears()} and deals {damage} damages to {character.Name}!");
         character.TakeDamage(damage);
 
         await Task.Delay(1000);
     }
         
-      
-
-
-
-
 
     // private async Task PlayerTurn()
     // {

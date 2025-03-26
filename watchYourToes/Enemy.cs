@@ -63,6 +63,14 @@ public class Enemy : Combatant{
         throw new NotImplementedException();
     }
 
+    public String PrintGears()
+    {
+        foreach (var gear in enemyGears)
+        {
+            return gear.Name;
+        }
+        return "";
+    }
 
 
 }

@@ -29,6 +29,11 @@ public class EnemyRoom : Room{
         public Dictionary<string, EnemyEntry> EnemyDict { get; set; } = new Dictionary<string, EnemyEntry>();
     }
 
+    public class LootData
+    {
+        public Dictionary<string, Gear> LootDict { get; set; } = new Dictionary<string, Gear>();
+    }
+
     public class EnemyEntry // for deserializing JSON data
     {   
         public string name { get; set; } = "";
@@ -53,18 +58,32 @@ public class EnemyRoom : Room{
             // string jsonFilePath = Path.Combine(Directory.GetCurrentDirectory(), "EnemyTable.json");
             // Console.WriteLine($"Looking for file at: {jsonFilePath}");
 
-            string jsonString = File.ReadAllText("EnemyTable.json"); // get all of the enemy json
-            EnemyData enemyData = JsonSerializer.Deserialize<EnemyData>(jsonString); // handle null list
+            string enemyString = File.ReadAllText("EnemyTable.json"); // get all of the enemy json
+            EnemyData enemyData = JsonSerializer.Deserialize<EnemyData>(enemyString); // handle null list
+
+            string gearString = File.ReadAllText("NormalLootTable.json"); // get all of the loot json
+            LootData lootData = JsonSerializer.Deserialize<LootData>(gearString);
 
             if (enemyData.EnemyDict == null || !enemyData.EnemyDict.Any())
             {
                 Console.WriteLine("Warning: No enemy data fonud in Json file");
             }
 
+            if (lootData.LootDict == null || !lootData.LootDict.Any())
+            {
+                Console.WriteLine("Warning: No loot data found in Json file");
+            }
+
             // Convert dictionary entries to a list, shuffle them, and take a random number
             var enemyEntries = (enemyData.EnemyDict ?? new Dictionary<string, EnemyEntry>()).Values.ToList();
             var selectedEnemies = enemyEntries
                     .OrderBy(x => random.Next()) // get random enemyNumber amount of enemies from the reshuffled List. Each enemy is unique
+                    .Take(enemyNumber)
+                    .ToList(); // provide an empty list if enemyTable is null
+
+            var lootEntries = (lootData.LootDict ?? new Dictionary<string, Gear>()).Values.ToList();
+            var selectedLoots = lootEntries
+                    .OrderBy(x => random.Next())
                     .Take(enemyNumber)
                     .ToList(); // provide an empty list if enemyTable is null
 
@@ -79,7 +98,7 @@ public class EnemyRoom : Room{
                     enemyEntry.magicdefencepoint, 
                     enemyEntry.speed, 
                     enemyEntry.exp, 
-                    new List<Gear>(), // for now, no gear 
+                    new List<Gear> {selectedLoots[random.Next(0, enemyNumber)]}, // add a random loot to the enemy
                     enemyEntry.possibilityOfDrop,
                     this.floorNumber));
             }

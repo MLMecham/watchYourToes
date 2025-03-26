@@ -5,10 +5,32 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using MongoDB.Driver;
 using System.Linq;
+using MongoDB.Bson.Serialization;
 
 class Program
-{
-    // static void ShowMenu()
+{   
+    static void RegisterDiscriminators()
+    {
+        // Register base class 'Item' with a discriminator
+        BsonClassMap.RegisterClassMap<Item>(cm =>
+        {
+            cm.AutoMap();
+            cm.SetDiscriminator("Item");
+        });
+        // Register subclass 'Consumable' with its own discriminator
+        BsonClassMap.RegisterClassMap<Consumable>(cm =>
+        {
+            cm.AutoMap();
+            cm.SetDiscriminator("Consumable");
+        });
+        // Similarly, register other subclasses like Gear, etc.
+        BsonClassMap.RegisterClassMap<Gear>(cm =>
+        {
+            cm.AutoMap();
+            cm.SetDiscriminator("Gear");
+        });
+    }
+        // static void ShowMenu()
     // {
     //     Console.Clear();
     //     Console.WriteLine("Welcome to the Main Menu!");
@@ -26,9 +48,9 @@ class Program
     //     var user = await db.GetUser(username);
     //     return user != null; // Returns true if the username already exists
     // }
-
-    static async Task Main()
-    {
+2    static async Task Main()
+    {   
+        RegisterDiscriminators();
         dbConnection db = new dbConnection(); // Create an instance of dbConnection
         Character myCharacter = null; // Declaring character  outside the loop
         string characterName = ""; // Declaring character  outside the loop

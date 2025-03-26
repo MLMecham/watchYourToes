@@ -4,18 +4,19 @@ namespace watchYourToes
 {
     public class Aging : Effect
     {
+        Stats stats = new Stats();
         public Aging(int dmg) : base("Aging", dmg)
         {
+            stats.CurrentStats.Health -= Dmg;
+            stats.CurrentStats.Speed -= 20;
         }
 
         public override void FieldEffect()
         {
-            Console.WriteLine("Aging slows down movement and reduces effectiveness over time.");
         }
 
         public override void BattleEffect()
         {
-            Console.WriteLine($"Aging deals {Dmg} damage and reduces the enemy's attack speed.");
         }
     }
 }

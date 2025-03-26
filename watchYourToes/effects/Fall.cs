@@ -4,18 +4,24 @@ namespace watchYourToes
 {
     public class Fall : Effect
     {
+        Stats stats = new Stats();
         public Fall(int dmg) : base("Fall", dmg)
         {
+            stats.CurrentStats.Health -= Dmg;
         }
 
         public override void FieldEffect()
         {
-            Console.WriteLine("Falling creates dangerous pits, making traversal risky.");
         }
 
         public override void BattleEffect()
         {
-            Console.WriteLine($"Falling deals {Dmg} damage and knocks the enemy down.");
+        }
+
+        public int SpecialEffect(int Floor)
+        {
+            Floor = Floor + 10;
+            return Floor;
         }
     }
 }

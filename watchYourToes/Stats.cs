@@ -33,6 +33,15 @@ public class Stat
     public int MagicDefense { get; set; }
     public int Speed { get; set; }
 
+    public Stat(int health = 0, int attack = 0, int defense = 0, int magicAttack = 0, int magicDefense = 0, int speed = 0)
+    {
+        Health = health;
+        Attack = attack;
+        Defense = defense;
+        MagicAttack = magicAttack;
+        MagicDefense = magicDefense;
+        Speed = speed;
+    }
 
     public Stat()
     {
@@ -42,16 +51,6 @@ public class Stat
         MagicAttack = 5;
         MagicDefense = 5;
         Speed = 5;
-    }
-
-    public Stat(int health = 0, int attack = 0, int defense = 0, int magicAttack = 0, int magicDefense = 0, int speed = 0)
-    {
-        Health = health;
-        Attack = attack;
-        Defense = defense;
-        MagicAttack = magicAttack;
-        MagicDefense = magicDefense;
-        Speed = speed;
     }
 
     public void PrintStats()

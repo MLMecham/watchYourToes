@@ -18,4 +18,7 @@ public class Effect
     public virtual void BattleEffect()
     {
     }
+    public virtual void SpecialEffect()
+    {
+    }
 }

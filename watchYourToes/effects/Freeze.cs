@@ -4,18 +4,19 @@ namespace watchYourToes
 {
     public class Freeze : Effect
     {
+        Stats stats = new Stats();
         public Freeze(int dmg) : base("Freeze", dmg)
         {
+            stats.CurrentStats.Health -= Dmg;
+            stats.CurrentStats.Speed -= 30;
         }
 
         public override void FieldEffect()
         {
-            Console.WriteLine("Freezing temperatures create slippery surfaces and slow movement.");
         }
 
         public override void BattleEffect()
         {
-            Console.WriteLine($"Freezing deals {Dmg} damage and reduces the enemy's speed.");
         }
     }
 }

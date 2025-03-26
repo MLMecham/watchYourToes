@@ -4,18 +4,19 @@ namespace watchYourToes
 {
     public class Bleed : Effect
     {
+        Stats stats = new Stats();
         public Bleed(int dmg) : base("Bleed", dmg)
         {
+            stats.CurrentStats.Health -= Dmg;
         }
 
         public override void FieldEffect()
         {
-            Console.WriteLine("Bleeding leaves a trail, attracting enemies.");
+            stats.CurrentStats.Health -= Dmg;
         }
 
         public override void BattleEffect()
         {
-            Console.WriteLine($"Bleeding deals {Dmg} damage over time.");
         }
     }
 }

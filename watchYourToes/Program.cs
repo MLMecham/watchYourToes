@@ -298,21 +298,42 @@ class Program
         Console.WriteLine("\nAfter Level Up:");
         myCharacter.PrintBaseStats();
 
-
+        
+ 
         //BATTLE TEST!!!!!
        
-        Console.WriteLine("\n-- Battle Test... --\n");
-        List<Enemy> enemies = new List<Enemy>
+        // Console.WriteLine("\n-- Battle Test... --\n");
+        // List<Enemy> enemies = new List<Enemy>
+        // {
+        //     new Enemy("Goblin", 10, 5, 2, 0, 1, 3, 10, new List<Gear>(), 0.5f, 1),
+        //     new Enemy("Orc", 20, 8, 5, 0, 2, 100, 20, new List<Gear>(), 0.5f, 1),
+        //     new Enemy("Skeleton", 15, 6, 3, 0, 1, 4, 15, new List<Gear>(), 0.5f, 1)
+        // };
+
+        // // Start the battle
+        // Battle battle = new Battle(myCharacter, enemies);
+        // await battle.StartBattle();
+
+
+        //VILLAGER CHATBOT TEST!!
+        Console.WriteLine("\n-- Villager Chatbot Test... --\n");
+        Console.WriteLine("Enter a question:");
+        string user_query = Console.ReadLine();
+        VillagerMessage villagerMessage = new VillagerMessage(user_query);
+        using HttpClient client = new HttpClient { BaseAddress = new Uri("http://127.0.0.1:8000/") };
+        string jsonMessage = JsonSerializer.Serialize(villagerMessage);
+        StringContent content = new StringContent(jsonMessage, Encoding.UTF8, "application/json");
+        try
         {
-            new Enemy("Goblin", 10, 5, 2, 0, 1, 3, 10, new List<Gear>(), 0.5f, 1),
-            new Enemy("Orc", 20, 8, 5, 0, 2, 100, 20, new List<Gear>(), 0.5f, 1),
-            new Enemy("Skeleton", 15, 6, 3, 0, 1, 4, 15, new List<Gear>(), 0.5f, 1)
-        };
-
-        // Start the battle
-        Battle battle = new Battle(myCharacter, enemies);
-        await battle.StartBattle();
-
+            HttpResponseMessage response = await client.PostAsync("villager_chat", content);
+            response.EnsureSuccessStatusCode();
+            string result = await response.Content.ReadAsStringAsync();
+            Console.WriteLine("Villager: " + result);
+        }
+        catch (HttpRequestException e)
+        {
+            Console.WriteLine("Error communicating with VillagerMessage AI: " + e.Message);
+        }
 
 
         Console.WriteLine("\nPress SPACE to continue...");

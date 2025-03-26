@@ -190,10 +190,10 @@ public class Battle
 
         try
         {
-            HttpResponseMessage response = await client.PostAsync("battle-ai", content);
+            HttpResponseMessage response = await client.PostAsync("battle_chat", content);
             response.EnsureSuccessStatusCode();
             string result = await response.Content.ReadAsStringAsync();
-            Console.WriteLine("Battle AI Response: " + result);
+            Console.WriteLine("Narrator: " + result);
         }
         catch (HttpRequestException e)
         {

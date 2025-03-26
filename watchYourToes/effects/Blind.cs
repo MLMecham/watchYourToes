@@ -4,18 +4,27 @@ namespace watchYourToes
 {
     public class Blind : Effect
     {
+        Stats stats = new Stats();
         public Blind(int dmg) : base("Blind", dmg)
         {
+            stats.CurrentStats.Health -= Dmg;
         }
 
         public override void FieldEffect()
         {
-            Console.WriteLine("Blindness causes reduced visibility, making navigation harder.");
         }
 
         public override void BattleEffect()
         {
-            Console.WriteLine($"Blindness deals {Dmg} damage and reduces the enemy's accuracy.");
+        }
+        public override void SpecialEffect()
+        {
+            Random random = new Random();
+            int blind = random.Next(1, 3);
+            if (blind > 2)
+            {
+                
+            }
         }
     }
 }

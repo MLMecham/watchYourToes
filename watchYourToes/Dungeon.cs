@@ -35,8 +35,14 @@ class Dungeon
         Width = width;
         RoomCount = roomCount;
         Floor = floor;
-        int i = Floor;
         character = myCharacter;
+        RandomizeDungeon();
+        GenerateDungeon();
+    }
+
+    public void RandomizeDungeon()
+    {
+        int i = Floor;
         for (; i > 1; i-=2)
         {
             randomNumber = rand.Next(1, 11);
@@ -45,10 +51,11 @@ class Dungeon
                 RoomCount++;
             }
         }
-        GenerateDungeon();
+
     }
 
-    private void GenerateDungeon()
+
+    public void GenerateDungeon()
     {
         int x = rand.Next(1, Width + 1);
         int y = rand.Next(1, Length + 1);
@@ -145,11 +152,11 @@ class Dungeon
             {
                 double chance = rand.NextDouble();
                 
-                if (chance < 0.55)
+                if (chance < 0.45)
                 {
                     grid[entry.Key] = new EnemyRoom();
                 }
-                else if (chance < 0.75)
+                else if (chance < 0.80)
                 {
                     grid[entry.Key] = new TrapRoom();
                 }
@@ -319,11 +326,15 @@ class Dungeon
         {
             Console.WriteLine("Invalid direction! Try again.");
         }
+        if (grid[currentCoord] is TrapRoom trapRoom)
+        {
+            trapRoom.TriggerTrap(character);
+        }
         // Movement(currentCoord);
 
     }
 
-public void Action()
+public int Action()
     {
         Console.Clear();
         Console.WriteLine( grid[currentCoord].Description);
@@ -354,51 +365,71 @@ public void Action()
             case ConsoleKey.NumPad1: // Move through the dungeon
                 Console.Clear();
                 Movement();
-                break;
+                return 0;
             case ConsoleKey.D2:
             case ConsoleKey.NumPad2: // Access Inventory
                 Console.Clear();
                 character.PrintInventory();
-                break;
+                Console.WriteLine("Press SPACE to continue...");
+                while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { }
+                return 0;
             case ConsoleKey.D3:
             case ConsoleKey.NumPad3: // Access Equipped Items
                 Console.Clear();
                 character.PrintEquippedItems();
-                break;
+                Console.WriteLine("Press SPACE to continue...");
+                while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { }
+                return 0;
             case ConsoleKey.D4:
-            case ConsoleKey.NumPad4: // Access Equipped Items
+            case ConsoleKey.NumPad4: // Access Stats
                 Console.Clear();
                 character.PrintCurrentStats();
-                break;
+                Console.WriteLine("Press SPACE to continue...");
+                while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { }
+                return 0;
             case ConsoleKey.D5:
-            case ConsoleKey.NumPad5: // Generate a new Dungeon
+            case ConsoleKey.NumPad5: // Deeper in the Dungeon
                 Console.Clear();
-                Dungeon start_dungeon = new Dungeon(character, Floor++);
-                start_dungeon.FindBossRoom(start_dungeon.startRoom);
-                start_dungeon.SetRooms();
-                Console.WriteLine("The voice of Malgor echoes in your ears as you enter the dungeon,\n 'Find the biggest baddie and bash him in! Only then can you continue into dungeons dim!");
-                while (start_dungeon.currentCoord != start_dungeon.bossRoom || start_dungeon.QuitDungeon == false)
+                
+                if (currentCoord == bossRoom) 
                 {
-                    start_dungeon.Action();
+                    character.LowestFloor ++;
+                    Console.Clear();
+                    Console.WriteLine("You enter deeper into the dungeons horrors...");
+                    Console.WriteLine("Press SPACE to continue...");
+                    while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { }
+                    return 1;
                 }
-                break;
+                else
+                {
+                    Console.Clear();
+                    Console.WriteLine("There is no passage to the next dungeon in this room. You are stuck here for now.");
+                    Console.WriteLine("Press SPACE to continue...");
+                    while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { }
+                    return 0;
+                }
+
             case ConsoleKey.D6:
             case ConsoleKey.NumPad6:
-                Console.Clear();
-                Console.WriteLine("Goodbye!");
-                QuitDungeon = true;
-
-                break;
+                if (currentCoord == bossRoom)
+                {
+                    Console.Clear();
+                    QuitDungeon = true;
+                    return 2;
+                }
+                else
+                {
+                    Console.Clear();
+                    Console.WriteLine("There is no passage to the exit in this room. You are stuck here for now.");
+                    Console.WriteLine("Press SPACE to continue...");
+                    while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { }
+                    return 0;
+                }
             default:
                 Console.Clear();
                 Console.WriteLine("Invalid choice!");
-                break;
+                return 0;
         
-        }
-        if (input != ConsoleKey.D6 && input != ConsoleKey.NumPad6)
-        {
-            Console.WriteLine("\nPress SPACE to continue...");
-            while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { }
         }
     }
 }

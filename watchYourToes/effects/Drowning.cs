@@ -4,18 +4,20 @@ namespace watchYourToes
 {
     public class Drowning : Effect
     {
+        Stats stats = new Stats();
         public Drowning(int dmg) : base("Drowning", dmg)
         {
+            Random random = new Random();
+            int min = random.Next(1, 5);
+            stats.CurrentStats.Health -= Dmg * min;
         }
 
         public override void FieldEffect()
         {
-            Console.WriteLine("Drowning causes the environment to become waterlogged, slowing movement.");
         }
 
         public override void BattleEffect()
         {
-            Console.WriteLine($"Drowning deals {Dmg} damage and stuns the enemy temporarily.");
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using MongoDB.Driver;
 using System.Linq;
+using MongoDB.Bson.Serialization;
 
 class Program
 {
@@ -26,9 +27,31 @@ class Program
     //     var user = await db.GetUser(username);
     //     return user != null; // Returns true if the username already exists
     // }
+    static void RegisterDiscriminators()
+    {
+        // Register base class 'Item' with a discriminator
+        BsonClassMap.RegisterClassMap<Item>(cm =>
+        {
+            cm.AutoMap();
+            cm.SetDiscriminator("Item");
+        });
+        // Register subclass 'Consumable' with its own discriminator
+        BsonClassMap.RegisterClassMap<Consumable>(cm =>
+        {
+            cm.AutoMap();
+            cm.SetDiscriminator("Consumable");
+        });
+        // Similarly, register other subclasses like Gear, etc.
+        BsonClassMap.RegisterClassMap<Gear>(cm =>
+        {
+            cm.AutoMap();
+            cm.SetDiscriminator("Gear");
+        });
+    }
 
     static async Task Main()
     {
+        RegisterDiscriminators();
         dbConnection db = new dbConnection(); // Create an instance of dbConnection
         Character myCharacter = null; // Declaring character  outside the loop
         string characterName = ""; // Declaring character  outside the loop
@@ -653,13 +676,42 @@ class Program
                     }
                 }
 
-                Dungeon start_dungeon = new Dungeon(myCharacter, chosenFloor);
-                start_dungeon.FindBossRoom(start_dungeon.startRoom);
-                start_dungeon.SetRooms();
-                Console.WriteLine("The voice of Malgor echoes in your ears as you enter the dungeon,\n 'Find the biggest baddie and bash him in! Only then can you continue into dungeons dim!");
-                while (start_dungeon.currentCoord != start_dungeon.bossRoom || start_dungeon.QuitDungeon == false)
+                // Dungeon start_dungeon = new Dungeon(myCharacter, chosenFloor);
+                // start_dungeon.FindBossRoom(start_dungeon.startRoom);
+                // start_dungeon.SetRooms();
+                // Console.WriteLine("The voice of Malgor echoes in your ears as you enter the dungeon,\n 'Find the biggest baddie and bash him in! Only then can you continue into dungeons dim!");
+                // while (start_dungeon.currentCoord != start_dungeon.bossRoom || start_dungeon.QuitDungeon == false)
+                // {
+                //     start_dungeon.Action();
+                // }
+                
+                Dungeon dungeon = new Dungeon(myCharacter, chosenFloor);
+                dungeon.FindBossRoom(dungeon.startRoom);
+                dungeon.SetRooms();
+
+                while (true)
                 {
-                    start_dungeon.Action();
+                    int actionResult =dungeon.Action();
+                    if (actionResult == 1) //Deeper in the dungeon
+                    {
+                        dungeon = new Dungeon(myCharacter, chosenFloor);
+                        dungeon.FindBossRoom(dungeon.startRoom);
+                        dungeon.SetRooms();
+                        // dungeon.grid.Clear();
+                        // dungeon.Floor++;
+                        // dungeon.RandomizeDungeon();
+                        // dungeon.GenerateDungeon();
+                        // dungeon.FindBossRoom(dungeon.startRoom);
+                        // dungeon.SetRooms();
+                    }
+                    else if (actionResult == 2) //Back out of the dungeon
+                    {
+                        Console.WriteLine("Goodbye!");
+                        Console.WriteLine("\nPress SPACE to continue...");
+                        while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { }
+                        break;
+                    }
+                    
                 }
             }
             break;

@@ -132,7 +132,13 @@ public class Character : Combatant
             // Allow the player to distribute extra points
             DistributeExtraPoints();
 
-            Stats.CurrentStats = Stats.BaseStats;
+            // in order to set the current to base, you cannot short cut with a current = base, you must do each individually
+            Stats.CurrentStats.Health  = Stats.BaseStats.Health;
+            Stats.CurrentStats.Attack = Stats.BaseStats.Attack;
+            Stats.CurrentStats.Defense = Stats.BaseStats.Defense;
+            Stats.CurrentStats.MagicAttack = Stats.BaseStats.MagicAttack;
+            Stats.CurrentStats.MagicDefense = Stats.BaseStats.MagicDefense;
+            Stats.CurrentStats.Speed = Stats.BaseStats.Speed;
 
             // Get total equipment buffs
             Stat equipmentBonus = Equipment.GetEquipmentStats();
@@ -221,13 +227,23 @@ public class Character : Combatant
     }
 }
 
-        Stats.CurrentStats = Stats.BaseStats;
+            Stats.CurrentStats.Health  = Stats.BaseStats.Health;
+            Stats.CurrentStats.Attack = Stats.BaseStats.Attack;
+            Stats.CurrentStats.Defense = Stats.BaseStats.Defense;
+            Stats.CurrentStats.MagicAttack = Stats.BaseStats.MagicAttack;
+            Stats.CurrentStats.MagicDefense = Stats.BaseStats.MagicDefense;
+            Stats.CurrentStats.Speed = Stats.BaseStats.Speed;
     }
 
 
 public void FullHeal()
 {
-    Stats.CurrentStats = Stats.BaseStats;
+            Stats.CurrentStats.Health  = Stats.BaseStats.Health;
+            Stats.CurrentStats.Attack = Stats.BaseStats.Attack;
+            Stats.CurrentStats.Defense = Stats.BaseStats.Defense;
+            Stats.CurrentStats.MagicAttack = Stats.BaseStats.MagicAttack;
+            Stats.CurrentStats.MagicDefense = Stats.BaseStats.MagicDefense;
+            Stats.CurrentStats.Speed = Stats.BaseStats.Speed;;
 
             ReaddEquipmentBonuses();
 

@@ -250,8 +250,13 @@ class Program
         myCharacter.AddItemToInventory(BigSword);
         myCharacter.AddItemToInventory(strengthPotionPermanent);
         myCharacter.AddItemToInventory(strengthPotionTemporary);
+        myCharacter.AddItemToInventory(strengthPotionTemporary);
+        myCharacter.AddItemToInventory(strengthPotionTemporary);
+        myCharacter.AddItemToInventory(strengthPotionTemporary);
         myCharacter.AddItemToInventory(bandage);
         myCharacter.AddItemToInventory(defensePotionTemporary);
+        myCharacter.AddItemToInventory(defensePotionPermanent);
+        myCharacter.AddItemToInventory(defensePotionPermanent);
         myCharacter.AddItemToInventory(defensePotionPermanent);
         // await db.UpdateCharacter(myCharacter); //save new info to db
 
@@ -266,8 +271,10 @@ class Program
         myCharacter.PrintCurrentStats();
         myCharacter.Stats.BaseStats.Speed += 50;
         myCharacter.Equip(shield);
+        myCharacter.Equip(sword);
         myCharacter.TakeDamage(20);
         myCharacter.UseConsumable(defensePotionTemporary);
+        
 
         Console.ReadLine();
         Console.WriteLine("\n\n");
@@ -455,7 +462,7 @@ class Program
 
         while (true)
 {
-    myCharacter.TakeDamage(100);
+    myCharacter.TakeDamage(10);
     Console.Clear();
     Console.WriteLine($"Day {myCharacter.Days}: You wake up to another day in the village.");
     Console.WriteLine("What would you like to do?");
@@ -681,7 +688,12 @@ break;
         case ConsoleKey.D7:
         case ConsoleKey.NumPad7:
             Console.WriteLine("You decide to rest and prepare for another loop.");
-            myCharacter.Stats.CurrentStats = myCharacter.Stats.BaseStats;
+            myCharacter.Stats.CurrentStats.Health  = myCharacter.Stats.BaseStats.Health;
+            myCharacter.Stats.CurrentStats.Attack = myCharacter.Stats.BaseStats.Attack;
+            myCharacter.Stats.CurrentStats.Defense = myCharacter.Stats.BaseStats.Defense;
+            myCharacter.Stats.CurrentStats.MagicAttack = myCharacter.Stats.BaseStats.MagicAttack;
+            myCharacter.Stats.CurrentStats.MagicDefense = myCharacter.Stats.BaseStats.MagicDefense;
+            myCharacter.Stats.CurrentStats.Speed = myCharacter.Stats.BaseStats.Speed;
             myCharacter.Days++;
 
 

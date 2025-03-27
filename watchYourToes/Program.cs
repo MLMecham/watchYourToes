@@ -5,113 +5,43 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using MongoDB.Driver;
 using System.Linq;
+using MongoDB.Bson.Serialization;
 
 class Program
 {
-    // static void ShowMenu()
-    // {
-    //     Console.Clear();
-    //     Console.WriteLine("Welcome to the Main Menu!");
-    //     Console.WriteLine("1. Option 1");
-    //     Console.WriteLine("2. Option 2");
-    //     Console.WriteLine("3. Logout");
-        
-    //     Console.Write("Choose an option: ");
-    //     Console.ReadLine();
-    // }
+    static void RegisterDiscriminators()
+{
+    // Register base class 'Item' with a discriminator
+    BsonClassMap.RegisterClassMap<Item>(cm =>
+    {
+        cm.AutoMap();
+        cm.SetDiscriminator("Item");
+    });
 
-    // This method checks if the username exists
-    // public static async Task<bool> CheckIfUsernameExists(string username, dbConnection db)
-    // {
-    //     var user = await db.GetUser(username);
-    //     return user != null; // Returns true if the username already exists
-    // }
+    // Register subclass 'Consumable' with its own discriminator
+    BsonClassMap.RegisterClassMap<Consumable>(cm =>
+    {
+        cm.AutoMap();
+        cm.SetDiscriminator("Consumable");
+    });
+
+    // Similarly, register other subclasses like Gear, etc.
+    BsonClassMap.RegisterClassMap<Gear>(cm =>
+    {
+        cm.AutoMap();
+        cm.SetDiscriminator("Gear");
+    });
+}
 
     static async Task Main()
     {
+        RegisterDiscriminators();
         dbConnection db = new dbConnection(); // Create an instance of dbConnection
         Character myCharacter = null; // Declaring character  outside the loop
         string characterName = ""; // Declaring character  outside the loop
 
 
-        // bool isLoggedIn = false;
-        // User currentUser = null; // Store the current logged-in user
-
-        // while (!isLoggedIn)
-        // {
-        //     Console.WriteLine("1. Create Account");
-        //     Console.WriteLine("2. Login");
-        //     Console.WriteLine("3. Exit");
-        //     Console.Write("Choose an option: ");
-
-        //     string choice = Console.ReadLine();
-
-        //     switch (choice)
-        //     {
-        //         case "1":
-        //             // Create Account
-        //             string createUsername;
-        //             bool usernameExists;
-        //             do
-        //             {
-        //                 Console.Write("Enter username: ");
-        //                 createUsername = Console.ReadLine().ToLower(); // Convert to lowercase
-
-        //                 // Check if the username already exists
-        //                 usernameExists = await CheckIfUsernameExists(createUsername, db);
-        //                 if (usernameExists)
-        //                 {
-        //                     Console.WriteLine("Username already exists. Please choose another one.");
-        //                 }
-        //             } while (usernameExists);
-
-        //             Console.Write("Enter password: ");
-        //             string createPassword = Console.ReadLine();
-
-        //             bool userCreated = await db.CreateUser(createUsername, createPassword);
-        //             if (userCreated)
-        //             {
-        //                 Console.WriteLine("Account created successfully!");
-        //             }
-        //             else
-        //             {
-        //                 Console.WriteLine("Error creating account.");
-        //             }
-        //             break;
-
-        //         case "2":
-        //             // Login
-        //             Console.Write("Enter username: ");
-        //             string loginUsername = Console.ReadLine().ToLower(); // Convert to lowercase
-        //             Console.Write("Enter password: ");
-        //             string loginPassword = Console.ReadLine();
-
-        //             User user = await db.GetUser(loginUsername);
-
-        //             if (user != null && db.VerifyPassword(loginPassword, user.Password))
-        //             {
-        //                 Console.WriteLine("Login successful!");
-        //                 currentUser = user;
-        //                 isLoggedIn = true;
-        //             }
-        //             else
-        //             {
-        //                 Console.WriteLine("Invalid username or password.");
-        //             }
-        //             break;
-
-        //         case "3":
-        //             // Exit
-        //             Console.WriteLine("Exiting...");
-        //             return;
-
-        //         default:
-        //             Console.WriteLine("Invalid option. Please try again.");
-        //             break;
-        //     }
-        // }
-
-        // Character creation or selection
+        
         bool isCharacterCreatedOrSelected = false;
         while (!isCharacterCreatedOrSelected)
         {
@@ -264,16 +194,52 @@ class Program
         );
 
 
-        //=== Character Stats  ===
-        Console.WriteLine();
-        myCharacter.PrintBaseStats();
-        Console.WriteLine();
-        myCharacter.PrintEquippedItems();
-        Console.WriteLine();
-        // Console.WriteLine("\nPress SPACE to continue...");
-        // while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
+        // Create some testing items:
+        // Strength Potion (Permanent)
+        Consumable strengthPotionPermanent = new Consumable(
+            "Strength Potion", 
+            "A potion that permanently increases attack by 5.", 
+            new Stat(attack: 5), // Only set attack to 5, others are 0 by default
+            false // Permanent effect
+        );
 
-        // Console.Clear(); // Clears the screen before the next scene
+        // Strength Potion (Temporary)
+        Consumable strengthPotionTemporary = new Consumable(
+            "Strength Potion (Temporary)", 
+            "A potion that temporarily increases attack by 50.", 
+            new Stat(attack: 300), // Only set attack to 50, others are 0 by default
+            true // Temporary effect
+        );
+
+        Consumable defensePotionPermanent = new Consumable(
+            "Defense Potion", 
+            "A potion that permanently increases defense by 5.", 
+            new Stat(defense: 5), // Only set defense to 5, others are 0 by default
+            false // Permanent effect
+        );
+
+        // Defense Potion (Temporary)
+        Consumable defensePotionTemporary = new Consumable(
+            "Defense Potion (Temporary)", 
+            "A potion that temporarily increases defense by 50.", 
+            new Stat(defense: 50), // Only set defense to 50, others are 0 by default
+            true // Temporary effect
+        );
+
+        // Bandage (Healing)
+        Consumable bandage = new Consumable(
+            "Bandage", 
+            "A bandage that heals 50 health.", 
+            new Stat(health: 50), // Only set health to 50, others are 0 by default
+            true // Temporary healing effect
+        );
+        
+        // bandage.ViewEffects();
+        // strengthPotionPermanent.ViewEffects();
+        // strengthPotionTemporary.ViewEffects();
+        // defensePotionTemporary.ViewEffects();
+        // defensePotionPermanent.ViewEffects();
+
 
 
         //TEST !!
@@ -282,7 +248,40 @@ class Program
         myCharacter.AddItemToInventory(sword);
         myCharacter.AddItemToInventory(shield);
         myCharacter.AddItemToInventory(BigSword);
-        await db.UpdateCharacter(myCharacter); //save new info to db
+        myCharacter.AddItemToInventory(strengthPotionPermanent);
+        myCharacter.AddItemToInventory(strengthPotionTemporary);
+        myCharacter.AddItemToInventory(bandage);
+        myCharacter.AddItemToInventory(defensePotionTemporary);
+        myCharacter.AddItemToInventory(defensePotionPermanent);
+        // await db.UpdateCharacter(myCharacter); //save new info to db
+
+        Console.ReadLine();
+
+        myCharacter.PrintInventory();
+
+
+        //=== Character Stats  ===
+        Console.WriteLine();
+        myCharacter.PrintBaseStats();
+        myCharacter.PrintCurrentStats();
+        myCharacter.Stats.BaseStats.Speed += 50;
+        myCharacter.Equip(shield);
+        myCharacter.TakeDamage(20);
+        myCharacter.UseConsumable(defensePotionTemporary);
+
+        Console.ReadLine();
+        Console.WriteLine("\n\n");
+
+        myCharacter.PrintBaseStats();
+        myCharacter.PrintCurrentStats();
+        Console.ReadLine();
+        // Console.WriteLine("\nPress SPACE to continue...");
+        // while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
+
+        // Console.Clear(); // Clears the screen before the next scene
+
+
+        
     
         Console.WriteLine("\n-- Level Up Test... --\n");
         //Level Up test
@@ -317,134 +316,134 @@ class Program
         Console.Write("Loading");
         for (int i = 0; i < 3; i++)
         {
-            Thread.Sleep(1000);
+            // Thread.Sleep(1000);
             Console.Write(".");
         }
 
-        Thread.Sleep(500);
-        Console.Clear();
+//         Thread.Sleep(500);
+//         Console.Clear();
 
-        Console.WriteLine("Welcome, traveler. A peaceful village lies nestled between towering mountains and endless forests, a sanctuary for adventurers seeking respite from the perils of the world. Yet, under the village walls, whispers speak of a dark dungeon, an ancient ruin filled with treasures, mysteries, and unspeakable dangers.");
+//         Console.WriteLine("Welcome, traveler. A peaceful village lies nestled between towering mountains and endless forests, a sanctuary for adventurers seeking respite from the perils of the world. Yet, under the village walls, whispers speak of a dark dungeon, an ancient ruin filled with treasures, mysteries, and unspeakable dangers.");
         
         
-        Console.WriteLine("You, having lived in this village your whole life, never felt the urge to delve into that wretched pit.");  
-        Console.WriteLine("Adventurers spoke of its horrors over tankards of ale,");  
-        Console.WriteLine("spinning tales of valiant warriors who ventured in, only to return as twisted husks of their former selves.");  
-        Console.WriteLine("The dungeon did not just kill—it corrupted, warping even the bravest into mindless horrors.");  
-        Console.WriteLine("The village residents knew better than to set foot near its cursed entrance.");  
-        Console.WriteLine("And so, you lived in peace, content to let the dungeon remain a nightmare for a future generation."); 
-        while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
-        Console.Clear();  
-        Console.WriteLine("Until the sky split open.");  
-        while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
-        Console.Clear();  
-        Console.WriteLine("A voice, deep and resonant with malice, thundered from the heavens, shaking the very earth beneath your feet.");  
-        while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
-        Console.Clear();  
-        Console.WriteLine("\"Foolish mortals! I am Malgor, and your time is mine to command!");  
-        Console.WriteLine("In the depths of the dungeon lies that which I seek.");  
-        Console.WriteLine("You will retrieve it today… or suffer eternity within my grasp!\"");  
-        while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed  
-        Console.Clear();  
-        Console.WriteLine("Darkness swallowed the sky, and then—just as suddenly—it was gone.");  
-        Console.WriteLine("The village stood still, breathless, gripped by an invisible force.");  
-        while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed  
-        Console.Clear();  
-        Console.WriteLine("That night, terror fell upon you all.");  
-        Console.WriteLine("Some tried to flee the village, but the roads were blocked, as if an unseen wall pressed down upon them.");  
-        Console.WriteLine("The gates of the village, once open and welcoming, now stood firmly closed, no matter how hard the villagers tried to open them.");  
-        Console.WriteLine("No one could escape. The air itself felt thick, stifling, as though the world held its breath.");  
-        Console.WriteLine("Some locked their doors in a futile attempt to keep the evil at bay.");  
-        Console.WriteLine("Others huddled together in the tavern, whispering frantic prayers, their eyes darting nervously toward the door.");  
-        Console.WriteLine("It didn’t matter. Death came for everyone. The flames. The shadows. The unearthly wails.");  
-        Console.WriteLine("And as midnight approached, the village grew eerily quiet, save for the muffled cries of those who knew the end was near.");  
-        Console.WriteLine("At the stroke of midnight, the village began to burn. Not from flames—but from the very air itself, turning to ash.");  
-        Console.WriteLine("The shadows moved with a life of their own, creeping into homes, dragging those inside into the darkness.");  
-        Console.WriteLine("One by one, the villagers fell to the curse. And then, as if it had all been a dream.");  
+//         Console.WriteLine("You, having lived in this village your whole life, never felt the urge to delve into that wretched pit.");  
+//         Console.WriteLine("Adventurers spoke of its horrors over tankards of ale,");  
+//         Console.WriteLine("spinning tales of valiant warriors who ventured in, only to return as twisted husks of their former selves.");  
+//         Console.WriteLine("The dungeon did not just kill—it corrupted, warping even the bravest into mindless horrors.");  
+//         Console.WriteLine("The village residents knew better than to set foot near its cursed entrance.");  
+//         Console.WriteLine("And so, you lived in peace, content to let the dungeon remain a nightmare for a future generation."); 
+//         while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
+//         Console.Clear();  
+//         Console.WriteLine("Until the sky split open.");  
+//         while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
+//         Console.Clear();  
+//         Console.WriteLine("A voice, deep and resonant with malice, thundered from the heavens, shaking the very earth beneath your feet.");  
+//         while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
+//         Console.Clear();  
+//         Console.WriteLine("\"Foolish mortals! I am Malgor, and your time is mine to command!");  
+//         Console.WriteLine("In the depths of the dungeon lies that which I seek.");  
+//         Console.WriteLine("You will retrieve it today… or suffer eternity within my grasp!\"");  
+//         while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed  
+//         Console.Clear();  
+//         Console.WriteLine("Darkness swallowed the sky, and then—just as suddenly—it was gone.");  
+//         Console.WriteLine("The village stood still, breathless, gripped by an invisible force.");  
+//         while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed  
+//         Console.Clear();  
+//         Console.WriteLine("That night, terror fell upon you all.");  
+//         Console.WriteLine("Some tried to flee the village, but the roads were blocked, as if an unseen wall pressed down upon them.");  
+//         Console.WriteLine("The gates of the village, once open and welcoming, now stood firmly closed, no matter how hard the villagers tried to open them.");  
+//         Console.WriteLine("No one could escape. The air itself felt thick, stifling, as though the world held its breath.");  
+//         Console.WriteLine("Some locked their doors in a futile attempt to keep the evil at bay.");  
+//         Console.WriteLine("Others huddled together in the tavern, whispering frantic prayers, their eyes darting nervously toward the door.");  
+//         Console.WriteLine("It didn’t matter. Death came for everyone. The flames. The shadows. The unearthly wails.");  
+//         Console.WriteLine("And as midnight approached, the village grew eerily quiet, save for the muffled cries of those who knew the end was near.");  
+//         Console.WriteLine("At the stroke of midnight, the village began to burn. Not from flames—but from the very air itself, turning to ash.");  
+//         Console.WriteLine("The shadows moved with a life of their own, creeping into homes, dragging those inside into the darkness.");  
+//         Console.WriteLine("One by one, the villagers fell to the curse. And then, as if it had all been a dream.");  
   
-        while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
-        Console.Clear();  
-        Console.WriteLine("You woke up.");  
-        while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
-        Console.Clear();  
-        Console.WriteLine("In your bed.");  
-        while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
-        Console.Clear();  
-        Console.WriteLine("Again.");  
-        while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
-        Console.Clear();  
-        Console.WriteLine("You ran into the streets. Others had already gathered, their faces pale, eyes wide with disbelief.");  
-        Console.WriteLine("They remembered. Every single person.");  
-        while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
-        Console.WriteLine("You all waited for the sky to open.");  
-        while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
-        Console.Clear();  
-        Console.WriteLine("A voice, deep and resonant with malice, thundered from the heavens, shaking the very earth beneath your feet.");  
-        while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
-        Console.Clear();  
-        Console.WriteLine("\"Foolish mortals! I am Malgor, and your time is mine to command!");  
-        Console.WriteLine("In the depths of the dungeon lies that which I seek.");  
-        Console.WriteLine("You will retrieve it today… or suffer eternity within my grasp!\"");  
-        while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed  
-        Console.Clear();  
-        Console.WriteLine("Darkness swallowed the sky, and then—just as suddenly—it was gone.");  
-        Console.WriteLine("The village stood still, breathless, gripped by an invisible force.");  
-        while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed  
-        Console.Clear();  
+//         while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
+//         Console.Clear();  
+//         Console.WriteLine("You woke up.");  
+//         while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
+//         Console.Clear();  
+//         Console.WriteLine("In your bed.");  
+//         while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
+//         Console.Clear();  
+//         Console.WriteLine("Again.");  
+//         while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
+//         Console.Clear();  
+//         Console.WriteLine("You ran into the streets. Others had already gathered, their faces pale, eyes wide with disbelief.");  
+//         Console.WriteLine("They remembered. Every single person.");  
+//         while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
+//         Console.WriteLine("You all waited for the sky to open.");  
+//         while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
+//         Console.Clear();  
+//         Console.WriteLine("A voice, deep and resonant with malice, thundered from the heavens, shaking the very earth beneath your feet.");  
+//         while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
+//         Console.Clear();  
+//         Console.WriteLine("\"Foolish mortals! I am Malgor, and your time is mine to command!");  
+//         Console.WriteLine("In the depths of the dungeon lies that which I seek.");  
+//         Console.WriteLine("You will retrieve it today… or suffer eternity within my grasp!\"");  
+//         while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed  
+//         Console.Clear();  
+//         Console.WriteLine("Darkness swallowed the sky, and then—just as suddenly—it was gone.");  
+//         Console.WriteLine("The village stood still, breathless, gripped by an invisible force.");  
+//         while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed  
+//         Console.Clear();  
 
-// Malgor's speech with added emphasis on stopping the loop
-        Console.WriteLine("\"The curse is simple. Retrieve what I seek from the dungeon, and the cycle will end.\"");
-        Console.WriteLine("\"Fail, and you will relive this moment, again and again, until the end of time.\"");
-        while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed  
-        Console.Clear();  
+// // Malgor's speech with added emphasis on stopping the loop
+//         Console.WriteLine("\"The curse is simple. Retrieve what I seek from the dungeon, and the cycle will end.\"");
+//         Console.WriteLine("\"Fail, and you will relive this moment, again and again, until the end of time.\"");
+//         while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed  
+//         Console.Clear();  
 
-        Console.Clear();  
-        Console.WriteLine("The town square became a place of madness.");  
-        Console.WriteLine("Some fell to their knees in despair.");  
-        Console.WriteLine("Some laughed hysterically, unable to comprehend the horror of it.");  
-        Console.WriteLine("Others raged, screaming into the sky, cursing Malgor’s name.");  
-        while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
-        Console.Clear();  
-        Console.WriteLine("Then night fell.");  
-        while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
-        Console.Clear();  
-        Console.WriteLine("And you all died.");  
-        while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
-        Console.Clear();  
-        Console.WriteLine("Again.");  
-        while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
-        Console.Clear();  
-        Console.WriteLine("And again.");  
-        while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
-        Console.Clear();  
-        Console.WriteLine("And again.");  
-        while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
-        Console.Clear();  
-        Console.WriteLine("The blacksmith, once a steady and calm man, smashed apart his own forge,");  
-        Console.WriteLine("declaring he would build a weapon mighty enough to kill a god.");  
-        Console.WriteLine("The baker stopped making bread, convinced there was no point in feeding the doomed.");  
-        Console.WriteLine("The children no longer played. The elders wept openly.");  
-        while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
-        Console.Clear();  
-        Console.WriteLine("Some people threw themselves into the dungeon in desperation, hoping to break the cycle.");  
-        Console.WriteLine("They never returned. But when the day reset, they were back in the village, their eyes hollow, their bodies shaking.");  
-        Console.WriteLine("They would not speak of what they had seen.");  
-        while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
-        Console.Clear();  
-        Console.WriteLine("It became clear: there was no escape. Not from the loop. Not from the dungeon.");  
-        while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
-        Console.Clear();  
-        Console.WriteLine("Malgor had bound you all to this fate.");  
-        while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
-        Console.Clear();  
-        Console.WriteLine("You had to enter the ruin. You had to retrieve whatever it was he wanted.");  
-        Console.WriteLine("No matter how long it took. No matter how many times you perished.");  
-        while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
-        Console.Clear(); 
-        Console.WriteLine("But how many cycles could you endure before losing yourself completely?");  
+//         Console.Clear();  
+//         Console.WriteLine("The town square became a place of madness.");  
+//         Console.WriteLine("Some fell to their knees in despair.");  
+//         Console.WriteLine("Some laughed hysterically, unable to comprehend the horror of it.");  
+//         Console.WriteLine("Others raged, screaming into the sky, cursing Malgor’s name.");  
+//         while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
+//         Console.Clear();  
+//         Console.WriteLine("Then night fell.");  
+//         while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
+//         Console.Clear();  
+//         Console.WriteLine("And you all died.");  
+//         while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
+//         Console.Clear();  
+//         Console.WriteLine("Again.");  
+//         while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
+//         Console.Clear();  
+//         Console.WriteLine("And again.");  
+//         while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
+//         Console.Clear();  
+//         Console.WriteLine("And again.");  
+//         while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
+//         Console.Clear();  
+//         Console.WriteLine("The blacksmith, once a steady and calm man, smashed apart his own forge,");  
+//         Console.WriteLine("declaring he would build a weapon mighty enough to kill a god.");  
+//         Console.WriteLine("The baker stopped making bread, convinced there was no point in feeding the doomed.");  
+//         Console.WriteLine("The children no longer played. The elders wept openly.");  
+//         while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
+//         Console.Clear();  
+//         Console.WriteLine("Some people threw themselves into the dungeon in desperation, hoping to break the cycle.");  
+//         Console.WriteLine("They never returned. But when the day reset, they were back in the village, their eyes hollow, their bodies shaking.");  
+//         Console.WriteLine("They would not speak of what they had seen.");  
+//         while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
+//         Console.Clear();  
+//         Console.WriteLine("It became clear: there was no escape. Not from the loop. Not from the dungeon.");  
+//         while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
+//         Console.Clear();  
+//         Console.WriteLine("Malgor had bound you all to this fate.");  
+//         while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
+//         Console.Clear();  
+//         Console.WriteLine("You had to enter the ruin. You had to retrieve whatever it was he wanted.");  
+//         Console.WriteLine("No matter how long it took. No matter how many times you perished.");  
+//         while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
+//         Console.Clear(); 
+//         Console.WriteLine("But how many cycles could you endure before losing yourself completely?");  
 
-        Thread.Sleep(3000); 
-        Console.Clear();
+//         Thread.Sleep(3000); 
+//         Console.Clear();
 
         // Start village loop
         // myCharacter.Days++;
@@ -456,6 +455,7 @@ class Program
 
         while (true)
 {
+    myCharacter.TakeDamage(100);
     Console.Clear();
     Console.WriteLine($"Day {myCharacter.Days}: You wake up to another day in the village.");
     Console.WriteLine("What would you like to do?");
@@ -475,62 +475,76 @@ class Program
         case ConsoleKey.D1:
         case ConsoleKey.NumPad1:
             myCharacter.PrintCurrentStats();
+            Console.WriteLine("\n");
+            myCharacter.PrintBaseStats();
             break;
 
         case ConsoleKey.D2: 
         case ConsoleKey.NumPad2:
             while (true)
+{
+    Console.Clear();
+    myCharacter.PrintInventory(); // Show inventory
+
+    Console.WriteLine("\nSelect an action:");
+    Console.WriteLine("E - Equip Gear");
+    Console.WriteLine("S - Send to Storage");
+    Console.WriteLine("U - Use Consumable");
+    Console.WriteLine("Enter - Exit Inventory");
+
+    ConsoleKeyInfo keyInfo = Console.ReadKey(true);
+    if (keyInfo.Key == ConsoleKey.Enter)
+        break;
+
+    Console.Clear();
+    myCharacter.PrintInventory(); // Refresh inventory display
+
+    Console.Write("\nEnter item number (1-N) or 0 to cancel: ");
+    if (int.TryParse(Console.ReadLine(), out int itemIndex) && itemIndex > 0 && itemIndex <= myCharacter.Inventory.Count)
+    {
+        Item selectedItem = myCharacter.Inventory[itemIndex - 1];
+
+        if (keyInfo.Key == ConsoleKey.E) // Equip Item
+        {
+            if (selectedItem is Gear gearItem)
             {
-                Console.Clear();
-                myCharacter.PrintInventory(); // Show inventory
-
-                Console.WriteLine("\nSelect an item to:");
-                Console.WriteLine("E - Equip Item");
-                Console.WriteLine("S - Send to Storage");
-                Console.WriteLine("Enter - Exit Inventory");
-
-                ConsoleKeyInfo keyInfo = Console.ReadKey(true);
-                if (keyInfo.Key == ConsoleKey.Enter)
-                    break;
-
-                Console.Clear();
-                myCharacter.PrintInventory(); // Refresh inventory display
-
-                Console.Write("\nEnter item number (1-N) or 0 to cancel: ");
-                if (int.TryParse(Console.ReadLine(), out int itemIndex) && itemIndex > 0 && itemIndex <= myCharacter.Inventory.Count)
-                {
-                    Item selectedItem = myCharacter.Inventory[itemIndex - 1];
-
-                    if (keyInfo.Key == ConsoleKey.E) // Equip Item
-                    {
-                        if (selectedItem is Gear gearItem)
-                        {
-                            myCharacter.Equip(gearItem);
-                            Console.WriteLine($"{gearItem.Name} equipped!");
-                        }
-                        else
-                        {
-                            Console.WriteLine("You can only equip gear items.");
-                        }
-                    }
-                    else if (keyInfo.Key == ConsoleKey.S) // Store Item
-                    {
-                        myCharacter.StoreItemInStorage(selectedItem);
-                    }
-                    else
-                    {
-                        Console.WriteLine("Invalid choice.");
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("Invalid selection.");
-                }
-
-                Console.WriteLine("\nPress any key to continue...");
-                Console.ReadKey(true);
+                myCharacter.Equip(gearItem);
+                Console.WriteLine($"{gearItem.Name} equipped!");
             }
-            break;
+            else
+            {
+                Console.WriteLine("You can only equip gear items.");
+            }
+        }
+        else if (keyInfo.Key == ConsoleKey.S) // Store Item
+        {
+            myCharacter.StoreItemInStorage(selectedItem);
+        }
+        else if (keyInfo.Key == ConsoleKey.U) // Use Consumable
+        {
+            if (selectedItem is Consumable consumableItem)
+            {
+                myCharacter.UseConsumable(consumableItem);
+            }
+            else
+            {
+                Console.WriteLine("You can only use consumable items.");
+            }
+        }
+        else
+        {
+            Console.WriteLine("Invalid choice.");
+        }
+    }
+    else
+    {
+        Console.WriteLine("Invalid selection.");
+    }
+
+    Console.WriteLine("\nPress any key to continue...");
+    Console.ReadKey(true);
+}
+break;
 
         case ConsoleKey.D3:
         case ConsoleKey.NumPad3:
@@ -729,37 +743,3 @@ bool ConfirmAction(string message)
 
 
 
-// // Add items to inventory
-// character.AddItemToInventory(sword);
-// character.AddItemToInventory(shield);
-// character.AddItemToInventory(BigSword);
-
-// character.MoveAllInventoryToStorage();
-
-// Console.WriteLine("\n-- Inventory Updated --\n");
-
-// // Equip sword (removes it from inventory)
-// character.Equip(sword);
-// Console.WriteLine("\nSword equipped.\n");
-
-// // Equip shield (removes it from inventory)
-// character.Equip(shield);
-// Console.WriteLine("\nShield equipped.\n");
-
-// character.PrintEquippedItems();
-// Console.WriteLine();
-// character.PrintBaseStats();
-// character.PrintCurrentStats();
-// Console.WriteLine();
-
-// // Remove sword (returns it to inventory)
-// character.RemoveItem("weapon");
-// Console.WriteLine("\nSword removed from equipment.\n");
-
-// character.PrintInventory();
-// Console.WriteLine();
-// character.PrintEquippedItems();
-// Console.WriteLine();
-// character.PrintBaseStats();
-// character.PrintCurrentStats();
-// Console.WriteLine();

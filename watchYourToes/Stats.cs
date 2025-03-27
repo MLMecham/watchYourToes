@@ -46,6 +46,16 @@ public class Stat
         Speed = 5;
     }
 
+    public Stat(int health = 0, int attack = 0, int defense = 0, int magicAttack = 0, int magicDefense = 0, int speed = 0)
+    {
+        Health = health;
+        Attack = attack;
+        Defense = defense;
+        MagicAttack = magicAttack;
+        MagicDefense = magicDefense;
+        Speed = speed;
+    }
+
     public void PrintStats()
     {
         Console.WriteLine($"Health: {Health}");

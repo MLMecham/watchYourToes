@@ -6,4 +6,9 @@ class TreasureRoom : Room
     public TreasureRoom(Character character) : base("OoO, treasure, lucky you...", character)
     {
     }
+
+    public override void RoomEffect()
+    {
+        Console.WriteLine($"This is a treasure Room.");
+    }
 }

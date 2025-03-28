@@ -95,4 +95,9 @@ public class EnemyRoom : Room{
         //     Console.WriteLine($"You are fighting an emeny--{enemy.Name} with " + enemy.CurrentStat.Health + " HP, " + enemy.CurrentStat.Attack + " ATK, " + enemy.CurrentStat.Defense + " DEF, " + enemy.CurrentStat.MagicAttack + " MATK, " + enemy.CurrentStat.MagicDefense + " MDEF, " + enemy.CurrentStat.Speed + " SPD");
         // }
     }
+
+    public override void RoomEffect()
+    {
+        Console.WriteLine($"This is an enemy room.");
+    }
 }

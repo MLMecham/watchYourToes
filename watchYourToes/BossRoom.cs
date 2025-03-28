@@ -6,4 +6,9 @@ class BossRoom : Room
     public BossRoom(Character character) : base("A MASSIVE Spider stares at you with eight eyes, poison oozing from it's mouth", character)
     {
     }
+
+    public override void RoomEffect()
+    {
+        Console.WriteLine($"This is the boss room.");
+    }
 }

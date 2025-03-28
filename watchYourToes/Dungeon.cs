@@ -340,7 +340,11 @@ class Dungeon
 
 public int Action()
     {
+
         Console.Clear();
+        grid[currentCoord].RoomEffect();
+
+
         Console.WriteLine( grid[currentCoord].Description);
         Console.WriteLine("");
         Console.WriteLine("What will you do:");

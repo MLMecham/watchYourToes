@@ -84,4 +84,9 @@ class TrapRoom : Room
         Console.WriteLine("\nPress SPACE to continue...");
         while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { }
     }
+
+    public override void RoomEffect()
+    {
+        Console.WriteLine($"This is a trap room. The trap is {trap.Name}");
+    }
 }

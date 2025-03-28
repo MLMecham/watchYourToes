@@ -13,4 +13,10 @@ public class Room
         Description = description;
         roomCompleted = false;
     }
+
+    public virtual void RoomEffect()
+    {
+        Console.WriteLine("Normal room");
+    }
+
 }

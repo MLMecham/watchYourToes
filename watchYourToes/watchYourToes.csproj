@@ -10,6 +10,14 @@
   <ItemGroup>
     <PackageReference Include="MongoDB.Driver" Version="3.2.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+      //1. Fix these lines to include all the json files
+      //2. Go back to photos on phone for reference.
+      //3. Remove bins files both in Ivan-2 and Mainbranch 3.21 repos on github
+      //4. If this works, it should get the json files automatically according to the CopyToOutputDirectory
+      <Content Include="Data.json" />
+      <CopyToOutputDirectory>CopyIfNewer</CopyToOutputDirectory>
   </ItemGroup>
+
+  
 
 </Project>

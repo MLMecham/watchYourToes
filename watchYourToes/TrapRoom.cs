@@ -58,45 +58,30 @@ class TrapRoom : Room
 
         Effect effect = trap.EffectType.ToLower() switch
         {
-            "poison" => new Poison(10),
-            "burn" => new Burn(10),
-            "freeze" => new Freeze(10),
-            "pierce" => new Pierce(10),
-            "crush" => new Crush(10),
-            "mental" => new Mental(10),
-            "magicdrain" => new MagicDrain(10),
-            "teleport" => new Teleport(10),
-            "radiation" => new Radiation(10),
-            "blind" => new Blind(10),
-            "bleed" => new Bleed(10),
-            "drowning" => new Drowning(10),
             "aging" => new Aging(10),
+            "bleed" => new Bleed(10),
+            "blind" => new Blind(10),
+            "burn" => new Burn(10),
+            "crush" => new Crush(10),
+            "drowning" => new Drowning(10),
+            "electric" => new Electric(10),
             "explosive" => new Explosive(10),
             "fall" => new Fall(10),
+            "freeze" => new Freeze(10),
+            "magicdrain" => new MagicDrain(10),
+            "mental" => new Mental(10),
+            "pierce" => new Pierce(10),
+            "poison" => new Poison(10),
+            "radiation" => new Radiation(10),
+            "teleport" => new Teleport(10),
+            
+
 
             _ => throw new ArgumentException($"Unknown effect type: {trap.EffectType}")
         };
-
+        
         character.ActiveEffects.Add(effect);
+        Console.WriteLine("\nPress SPACE to continue...");
+        while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { }
     }
 }
-
-
-// Effects:
-// Poison
-// Burn
-// Explosive
-// Freeze
-// Pierce
-// Crush
-// Mental
-// Magic Drain
-// Teleport
-// Radiation
-// Blind
-// Bleed
-// Drowning
-// Aging
-
-
-// When die: pause and tell why died, save, return to main menu, initate long rest to reset.

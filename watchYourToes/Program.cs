@@ -694,21 +694,13 @@ class Program
                     int actionResult =dungeon.Action();
                     if (actionResult == 1) //Deeper in the dungeon
                     {
-                        dungeon = new Dungeon(myCharacter, chosenFloor);
+                        dungeon = new Dungeon(myCharacter, chosenFloor++);
                         dungeon.FindBossRoom(dungeon.startRoom);
                         dungeon.SetRooms();
-                        // dungeon.grid.Clear();
-                        // dungeon.Floor++;
-                        // dungeon.RandomizeDungeon();
-                        // dungeon.GenerateDungeon();
-                        // dungeon.FindBossRoom(dungeon.startRoom);
-                        // dungeon.SetRooms();
                     }
                     else if (actionResult == 2) //Back out of the dungeon
                     {
                         Console.WriteLine("Goodbye!");
-                        Console.WriteLine("\nPress SPACE to continue...");
-                        while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { }
                         break;
                     }
                     

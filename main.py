@@ -29,6 +29,7 @@ class BattleMessage(BaseModel):
 
 class VillagerMessage(BaseModel):
     User_query: str
+    Days : int
 
 
 @app.post("/battle_chat")
@@ -50,7 +51,8 @@ async def battle_ai(request: BattleMessage):
     
 @app.post("/villager_chat")
 async def villager_chat(request: VillagerMessage):
-    user_prompt = "You are a villager in a medieval fantasy world. Answer questions in a helpful and immersive way. Limit your response to 1 to 2 sentences."
+    #TODOOO pass on the days it's been to villager
+    user_prompt = "You are a villager in a medieval fantasy world. Your village has been cursed into a time loop until you retrieve the item malgar wants in the dungeon. Depenind on the amount of days past the beginning, you should start going crazy. Currently you are on day " + str(request.Days) + ". Answer questions in a helpful and immersive way. Limit your response to 1 to 2 sentences."
     response = client.models.generate_content(
         model="gemini-2.0-flash",
         contents=[user_prompt, request.User_query]

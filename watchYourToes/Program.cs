@@ -5,6 +5,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using MongoDB.Driver;
 using System.Linq;
+using MongoDB.Bson.Serialization;
 
 class Program
 {
@@ -27,11 +28,36 @@ class Program
     //     return user != null; // Returns true if the username already exists
     // }
 
-    static async Task Main()
+    static void RegisterDiscriminators()
     {
+        // Register base class 'Item' with a discriminator
+        BsonClassMap.RegisterClassMap<Item>(cm =>
+        {
+            cm.AutoMap();
+            cm.SetDiscriminator("Item");
+        });
+        // Register subclass 'Consumable' with its own discriminator
+        BsonClassMap.RegisterClassMap<Consumable>(cm =>
+        {
+            cm.AutoMap();
+            cm.SetDiscriminator("Consumable");
+        });
+        // Similarly, register other subclasses like Gear, etc.
+        BsonClassMap.RegisterClassMap<Gear>(cm =>
+        {
+            cm.AutoMap();
+            cm.SetDiscriminator("Gear");
+        });
+    }
+
+
+    static async Task Main()
+    {   
+        RegisterDiscriminators();
         dbConnection db = new dbConnection(); // Create an instance of dbConnection
         Character myCharacter = null; // Declaring character  outside the loop
         string characterName = ""; // Declaring character  outside the loop
+        List<string> classNames = new List<string> { "Archer", "Mage", "Ninja", "Warrior", "Custom Class" };
 
 
         // bool isLoggedIn = false;
@@ -141,38 +167,49 @@ class Program
                         }
                     } while (characterExists);
 
-                    Console.Write("Select character class:\n");
-                    Console.WriteLine("1. Archer\n2.Mage\n3.Ninja\n4.Warrior\n5.Custom Class");
-                    string characterClass = Console.ReadLine();
-                    if(characterClass == "5")
+                    Console.WriteLine("Select character class:");
+                    for (int i = 0; i < classNames.Count; i++)
                     {
-                        Console.Write("Enter Class Name: ");
-                        characterClass = Console.ReadLine();
+                        Console.WriteLine($"{i + 1}. {classNames[i]}");
                     }
 
-                    // Create the character object with default Level and Stats set in the constructor
-                    Character newCharacter = new Character(characterName, characterClass);
+                    Console.Write("Enter your choice: ");
+                    string input = Console.ReadLine();
+                    int classIndex;
 
-                    // Save the character to the database
-                    bool isSaved = await newCharacter.SaveCharacter();
-
-                    if (isSaved)
+                    if (int.TryParse(input, out classIndex) && classIndex >= 1 && classIndex <= classNames.Count)
                     {
-                        Console.WriteLine("Character created and saved successfully!");
+                        string characterClass = classNames[classIndex - 1];
 
-                        // Add the character name to the user's list of characters in the database
-                        //bool isCharacterAssigned = await db.AssignCharacterToUser(currentUser.Username, newCharacter.Name);
-                        // if (isCharacterAssigned)
-                        // {
-                        //     Console.WriteLine("Character added to user successfully!");
-                        // }
-                        
+                        if (characterClass == "Custom Class")
+                        {
+                            Console.Write("Enter Class Name: ");
+                            characterClass = Console.ReadLine();
+                        }
+
+                        // Create the character object with default Level and Stats set in the constructor
+                        Character newCharacter = new Character(characterName, characterClass);
+
+                        // Save the character to the database
+                        bool isSaved = await newCharacter.SaveCharacter();
+
+                        if (isSaved)
+                        {
+                            Console.WriteLine("Character created and saved successfully!");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Failed to save character.");
+                        }
                     }
                     else
                     {
-                        Console.WriteLine("Failed to save character.");
-                        
+                        Console.WriteLine("Invalid choice. Please try again.");
                     }
+
+
+
+
                     break;
 
                 case "2":
@@ -300,40 +337,71 @@ class Program
 
         
  
-        //BATTLE TEST!!!!!
+        // //BATTLE TEST!!!!!
+        //double check logic bc enemy still appears uu
        
-        Console.WriteLine("\n-- Battle Test... --\n");
-        List<Enemy> enemies = new List<Enemy>
+        // Console.WriteLine("\n-- Battle Test... --\n");
+        // List<Enemy> enemies = new List<Enemy>
+        // {
+        //     new Enemy("Goblin", 10, 5, 2, 0, 1, 3, 10, new List<Gear>(), 0.5f, 1),
+        //     new Enemy("Orc", 20, 8, 5, 0, 2, 100, 20, new List<Gear>(), 0.5f, 1),
+        //     new Enemy("Skeleton", 15, 6, 3, 0, 1, 4, 15, new List<Gear>(), 0.5f, 1)
+        // };
+
+        // // // // Start the battle
+        // Battle battle = new Battle(myCharacter, enemies);
+        // await battle.StartBattle();
+
+
+        // //VILLAGER CHATBOT TEST!!
+        Console.WriteLine("\n-- Villager Chatbot --\n");
+        while (true)
         {
-            new Enemy("Goblin", 10, 5, 2, 0, 1, 3, 10, new List<Gear>(), 0.5f, 1),
-            new Enemy("Orc", 20, 8, 5, 0, 2, 100, 20, new List<Gear>(), 0.5f, 1),
-            new Enemy("Skeleton", 15, 6, 3, 0, 1, 4, 15, new List<Gear>(), 0.5f, 1)
-        };
+            Console.WriteLine("Do you want to talk to the villager?");
+            Console.WriteLine("1. Yes");
+            Console.WriteLine("2. No");
+            Console.Write("Choose an option: ");
+            string user_input = Console.ReadLine();
 
-        // // Start the battle
-        Battle battle = new Battle(myCharacter, enemies);
-        await battle.StartBattle();
+            if (user_input == "1")
+            {
+                Console.WriteLine("Enter a question (or type 'exit' to stop chatting):");
+                string user_query = Console.ReadLine();
+                if (user_query.ToLower() == "exit")
+                {
+                    Console.WriteLine("You finished talking to the villager.");
+                    break; 
+                }
 
+                VillagerMessage villagerMessage = new VillagerMessage(user_query,myCharacter.Days);
+                using HttpClient client = new HttpClient { BaseAddress = new Uri("http://127.0.0.1:8000/") };
+                string jsonMessage = JsonSerializer.Serialize(villagerMessage);
+                StringContent content = new StringContent(jsonMessage, Encoding.UTF8, "application/json");
 
-        //VILLAGER CHATBOT TEST!!
-        Console.WriteLine("\n-- Villager Chatbot Test... --\n");
-        Console.WriteLine("Enter a question:");
-        string user_query = Console.ReadLine();
-        VillagerMessage villagerMessage = new VillagerMessage(user_query);
-        using HttpClient client = new HttpClient { BaseAddress = new Uri("http://127.0.0.1:8000/") };
-        string jsonMessage = JsonSerializer.Serialize(villagerMessage);
-        StringContent content = new StringContent(jsonMessage, Encoding.UTF8, "application/json");
-        try
-        {
-            HttpResponseMessage response = await client.PostAsync("villager_chat", content);
-            response.EnsureSuccessStatusCode();
-            string result = await response.Content.ReadAsStringAsync();
-            Console.WriteLine("Villager: " + result);
+                try
+                {
+                    HttpResponseMessage response = await client.PostAsync("villager_chat", content);
+                    response.EnsureSuccessStatusCode();
+                    string result = await response.Content.ReadAsStringAsync();
+                    Console.WriteLine("Villager: " + result);
+                }
+                catch (HttpRequestException e)
+                {
+                    Console.WriteLine("Error communicating with Villager AI: " + e.Message);
+                }
+            }
+            else if (user_input == "2")
+            {
+                Console.WriteLine("You decide not to approach the villager. ByeEE!");
+                break; 
+            }
+            else
+            {
+                Console.WriteLine("Invalid input. Please try again.");
+            }
         }
-        catch (HttpRequestException e)
-        {
-            Console.WriteLine("Error communicating with VillagerMessage AI: " + e.Message);
-        }
+
+
 
 
         Console.WriteLine("\nPress SPACE to continue...");
@@ -502,6 +570,8 @@ class Program
         case ConsoleKey.D1:
         case ConsoleKey.NumPad1:
             myCharacter.PrintCurrentStats();
+            Console.WriteLine();
+            myCharacter.PrintBaseStats();
             break;
 
         case ConsoleKey.D2: 

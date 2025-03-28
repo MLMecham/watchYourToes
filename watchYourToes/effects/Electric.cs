@@ -20,6 +20,7 @@ namespace watchYourToes
 
         public override void BattleEffect()
         {
+            // Will affect your accuracy
         }
     }
 }

@@ -330,6 +330,7 @@ class Dungeon
         {
             trapRoom.TriggerTrap(character);
         }
+        
         // Movement(currentCoord);
 
     }
@@ -413,6 +414,7 @@ public int Action()
             case ConsoleKey.NumPad6:
                 if (currentCoord == bossRoom)
                 {
+                    character.LowestFloor ++;
                     Console.Clear();
                     QuitDungeon = true;
                     return 2;

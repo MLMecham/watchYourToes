@@ -316,7 +316,7 @@ class Program
         myCharacter.PrintBaseStats();
 
 
-        //BATTLE TEST!!!!!
+        //BATTLE TEST!!!!!!!!
        
         // Console.WriteLine("\n-- Battle Test... --\n");
         // List<Enemy> enemies = new List<Enemy>

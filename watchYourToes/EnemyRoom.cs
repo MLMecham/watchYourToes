@@ -18,7 +18,7 @@ public class EnemyRoom : Room{
     public int floorNumber;
     public List<Enemy> enemiesList {get; set;} = new List<Enemy>();
 
-    public EnemyRoom(int floorNumber = 1) : base("A dark and eerie room filled with enemies.") // Call the base class constructor with a default description
+    public EnemyRoom(Character character, int floorNumber = 1) : base("A dark and eerie room filled with enemies.", character) // Call the base class constructor with a default description
     {
         getEnemyList(floorNumber);   // Initialize the enemy list for the room
     }

@@ -25,7 +25,7 @@ class Dungeon
     public int RoomCount; //Amount of rooms to be made in the grid
     public int Floor; //The floor that the player is on.
 
-    Character character;
+    public Character character;
 
     //Pass in character to get stats
     public Dungeon(Character myCharacter, int floor = 1, int roomCount = 10, int length = 10, int width = 10)
@@ -61,7 +61,7 @@ class Dungeon
         int y = rand.Next(1, Length + 1);
 
 
-        grid[(x,y)] = new StartRoom();
+        grid[(x,y)] = new StartRoom(character);
         startRoom = (x, y);
         currentCoord = startRoom;
 
@@ -109,7 +109,7 @@ class Dungeon
 
         if (InGrid(newX, newY, Length, Width) && !grid.ContainsKey((newX, newY)))
         {
-            grid[(newX, newY)] = new Room("Magar doesn't want you to see this");
+            grid[(newX, newY)] = new Room("Magar doesn't want you to see this", character);
 
             var randomRoom = grid.Keys.ElementAt(rand.Next(grid.Count));
 
@@ -142,7 +142,7 @@ class Dungeon
                 bossRoom = (entry.Key.Item1, entry.Key.Item2);
             }
         }
-        grid[bossRoom] = new BossRoom();
+        grid[bossRoom] = new BossRoom(character);
     }
     public void SetRooms()
     {
@@ -154,19 +154,19 @@ class Dungeon
                 
                 if (chance < 0.45)
                 {
-                    grid[entry.Key] = new EnemyRoom();
+                    grid[entry.Key] = new EnemyRoom(character);
                 }
                 else if (chance < 0.80)
                 {
-                    grid[entry.Key] = new TrapRoom();
+                    grid[entry.Key] = new TrapRoom(character);
                 }
                 else if (chance < 0.95)
                 {
-                    grid[entry.Key] = new EmptyRoom();
+                    grid[entry.Key] = new EmptyRoom(character);
                 }
                 else
                 {
-                    grid[entry.Key] = new TreasureRoom();
+                    grid[entry.Key] = new TreasureRoom(character);
                 }
             }
         }
@@ -273,6 +273,9 @@ class Dungeon
         DisplayMap(currentCoord);
         // Display available directions
         Console.WriteLine( grid[currentCoord].Description);
+
+        Console.WriteLine( grid[currentCoord].roomCompleted);
+
         Console.Write("You can go ");
         if (directions.Count > 0)
         {

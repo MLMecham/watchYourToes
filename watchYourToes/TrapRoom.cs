@@ -15,7 +15,7 @@ class TrapRoom : Room
         LoadTrapsFromJson("obj/traps.json"); // Load traps **once** for all instances
     }
 
-    public TrapRoom() : base("The room reeks of trouble...")
+    public TrapRoom(Character character) : base("The room reeks of trouble...", character) 
     {
         trap = GetRandomTrap();
     }

@@ -320,7 +320,7 @@ class Program
         myCharacter.PrintBaseStats();
 
 
-        //BATTLE TEST!!!!!
+        // // BATTLE TEST!!!!!
         // Console.WriteLine("\n-- Battle Test... --\n");
         // Enemy randomdude1 = JsonManager.GetRandomEnemy(5);
         // Enemy randomdude2 = JsonManager.GetRandomEnemy(5);

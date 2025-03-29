@@ -11,6 +11,7 @@ public class Mage : Character
         this.Level = character.Level;
         this.Exp = character.Exp;
         this.Stats = character.Stats;
+        this.Days = character.Days;
     }
 
     public override int BonusPoints { get; } = 5; // Mages get 5 bonus points

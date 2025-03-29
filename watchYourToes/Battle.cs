@@ -42,7 +42,7 @@ public class Battle
         // Display the combatants turn order
         
     }
-    public void StartBattle()
+    public async Task StartBattle()
     {
         Console.WriteLine($"Battle starts! {character.Name} vs {enemies.Count} enemie(s)!");
      
@@ -73,16 +73,16 @@ public class Battle
             
             foreach (var combatant in combatants.ToList()) //copy of combatants list
             {
-            if (character.Stats.CurrentStats.Health <= 0 || combatants.Count == 1) break;  //stops battle if over
+                if (character.Stats.CurrentStats.Health <= 0 || combatants.Count == 1) break;  //stops battle if over
 
-            if (combatant is Character charCombatant)
-                {
-                    PlayerTurn(charCombatant);
-                }
-            else if (combatant is Enemy enemy)
-                {
-                    EnemyTurn(enemy);
-                }
+                if (combatant is Character charCombatant)
+                    {
+                       await PlayerTurn(charCombatant);
+                    }
+                else if (combatant is Enemy enemy)
+                    {
+                       await EnemyTurn(enemy);
+                    }
 
             //removes dead enemies from combatants & enemies list
             // It's better to remove enemy here instead of in character's turn to avoid modifying the list while iterating

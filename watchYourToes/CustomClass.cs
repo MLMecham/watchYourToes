@@ -6,8 +6,9 @@ public class CustomClass : Character
         this.Id = character.Id;
         this.Level = character.Level;
         this.Exp = character.Exp;
-        this.Days = character.Days;
         this.Stats = character.Stats;
+        this.Days = character.Days;
+        
     }
 
     // Default minimal bonus 3 from Character class

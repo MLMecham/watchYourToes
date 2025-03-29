@@ -167,13 +167,50 @@ class Program
         // Grab the Json data and store them into static variables.
          string filePath = "EnemyTable.json";  // Path to the enemy json file
          string filePathGear = "GearTable.json";
+         string filePathConsumable = "ConsumableTable.json";
+
+
+        // Load Consumables from JSON
+        JsonManager.LoadConsumablesFromJson(filePathConsumable);
+        Consumable randomConsumable = JsonManager.GetRandomConsumable();
+        if (randomConsumable != null)
+        {
+            Console.WriteLine("Randomly Selected Consumable:");
+            randomConsumable.PrintConsumable();
+        }
+        Console.ReadLine();
+        myCharacter.AddItemToInventory(randomConsumable);
+        randomConsumable = JsonManager.GetRandomConsumable();
+        if (randomConsumable != null)
+        {
+            Console.WriteLine("Randomly Selected Consumable:");
+            randomConsumable.PrintConsumable();
+        }
+        Console.ReadLine();
+        myCharacter.AddItemToInventory(randomConsumable);
+        randomConsumable = JsonManager.GetRandomConsumable();
+        if (randomConsumable != null)
+        {
+            Console.WriteLine("Randomly Selected Consumable:");
+            randomConsumable.PrintConsumable();
+        }
+        Console.ReadLine();
+        myCharacter.AddItemToInventory(randomConsumable);
+        randomConsumable = JsonManager.GetRandomConsumable();
+        if (randomConsumable != null)
+        {
+            Console.WriteLine("Randomly Selected Consumable:");
+            randomConsumable.PrintConsumable();
+        }
+        Console.ReadLine();
+        myCharacter.AddItemToInventory(randomConsumable);
+
 
         // Load Gear from Specified file
         JsonManager.LoadGearFromJson(filePathGear);
         Gear randomgear = JsonManager.GetRandomGear();
         myCharacter.AddItemToInventory(randomgear);
         myCharacter.PrintInventory();
-        Console.ReadLine();
 
         // Load enemies from the specified file
         // DO NOT DELETE THIS LINE. THIS IS WHAT LET"S US USE THE STATIC JSON LIST

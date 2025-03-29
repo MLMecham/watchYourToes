@@ -256,7 +256,7 @@ public class Character : Combatant
         if (Inventory.Contains(consumable))
         {
             // If the consumable has health effects (e.g., healing item)
-            if (consumable.Effects.Health > 0) 
+            if (consumable.Effects.Health > 0 && !consumable.Temporary) 
             {
                 int maxHealth = Stats.BaseStats.Health; // Maximum possible health
                 if (Stats.CurrentStats.Health >= maxHealth)

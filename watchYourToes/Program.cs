@@ -127,6 +127,7 @@ class Program
                             if (myCharacter != null)
                             {
                                 Console.WriteLine($"Character loaded: {myCharacter.Name},Id: {myCharacter.Id}, Class Name: {myCharacter.ClassName}, Level: {myCharacter.Level}");
+                                myCharacter.FullHeal();
                             }
                             else
                             {
@@ -236,39 +237,7 @@ class Program
 
 
 
-        // // Load Json Data
-        // string filePath = "EnemyTable.json"; // Make sure this file exists
-
-
-        // if (File.Exists(filePath))
-        // {
-        //     string jsonString = File.ReadAllText(filePath);
-        //     List<Enemy> enemies = JsonSerializer.Deserialize<List<Enemy>>(jsonString);
-
-        //     foreach (var enemy in enemies)
-        //     {
-        //         Console.WriteLine($"Name: {enemy.Name} | Health: {enemy.Health} | Attack: {enemy.Attack} | Defense: {enemy.Defense} | Magic Attack: {enemy.MagicAttack} | Magic Defense: {enemy.MagicDefense} | Speed: {enemy.Speed} | Exp: {enemy.Exp} | Possibility of Drop: {enemy.PossibilityOfDrop}");
-        //         enemy.InitializeCurrentStat();
-        //         enemy.CurrentStat.PrintStats();
-
-        //         // enemy.CurrentStat = new Stat(enemy.Health, enemy.Attack, enemy.Defense, enemy.MagicAttack, enemy.MagicDefense, enemy.Speed);
-        //         // enemy.InitializeCurrentStat();
-        //         // enemy.CurrentStat.Health = enemy.Health;
-        //         // enemy.CurrentStat.Attack = enemy.Attack;
-        //         // enemy.CurrentStat.Defense = enemy.Defense;
-        //         // enemy.CurrentStat.MagicAttack = enemy.MagicAttack;
-        //         // enemy.CurrentStat.MagicDefense = enemy.MagicDefense;
-        //         // enemy.CurrentStat.Speed = enemy.Speed;
-
-        //         // enemy.CurrentStat.PrintStats();
-        //         Console.WriteLine("----------------");
-        //     }
-        // }
-        // else
-        // {
-        //     Console.WriteLine("File not found!");
-        // }
-    
+        
     
 
         //TEST !!
@@ -277,7 +246,11 @@ class Program
         myCharacter.AddItemToInventory(sword);
         myCharacter.AddItemToInventory(shield);
         myCharacter.AddItemToInventory(BigSword);
-        await db.UpdateCharacter(myCharacter); //save new info to db
+        myCharacter.Equip(sword);
+        myCharacter.PrintBaseStats();
+        myCharacter.PrintCurrentStats();
+        Console.ReadLine();
+        // await db.UpdateCharacter(myCharacter); //save new info to db
     
         Console.WriteLine("\n-- Level Up Test... --\n");
         //Level Up test
@@ -438,20 +411,16 @@ class Program
         Console.Clear(); 
         Console.WriteLine("But how many cycles could you endure before losing yourself completely?");  
 
-        Thread.Sleep(3000); 
+        Thread.Sleep(200); 
         Console.Clear();
 
-        // Start village loop
-        // myCharacter.Days++;
-        // Console.WriteLine("You wake up to another day. How do You feel?");
-        // myCharacter.PrintCurrentStats();
-        // while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
-        // Console.Clear(); 
+        
 
 
         while (true)
 {
     Console.Clear();
+    myCharacter.TakeDamage(30);
     Console.WriteLine($"Day {myCharacter.Days}: You wake up to another day in the village.");
     Console.WriteLine("What would you like to do?");
     Console.WriteLine("1. See Stats");
@@ -469,6 +438,7 @@ class Program
     {
         case ConsoleKey.D1:
         case ConsoleKey.NumPad1:
+            myCharacter.PrintBaseStats();
             myCharacter.PrintCurrentStats();
             break;
 
@@ -683,7 +653,7 @@ class Program
         case ConsoleKey.D7:
         case ConsoleKey.NumPad7:
             Console.WriteLine("You decide to rest and prepare for another loop.");
-            myCharacter.Stats.CurrentStats = myCharacter.Stats.BaseStats;
+            myCharacter.FullHeal();
             myCharacter.Days++;
 
 
@@ -712,70 +682,10 @@ bool ConfirmAction(string message)
         
         
 
-        // Let player go to shops / save / change class / go to storage / heal
-        // Let players go into the dungeon
-
-            // dungeon stuff
-            // dungeon stuff
-            // dungeon stuff
-            // dungeon stuff
-
-
-        // When the player dies or finishes the dungeon, they wake up at the start of the village loop.
+       
 
     }
 }
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// // Add items to inventory
-// character.AddItemToInventory(sword);
-// character.AddItemToInventory(shield);
-// character.AddItemToInventory(BigSword);
-
-// character.MoveAllInventoryToStorage();
-
-// Console.WriteLine("\n-- Inventory Updated --\n");
-
-// // Equip sword (removes it from inventory)
-// character.Equip(sword);
-// Console.WriteLine("\nSword equipped.\n");
-
-// // Equip shield (removes it from inventory)
-// character.Equip(shield);
-// Console.WriteLine("\nShield equipped.\n");
-
-// character.PrintEquippedItems();
-// Console.WriteLine();
-// character.PrintBaseStats();
-// character.PrintCurrentStats();
-// Console.WriteLine();
-
-// // Remove sword (returns it to inventory)
-// character.RemoveItem("weapon");
-// Console.WriteLine("\nSword removed from equipment.\n");
-
-// character.PrintInventory();
-// Console.WriteLine();
-// character.PrintEquippedItems();
-// Console.WriteLine();
-// character.PrintBaseStats();
-// character.PrintCurrentStats();
-// Console.WriteLine();

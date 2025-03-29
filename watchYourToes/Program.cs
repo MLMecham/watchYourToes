@@ -169,7 +169,9 @@ class Program
 
         // Load Gear from Specified file
         JsonManager.LoadGearFromJson(filePathGear);
-
+        Gear randomgear = JsonManager.GetRandomGear();
+        myCharacter.AddItemToInventory(randomgear);
+        myCharacter.PrintInventory();
         Console.ReadLine();
 
         // Load enemies from the specified file

@@ -1,7 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-
+using System.Text.Json;
+using System.Net.Http;
+using System.Linq;
+using System.Text;
 
 public class Battle
 {
@@ -9,6 +12,7 @@ public class Battle
     private List<Enemy> enemies;
     public List<Combatant> combatants = new List<Combatant>();
     private Random random = new Random();
+    private static readonly HttpClient client = new HttpClient { BaseAddress = new Uri("http://127.0.0.1:8000/") };
 
     public Battle(Character character, List<Enemy> enemies)
     {
@@ -58,10 +62,11 @@ public class Battle
         else if (combatant is Enemy enemy)
         {
             // Handle the case for non-Character combatants (e.g., Enemy)
-            Console.WriteLine($"{enemy.Name} - Speed: {enemy.CurrentStat.Speed} is not a character.");
+            Console.WriteLine($"{enemy.Name} - Speed: {enemy.CurrentStat.Speed}");
         }
             
         }
+        Console.WriteLine("");
 
         // Battle loop
         while (character.Stats.BaseStats.Health > 0 && enemies.Count > 0){ // while character is alive and there are enemies left
@@ -145,8 +150,14 @@ public class Battle
 
         int damage = rawDamage - target.CurrentStat.Defense;
         damage = Math.Max(damage, 1); // apply target's defense to the damage and ensure at least 1 damage is dealt
-        Console.WriteLine($"{charCombatant.Name} uses {attackType} attack on {target.Name} for {damage} damage!");
-        target.TakeDamage(damage); 
+        
+        //Calling Battle chatbot
+        // Console.WriteLine($"{charCombatant.Name} uses {attackType} attack on {target.Name} for {damage} damage!");
+        
+        await PrintBattleMessage(charCombatant.Name, charCombatant.ClassName, attackType, target.Name, target.Name);
+        target.TakeDamage(damage);
+        await Task.Delay(1000);  
+        Console.WriteLine("");
 
         if (target.IsDefeated())
         {
@@ -166,9 +177,30 @@ public class Battle
         }
         int damage = enemy.CurrentStat.Attack - character.Stats.BaseStats.Defense;
         damage = Math.Max(damage, 1); // Ensures at least 1 damage is dealt
+        //Calling Battle chatbot
+        await PrintBattleMessage(enemy.Name,enemy.Name, "Attack", character.Name, character.ClassName);
         character.TakeDamage(damage);
-
         await Task.Delay(1000);
+        Console.WriteLine("");
+    }
+
+    public async Task PrintBattleMessage(string name, string name_class, string action, string target, string target_class)
+
+    {
+        BattleMessage battleMessage = new BattleMessage(name, name_class,action, target, target_class);
+        string jsonMessage = JsonSerializer.Serialize(battleMessage);
+        StringContent content = new StringContent(jsonMessage, Encoding.UTF8, "application/json");
+        try
+        {
+            HttpResponseMessage response = await client.PostAsync("battle_chat", content);
+            response.EnsureSuccessStatusCode();
+            string result = await response.Content.ReadAsStringAsync();
+            Console.WriteLine("Narrator: " + result);
+        }
+        catch (HttpRequestException e)
+        {
+            Console.WriteLine("Error communicating with Battle AI: " + e.Message);
+        }
     }
         
       

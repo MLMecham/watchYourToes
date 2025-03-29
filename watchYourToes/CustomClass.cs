@@ -1,11 +1,12 @@
 public class CustomClass : Character
 {
     // Constructor to load an existing character from DB
-    public CustomClass(Character character) : base(character.Name, character.ClassName)
+    public CustomClass(Character character) : base(character.Name, character.ClassName )
     {
         this.Id = character.Id;
         this.Level = character.Level;
         this.Exp = character.Exp;
+        this.Days = character.Days;
         this.Stats = character.Stats;
     }
 

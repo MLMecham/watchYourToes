@@ -124,9 +124,10 @@ class Program
                             Console.WriteLine($"Character '{selectedCharacterName}' selected.");
 
                             myCharacter = await db.LoadCharacter(selectedCharacterName); // Load and assing the selected character
+                            Console.WriteLine(myCharacter);
                             if (myCharacter != null)
                             {
-                                Console.WriteLine($"Character loaded: {myCharacter.Name},Id: {myCharacter.Id}, Class Name: {myCharacter.ClassName}, Level: {myCharacter.Level}");
+                                Console.WriteLine($"Character loaded: {myCharacter.Name},Id: {myCharacter.Id}, Class Name: {myCharacter.ClassName}, Level: {myCharacter.Level}, Days: {myCharacter.Days}");
                                 myCharacter.FullHeal();
                             }
                             else
@@ -320,19 +321,70 @@ class Program
 
 
         //BATTLE TEST!!!!!
-       
         // Console.WriteLine("\n-- Battle Test... --\n");
+        // Enemy randomdude1 = JsonManager.GetRandomEnemy(5);
+        // Enemy randomdude2 = JsonManager.GetRandomEnemy(5);
+        // Enemy randomdude3 = JsonManager.GetRandomEnemy(5);
         // List<Enemy> enemies = new List<Enemy>
         // {
-        //     new Enemy("Goblin", 10, 5, 2, 0, 1, 3, 10, new List<Gear>(), 0.5f, 1),
-        //     new Enemy("Orc", 20, 8, 5, 0, 2, 100, 20, new List<Gear>(), 0.5f, 1),
-        //     new Enemy("Skeleton", 15, 6, 3, 0, 1, 4, 15, new List<Gear>(), 0.5f, 1)
+        //     randomdude1,
+        //     randomdude2,
+        //     randomdude3
         // };
 
         // // Start the battle
         // Battle battle = new Battle(myCharacter, enemies);
         // await battle.StartBattle();
 
+
+        // //VILLAGER CHATBOT TEST!!
+        Console.WriteLine("\n-- Villager Chatbot --\n");
+        Console.WriteLine("Days: " +  myCharacter.Days);
+        while (true)
+        {
+            Console.WriteLine("Do you want to talk to the villager?");
+            Console.WriteLine("1. Yes");
+            Console.WriteLine("2. No");
+            Console.Write("Choose an option: ");
+            string user_input = Console.ReadLine();
+
+            if (user_input == "1")
+            {
+                Console.WriteLine("Enter a question (or type 'exit' to stop chatting):");
+                string user_query = Console.ReadLine();
+                if (user_query.ToLower() == "exit")
+                {
+                    Console.WriteLine("You finished talking to the villager.");
+                    break; 
+                }
+
+                VillagerMessage villagerMessage = new VillagerMessage(user_query,myCharacter.Days);
+                using HttpClient client = new HttpClient { BaseAddress = new Uri("http://127.0.0.1:8000/") };
+                string jsonMessage = JsonSerializer.Serialize(villagerMessage);
+                StringContent content = new StringContent(jsonMessage, Encoding.UTF8, "application/json");
+
+                try
+                {
+                    HttpResponseMessage response = await client.PostAsync("villager_chat", content);
+                    response.EnsureSuccessStatusCode();
+                    string result = await response.Content.ReadAsStringAsync();
+                    Console.WriteLine("Villager: " + result);
+                }
+                catch (HttpRequestException e)
+                {
+                    Console.WriteLine("Error communicating with Villager AI: " + e.Message);
+                }
+            }
+            else if (user_input == "2")
+            {
+                Console.WriteLine("You decide not to approach the villager. BYE!");
+                break; 
+            }
+            else
+            {
+                Console.WriteLine("Invalid input. Please try again.");
+            }
+        }
 
 
         Console.WriteLine("\nPress SPACE to continue...");

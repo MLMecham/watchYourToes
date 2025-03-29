@@ -41,7 +41,7 @@ public class Character : Combatant
 
     
 
-    public Character(string name, string className)
+    public Character(string name, string className )
     {
         Name = name;
         Level = 1;
@@ -556,7 +556,7 @@ public void PrintCurrentStats()
 
 public override void BasicAttack()
 {
-    Console.WriteLine("the character doesn't know how to fight!");
+    // Console.WriteLine("the character doesn't know how to fight!");
 }
 
 }

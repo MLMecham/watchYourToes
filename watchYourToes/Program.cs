@@ -179,6 +179,7 @@ class Program
             Console.WriteLine("Randomly Selected Consumable:");
             randomConsumable.PrintConsumable();
         }
+        myCharacter.AddItemToInventory(randomConsumable);
         Console.ReadLine();
         
 

@@ -1,7 +1,7 @@
 # Ignore build artifacts
 .env
-bin/
-obj/
+watchYourToes/bin/
+watchYourToes/obj/
 *.exe
 *.dll
 *.pdb

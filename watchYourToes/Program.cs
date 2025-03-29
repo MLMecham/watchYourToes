@@ -159,8 +159,15 @@ class Program
             }
         }
 
+
+
+        
+
         // Grab the Json data and store them into static variables.
-         string filePath = "EnemyTable.json";  // Path to your JSON file
+         string filePath = "EnemyTable.json";  // Path to the enemy json file
+         string filePathGear = "GearTable.json";
+
+        // Load Gear from Specified file
 
         // Load enemies from the specified file
         // DO NOT DELETE THIS LINE. THIS IS WHAT LET"S US USE THE STATIC JSON LIST

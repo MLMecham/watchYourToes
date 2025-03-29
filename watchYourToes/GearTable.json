@@ -1,0 +1,222 @@
+[
+    {
+      "Name": "Adventurer's Reliable Sword",
+      "Description": "A well-balanced blade with decent craftsmanship, showing signs of regular maintenance and care.",
+      "Slot": "Weapon",
+      "HealthChange": 6,
+      "AttackChange": 900,
+      "DefenseChange": 3,
+      "MagicAttackChange": -2,
+      "MagicDefenseChange": 0,
+      "SpeedChange": -3
+    },
+    {
+      "Name": "Traveler's Sturdy Boots",
+      "Description": "Comfortable footwear with reinforced soles, perfect for long journeys across varied terrain.",
+      "Slot": "Toes",
+      "HealthChange": 2,
+      "AttackChange": 1,
+      "DefenseChange": 3,
+      "MagicAttackChange": 0,
+      "MagicDefenseChange": 1,
+      "SpeedChange": 8
+    },
+    {
+      "Name": "Militia Captain's Helm",
+      "Description": "A standard-issue helmet with a few dents, once belonging to a local militia leader.",
+      "Slot": "Head",
+      "HealthChange": 8,
+      "AttackChange": 2,
+      "DefenseChange": 7,
+      "MagicAttackChange": -1,
+      "MagicDefenseChange": 3,
+      "SpeedChange": -2
+    },
+    {
+      "Name": "Merchant's Knee Pads",
+      "Description": "Practical knee protection worn by traders who frequently kneel to display their wares.",
+      "Slot": "Knees",
+      "HealthChange": 4,
+      "AttackChange": 0,
+      "DefenseChange": 6,
+      "MagicAttackChange": 1,
+      "MagicDefenseChange": 2,
+      "SpeedChange": 1
+    },
+    {
+      "Name": "Guard's Shoulder Plates",
+      "Description": "Standard shoulder protection issued to city guards, showing signs of regular use.",
+      "Slot": "Shoulders",
+      "HealthChange": 5,
+      "AttackChange": 3,
+      "DefenseChange": 7,
+      "MagicAttackChange": -1,
+      "MagicDefenseChange": 2,
+      "SpeedChange": -2
+    },
+    {
+      "Name": "Apprentice Mage's Staff",
+      "Description": "A simple wooden staff with a small focusing crystal, suitable for novice spellcasters.",
+      "Slot": "Weapon",
+      "HealthChange": -3,
+      "AttackChange": 2,
+      "DefenseChange": 1,
+      "MagicAttackChange": 11,
+      "MagicDefenseChange": 5,
+      "SpeedChange": 0
+    },
+    {
+      "Name": "Hunter's Camouflage Cap",
+      "Description": "A lightweight cap covered in leaves and twigs, helping the wearer blend into forest environments.",
+      "Slot": "Head",
+      "HealthChange": 1,
+      "AttackChange": 4,
+      "DefenseChange": 2,
+      "MagicAttackChange": 0,
+      "MagicDefenseChange": 1,
+      "SpeedChange": 3
+    },
+    {
+      "Name": "Blacksmith's Heat-Resistant Gloves",
+      "Description": "Thick leather footwear designed to protect against forge heat and falling embers.",
+      "Slot": "Toes",
+      "HealthChange": 3,
+      "AttackChange": 2,
+      "DefenseChange": 8,
+      "MagicAttackChange": -2,
+      "MagicDefenseChange": 6,
+      "SpeedChange": -3
+    },
+    {
+      "Name": "Scribe's Enchanted Quill",
+      "Description": "A writing implement that doubles as a magical focus, allowing for minor cantrips between note-taking.",
+      "Slot": "Weapon",
+      "HealthChange": -1,
+      "AttackChange": 0,
+      "DefenseChange": -2,
+      "MagicAttackChange": 8,
+      "MagicDefenseChange": 4,
+      "SpeedChange": 2
+    },
+    {
+      "Name": "Farmer's Reinforced Knee Pads",
+      "Description": "Sturdy protection for long days of kneeling in the fields, with extra padding for comfort.",
+      "Slot": "Knees",
+      "HealthChange": 5,
+      "AttackChange": 1,
+      "DefenseChange": 4,
+      "MagicAttackChange": -1,
+      "MagicDefenseChange": 0,
+      "SpeedChange": -1
+    },
+    {
+      "Name": "Sailor's Weather-Beaten Hat",
+      "Description": "A wide-brimmed hat that has seen many voyages, offering protection from sun and rain alike.",
+      "Slot": "Head",
+      "HealthChange": 2,
+      "AttackChange": 0,
+      "DefenseChange": 3,
+      "MagicAttackChange": 1,
+      "MagicDefenseChange": 5,
+      "SpeedChange": 1
+    },
+    {
+      "Name": "Messenger's Swift Sandals",
+      "Description": "Lightweight footwear designed for couriers who need to deliver messages quickly across town.",
+      "Slot": "Toes",
+      "HealthChange": 0,
+      "AttackChange": 1,
+      "DefenseChange": 1,
+      "MagicAttackChange": 0,
+      "MagicDefenseChange": 0,
+      "SpeedChange": 11
+    },
+    {
+      "Name": "Woodcutter's Trusty Axe",
+      "Description": "A well-balanced axe with a worn handle, having felled countless trees in its lifetime.",
+      "Slot": "Weapon",
+      "HealthChange": 4,
+      "AttackChange": 10,
+      "DefenseChange": 2,
+      "MagicAttackChange": -3,
+      "MagicDefenseChange": -1,
+      "SpeedChange": -2
+    },
+    {
+      "Name": "Alchemist's Protective Shoulder Pads",
+      "Description": "Padded shoulder protection designed to prevent burns from splashing potions and reagents.",
+      "Slot": "Shoulders",
+      "HealthChange": 3,
+      "AttackChange": -1,
+      "DefenseChange": 5,
+      "MagicAttackChange": 4,
+      "MagicDefenseChange": 7,
+      "SpeedChange": 0
+    },
+    {
+      "Name": "Priest's Blessed Sandals",
+      "Description": "Simple footwear that has been blessed to provide comfort during long ceremonies and pilgrimages.",
+      "Slot": "Toes",
+      "HealthChange": 5,
+      "AttackChange": -2,
+      "DefenseChange": 2,
+      "MagicAttackChange": 3,
+      "MagicDefenseChange": 7,
+      "SpeedChange": 4
+    },
+    {
+      "Name": "Squire's Training Helm",
+      "Description": "A basic helmet used during combat practice, offering adequate protection without excessive weight.",
+      "Slot": "Head",
+      "HealthChange": 6,
+      "AttackChange": 1,
+      "DefenseChange": 8,
+      "MagicAttackChange": 0,
+      "MagicDefenseChange": 2,
+      "SpeedChange": -1
+    },
+    {
+      "Name": "Thief's Silent Knee Wraps",
+      "Description": "Dark cloth wrappings that muffle movement and protect during stealthy crawling.",
+      "Slot": "Knees",
+      "HealthChange": 1,
+      "AttackChange": 3,
+      "DefenseChange": 2,
+      "MagicAttackChange": 0,
+      "MagicDefenseChange": 1,
+      "SpeedChange": 7
+    },
+    {
+      "Name": "Bard's Decorative Shoulder Cape",
+      "Description": "A flamboyant shoulder covering that adds flair to performances while offering minimal protection.",
+      "Slot": "Shoulders",
+      "HealthChange": 0,
+      "AttackChange": 1,
+      "DefenseChange": 3,
+      "MagicAttackChange": 5,
+      "MagicDefenseChange": 4,
+      "SpeedChange": 2
+    },
+    {
+      "Name": "Ranger's Hunting Knife",
+      "Description": "A versatile blade used for everything from skinning game to cutting rope, kept razor-sharp.",
+      "Slot": "Weapon",
+      "HealthChange": 1,
+      "AttackChange": 8,
+      "DefenseChange": 0,
+      "MagicAttackChange": 1,
+      "MagicDefenseChange": 0,
+      "SpeedChange": 5
+    },
+    {
+      "Name": "Miner's Reinforced Helmet",
+      "Description": "A sturdy helmet with a small lamp attachment, designed to protect against falling rocks.",
+      "Slot": "Head",
+      "HealthChange": 7,
+      "AttackChange": 0,
+      "DefenseChange": 9,
+      "MagicAttackChange": -2,
+      "MagicDefenseChange": 1,
+      "SpeedChange": -3
+    }
+]

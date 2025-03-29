@@ -1,0 +1,222 @@
+[
+    {
+      "name": "Goblin",
+      "healthpoint": 50,
+      "attackpoint": 15,
+      "defencepoint": 8,
+      "magicattackpoint": 0,
+      "magicdefencepoint": 5,
+      "speed": 20,
+      "exp": 25,
+      "possibilityOfDrop": 0.75
+    },
+    {
+      "name": "Skeleton",
+      "healthpoint": 65,
+      "attackpoint": 18,
+      "defencepoint": 12,
+      "magicattackpoint": 0,
+      "magicdefencepoint": 10,
+      "speed": 15,
+      "exp": 35,
+      "possibilityOfDrop": 0.7
+    },
+    {
+      "name": "Slime",
+      "healthpoint": 30,
+      "attackpoint": 8,
+      "defencepoint": 5,
+      "magicattackpoint": 0,
+      "magicdefencepoint": 15,
+      "speed": 10,
+      "exp": 15,
+      "possibilityOfDrop": 0.9
+    },
+    {
+      "name": "Zombie",
+      "healthpoint": 80,
+      "attackpoint": 12,
+      "defencepoint": 10,
+      "magicattackpoint": 0,
+      "magicdefencepoint": 8,
+      "speed": 8,
+      "exp": 30,
+      "possibilityOfDrop": 0.65
+    },
+    {
+      "name": "Giant Rat",
+      "healthpoint": 35,
+      "attackpoint": 12,
+      "defencepoint": 6,
+      "magicattackpoint": 0,
+      "magicdefencepoint": 4,
+      "speed": 25,
+      "exp": 20,
+      "possibilityOfDrop": 0.8
+    },
+    {
+      "name": "Orc",
+      "healthpoint": 100,
+      "attackpoint": 25,
+      "defencepoint": 15,
+      "magicattackpoint": 0,
+      "magicdefencepoint": 10,
+      "speed": 15,
+      "exp": 50,
+      "possibilityOfDrop": 0.7
+    },
+    {
+      "name": "Dark Elf",
+      "healthpoint": 75,
+      "attackpoint": 18,
+      "defencepoint": 12,
+      "magicattackpoint": 20,
+      "magicdefencepoint": 18,
+      "speed": 22,
+      "exp": 60,
+      "possibilityOfDrop": 0.75
+    },
+    {
+      "name": "Fire Elemental",
+      "healthpoint": 85,
+      "attackpoint": 15,
+      "defencepoint": 15,
+      "magicattackpoint": 30,
+      "magicdefencepoint": 25,
+      "speed": 18,
+      "exp": 65,
+      "possibilityOfDrop": 0.6
+    },
+    {
+      "name": "Ghost",
+      "healthpoint": 60,
+      "attackpoint": 10,
+      "defencepoint": 5,
+      "magicattackpoint": 25,
+      "magicdefencepoint": 30,
+      "speed": 20,
+      "exp": 55,
+      "possibilityOfDrop": 0.55
+    },
+    {
+      "name": "Minotaur",
+      "healthpoint": 150,
+      "attackpoint": 35,
+      "defencepoint": 25,
+      "magicattackpoint": 0,
+      "magicdefencepoint": 15,
+      "speed": 12,
+      "exp": 100,
+      "possibilityOfDrop": 0.8
+    },
+    {
+      "name": "Harpy",
+      "healthpoint": 70,
+      "attackpoint": 22,
+      "defencepoint": 10,
+      "magicattackpoint": 15,
+      "magicdefencepoint": 12,
+      "speed": 30,
+      "exp": 70,
+      "possibilityOfDrop": 0.65
+    },
+    {
+      "name": "Ogre",
+      "healthpoint": 180,
+      "attackpoint": 40,
+      "defencepoint": 30,
+      "magicattackpoint": 0,
+      "magicdefencepoint": 10,
+      "speed": 8,
+      "exp": 120,
+      "possibilityOfDrop": 0.85
+    },
+    {
+      "name": "Giant Spider",
+      "healthpoint": 65,
+      "attackpoint": 20,
+      "defencepoint": 12,
+      "magicattackpoint": 0,
+      "magicdefencepoint": 15,
+      "speed": 25,
+      "exp": 45,
+      "possibilityOfDrop": 0.75
+    },
+    {
+      "name": "Kobold",
+      "healthpoint": 40,
+      "attackpoint": 12,
+      "defencepoint": 8,
+      "magicattackpoint": 5,
+      "magicdefencepoint": 8,
+      "speed": 22,
+      "exp": 30,
+      "possibilityOfDrop": 0.7
+    },
+    {
+      "name": "Dark Wizard",
+      "healthpoint": 70,
+      "attackpoint": 10,
+      "defencepoint": 12,
+      "magicattackpoint": 35,
+      "magicdefencepoint": 25,
+      "speed": 18,
+      "exp": 85,
+      "possibilityOfDrop": 0.8
+    },
+    {
+      "name": "Troll",
+      "healthpoint": 160,
+      "attackpoint": 30,
+      "defencepoint": 25,
+      "magicattackpoint": 0,
+      "magicdefencepoint": 20,
+      "speed": 10,
+      "exp": 90,
+      "possibilityOfDrop": 0.75
+    },
+    {
+      "name": "Werewolf",
+      "healthpoint": 120,
+      "attackpoint": 28,
+      "defencepoint": 15,
+      "magicattackpoint": 0,
+      "magicdefencepoint": 12,
+      "speed": 28,
+      "exp": 80,
+      "possibilityOfDrop": 0.6
+    },
+    {
+      "name": "Banshee",
+      "healthpoint": 75,
+      "attackpoint": 15,
+      "defencepoint": 10,
+      "magicattackpoint": 30,
+      "magicdefencepoint": 25,
+      "speed": 20,
+      "exp": 75,
+      "possibilityOfDrop": 0.65
+    },
+    {
+      "name": "Golem",
+      "healthpoint": 200,
+      "attackpoint": 25,
+      "defencepoint": 40,
+      "magicattackpoint": 0,
+      "magicdefencepoint": 35,
+      "speed": 5,
+      "exp": 110,
+      "possibilityOfDrop": 0.9
+    },
+    {
+      "name": "Gargoyle",
+      "healthpoint": 110,
+      "attackpoint": 22,
+      "defencepoint": 30,
+      "magicattackpoint": 10,
+      "magicdefencepoint": 25,
+      "speed": 15,
+      "exp": 70,
+      "possibilityOfDrop": 0.7
+    }
+  ]

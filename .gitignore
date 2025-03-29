@@ -5,7 +5,6 @@ obj/
 *.exe
 *.dll
 *.pdb
-*.json
 *.deps.json
 *.runtimeconfig.json
 

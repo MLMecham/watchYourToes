@@ -132,7 +132,12 @@ public class Character : Combatant
             // Allow the player to distribute extra points
             DistributeExtraPoints();
 
-            Stats.CurrentStats = Stats.BaseStats;
+            Stats.CurrentStats.Health  = Stats.BaseStats.Health;
+            Stats.CurrentStats.Attack = Stats.BaseStats.Attack;
+            Stats.CurrentStats.Defense = Stats.BaseStats.Defense;
+            Stats.CurrentStats.MagicAttack = Stats.BaseStats.MagicAttack;
+            Stats.CurrentStats.MagicDefense = Stats.BaseStats.MagicDefense;
+            Stats.CurrentStats.Speed = Stats.BaseStats.Speed;
 
             // Get total equipment buffs
             Stat equipmentBonus = Equipment.GetEquipmentStats();
@@ -216,7 +221,12 @@ public class Character : Combatant
     }
 }
 
-        Stats.CurrentStats = Stats.BaseStats;
+            Stats.CurrentStats.Health  = Stats.BaseStats.Health;
+            Stats.CurrentStats.Attack = Stats.BaseStats.Attack;
+            Stats.CurrentStats.Defense = Stats.BaseStats.Defense;
+            Stats.CurrentStats.MagicAttack = Stats.BaseStats.MagicAttack;
+            Stats.CurrentStats.MagicDefense = Stats.BaseStats.MagicDefense;
+            Stats.CurrentStats.Speed = Stats.BaseStats.Speed;
     }
 
     // Equip the item and update stats accordingly

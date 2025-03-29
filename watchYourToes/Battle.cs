@@ -108,7 +108,7 @@ public class Battle
     }
 
     //player's turn - they choose who to attack
-    public void PlayerTurn(Character charCombatant)
+     public async Task PlayerTurn(Character charCombatant)
     {
         if (enemies.Count == 0) return;  //if no enemies left
 
@@ -169,7 +169,7 @@ public class Battle
     }
 
     //enemy just attacks character, no choice
-    public void EnemyTurn(Enemy enemy)
+     public async Task EnemyTurn(Enemy enemy)
     {
         if (character.Stats.BaseStats.Health <= 0) {
             // the dead emeny already gets removed in the Battle loop

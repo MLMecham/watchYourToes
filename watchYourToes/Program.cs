@@ -236,6 +236,47 @@ class Program
         // while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
 
 
+        // Create some testing items:
+        // Strength Potion (Permanent)
+        Consumable strengthPotionPermanent = new Consumable(
+            "Strength Potion", 
+            "A potion that permanently increases attack by 5.", 
+            new Stat(attack: 5), // Only set attack to 5, others are 0 by default
+            false // Permanent effect
+        );
+
+        // Strength Potion (Temporary)
+        Consumable strengthPotionTemporary = new Consumable(
+            "Strength Potion (Temporary)", 
+            "A potion that temporarily increases attack by 50.", 
+            new Stat(attack: 300), // Only set attack to 50, others are 0 by default
+            true // Temporary effect
+        );
+
+        Consumable defensePotionPermanent = new Consumable(
+            "Defense Potion", 
+            "A potion that permanently increases defense by 5.", 
+            new Stat(defense: 5), // Only set defense to 5, others are 0 by default
+            false // Permanent effect
+        );
+
+        // Defense Potion (Temporary)
+        Consumable defensePotionTemporary = new Consumable(
+            "Defense Potion (Temporary)", 
+            "A potion that temporarily increases defense by 50.", 
+            new Stat(defense: 50), // Only set defense to 50, others are 0 by default
+            true // Temporary effect
+        );
+
+        // Bandage (Healing)
+        Consumable bandage = new Consumable(
+            "Bandage", 
+            "A bandage that heals 50 health.", 
+            new Stat(health: 50), // Only set health to 50, others are 0 by default
+            true // Temporary healing effect
+        );
+
+
 
         
     
@@ -245,7 +286,11 @@ class Program
         Console.WriteLine("\n-- Adding Items to Inventory ... --\n");
         myCharacter.AddItemToInventory(sword);
         myCharacter.AddItemToInventory(shield);
-        myCharacter.AddItemToInventory(BigSword);
+        myCharacter.AddItemToInventory(bandage);
+        myCharacter.AddItemToInventory(defensePotionTemporary);
+        myCharacter.AddItemToInventory(defensePotionPermanent);
+        myCharacter.AddItemToInventory(strengthPotionTemporary);
+        myCharacter.AddItemToInventory(strengthPotionPermanent);
         myCharacter.Equip(sword);
         myCharacter.PrintBaseStats();
         myCharacter.PrintCurrentStats();
@@ -445,57 +490,69 @@ class Program
         case ConsoleKey.D2: 
         case ConsoleKey.NumPad2:
             while (true)
+    {
+        Console.Clear();
+        myCharacter.PrintInventory(); // Show inventory
+
+        Console.WriteLine("\nSelect an action:");
+        Console.WriteLine("E - Equip Gear");
+        Console.WriteLine("S - Send to Storage");
+        Console.WriteLine("U - Use Consumable");
+        Console.WriteLine("Enter - Exit Inventory");
+
+        ConsoleKeyInfo keyInfo = Console.ReadKey(true);
+        if (keyInfo.Key == ConsoleKey.Enter)
+            break;
+
+        Console.Clear();
+        myCharacter.PrintInventory(); // Refresh inventory display
+
+        Console.Write("\nEnter item number (1-N) or 0 to cancel: ");
+        if (int.TryParse(Console.ReadLine(), out int itemIndex) && itemIndex > 0 && itemIndex <= myCharacter.Inventory.Count)
+        {
+            Item selectedItem = myCharacter.Inventory[itemIndex - 1];
+
+            if (keyInfo.Key == ConsoleKey.E) // Equip Item
             {
-                Console.Clear();
-                myCharacter.PrintInventory(); // Show inventory
-
-                Console.WriteLine("\nSelect an item to:");
-                Console.WriteLine("E - Equip Item");
-                Console.WriteLine("S - Send to Storage");
-                Console.WriteLine("Enter - Exit Inventory");
-
-                ConsoleKeyInfo keyInfo = Console.ReadKey(true);
-                if (keyInfo.Key == ConsoleKey.Enter)
-                    break;
-
-                Console.Clear();
-                myCharacter.PrintInventory(); // Refresh inventory display
-
-                Console.Write("\nEnter item number (1-N) or 0 to cancel: ");
-                if (int.TryParse(Console.ReadLine(), out int itemIndex) && itemIndex > 0 && itemIndex <= myCharacter.Inventory.Count)
+                if (selectedItem is Gear gearItem)
                 {
-                    Item selectedItem = myCharacter.Inventory[itemIndex - 1];
-
-                    if (keyInfo.Key == ConsoleKey.E) // Equip Item
-                    {
-                        if (selectedItem is Gear gearItem)
-                        {
-                            myCharacter.Equip(gearItem);
-                            Console.WriteLine($"{gearItem.Name} equipped!");
-                        }
-                        else
-                        {
-                            Console.WriteLine("You can only equip gear items.");
-                        }
-                    }
-                    else if (keyInfo.Key == ConsoleKey.S) // Store Item
-                    {
-                        myCharacter.StoreItemInStorage(selectedItem);
-                    }
-                    else
-                    {
-                        Console.WriteLine("Invalid choice.");
-                    }
+                    myCharacter.Equip(gearItem);
+                    Console.WriteLine($"{gearItem.Name} equipped!");
                 }
                 else
                 {
-                    Console.WriteLine("Invalid selection.");
+                    Console.WriteLine("You can only equip gear items.");
                 }
-
-                Console.WriteLine("\nPress any key to continue...");
-                Console.ReadKey(true);
             }
-            break;
+            else if (keyInfo.Key == ConsoleKey.S) // Store Item
+            {
+                myCharacter.StoreItemInStorage(selectedItem);
+            }
+            else if (keyInfo.Key == ConsoleKey.U) // Use Consumable
+            {
+                if (selectedItem is Consumable consumableItem)
+                {
+                    myCharacter.UseConsumable(consumableItem);
+                }
+                else
+                {
+                    Console.WriteLine("You can only use consumable items.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Invalid choice.");
+            }
+        }
+        else
+        {
+            Console.WriteLine("Invalid selection.");
+        }
+
+        Console.WriteLine("\nPress any key to continue...");
+        Console.ReadKey(true);
+    }
+    break;
 
         case ConsoleKey.D3:
         case ConsoleKey.NumPad3:

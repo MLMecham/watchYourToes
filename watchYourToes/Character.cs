@@ -269,7 +269,7 @@ public class Character : Combatant
                 int healAmount = Math.Min(consumable.Effects.Health, maxHealth - Stats.CurrentStats.Health);
                 Stats.CurrentStats.Health += healAmount;
 
-                Console.WriteLine($"{consumable.Name} healed you for {healAmount} health.");
+                Console.WriteLine($"{consumable.Name} healed you for {healAmount} health. You now have {Stats.CurrentStats.Health} HP");
             }
             else if (consumable.Temporary)
             {
@@ -332,6 +332,8 @@ public class Character : Combatant
         Stats.CurrentStats.MagicAttack = Stats.BaseStats.MagicAttack;
         Stats.CurrentStats.MagicDefense = Stats.BaseStats.MagicDefense;
         Stats.CurrentStats.Speed = Stats.BaseStats.Speed;
+
+        ReaddEquipmentBonuses();
     }
 
     // Equip the item and update stats accordingly

@@ -52,8 +52,10 @@ public class Stat
         Defense = 5;
         MagicAttack = 5;
         MagicDefense = 5;
-        Speed = 5;
+        Speed = 20;
     }
+
+    
 
     public void PrintStats()
     {

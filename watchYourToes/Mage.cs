@@ -43,7 +43,7 @@ public class Mage : Character
         await db.UpdateCharacter(this);
     }
 
-    public override void Attack()
+    public override void BasicAttack()
     {
         // Console.WriteLine("The mage flips a table.");
     }

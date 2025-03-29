@@ -6,27 +6,12 @@ using System.Threading.Tasks;
 using MongoDB.Driver;
 using System.Linq;
 using MongoDB.Bson.Serialization;
+using System.Collections.Generic;
+using System.IO;
 
 class Program
 {
-    // static void ShowMenu()
-    // {
-    //     Console.Clear();
-    //     Console.WriteLine("Welcome to the Main Menu!");
-    //     Console.WriteLine("1. Option 1");
-    //     Console.WriteLine("2. Option 2");
-    //     Console.WriteLine("3. Logout");
-        
-    //     Console.Write("Choose an option: ");
-    //     Console.ReadLine();
-    // }
-
-    // This method checks if the username exists
-    // public static async Task<bool> CheckIfUsernameExists(string username, dbConnection db)
-    // {
-    //     var user = await db.GetUser(username);
-    //     return user != null; // Returns true if the username already exists
-    // }
+    
     static void RegisterDiscriminators()
     {
         // Register base class 'Item' with a discriminator
@@ -51,89 +36,15 @@ class Program
 
     static async Task Main()
     {
+
+        
         RegisterDiscriminators();
         dbConnection db = new dbConnection(); // Create an instance of dbConnection
         Character myCharacter = null; // Declaring character  outside the loop
         string characterName = ""; // Declaring character  outside the loop
 
 
-        // bool isLoggedIn = false;
-        // User currentUser = null; // Store the current logged-in user
-
-        // while (!isLoggedIn)
-        // {
-        //     Console.WriteLine("1. Create Account");
-        //     Console.WriteLine("2. Login");
-        //     Console.WriteLine("3. Exit");
-        //     Console.Write("Choose an option: ");
-
-        //     string choice = Console.ReadLine();
-
-        //     switch (choice)
-        //     {
-        //         case "1":
-        //             // Create Account
-        //             string createUsername;
-        //             bool usernameExists;
-        //             do
-        //             {
-        //                 Console.Write("Enter username: ");
-        //                 createUsername = Console.ReadLine().ToLower(); // Convert to lowercase
-
-        //                 // Check if the username already exists
-        //                 usernameExists = await CheckIfUsernameExists(createUsername, db);
-        //                 if (usernameExists)
-        //                 {
-        //                     Console.WriteLine("Username already exists. Please choose another one.");
-        //                 }
-        //             } while (usernameExists);
-
-        //             Console.Write("Enter password: ");
-        //             string createPassword = Console.ReadLine();
-
-        //             bool userCreated = await db.CreateUser(createUsername, createPassword);
-        //             if (userCreated)
-        //             {
-        //                 Console.WriteLine("Account created successfully!");
-        //             }
-        //             else
-        //             {
-        //                 Console.WriteLine("Error creating account.");
-        //             }
-        //             break;
-
-        //         case "2":
-        //             // Login
-        //             Console.Write("Enter username: ");
-        //             string loginUsername = Console.ReadLine().ToLower(); // Convert to lowercase
-        //             Console.Write("Enter password: ");
-        //             string loginPassword = Console.ReadLine();
-
-        //             User user = await db.GetUser(loginUsername);
-
-        //             if (user != null && db.VerifyPassword(loginPassword, user.Password))
-        //             {
-        //                 Console.WriteLine("Login successful!");
-        //                 currentUser = user;
-        //                 isLoggedIn = true;
-        //             }
-        //             else
-        //             {
-        //                 Console.WriteLine("Invalid username or password.");
-        //             }
-        //             break;
-
-        //         case "3":
-        //             // Exit
-        //             Console.WriteLine("Exiting...");
-        //             return;
-
-        //         default:
-        //             Console.WriteLine("Invalid option. Please try again.");
-        //             break;
-        //     }
-        // }
-
+        
         // Character creation or selection
         bool isCharacterCreatedOrSelected = false;
         while (!isCharacterCreatedOrSelected)
@@ -248,6 +159,21 @@ class Program
             }
         }
 
+        // Grab the Json data and store them into static variables.
+         string filePath = "EnemyTable.json";  // Path to your JSON file
+
+        // Load enemies from the specified file
+        // DO NOT DELETE THIS LINE. THIS IS WHAT LET"S US USE THE STATIC JSON LIST
+        JsonManager.LoadEnemiesFromJson(filePath);
+        // JsonManager.PrintAllEnemies();
+        Enemy randomdude = JsonManager.GetRandomEnemy(5);
+        Console.WriteLine(randomdude.Name);
+        randomdude.CurrentStat.PrintStats();
+        Console.ReadLine();
+
+        
+
+
         //=== ITEMS Creation ===
 
         // Create gear items
@@ -296,8 +222,42 @@ class Program
         // Console.WriteLine("\nPress SPACE to continue...");
         // while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
 
-        // Console.Clear(); // Clears the screen before the next scene
 
+
+        // // Load Json Data
+        // string filePath = "EnemyTable.json"; // Make sure this file exists
+
+
+        // if (File.Exists(filePath))
+        // {
+        //     string jsonString = File.ReadAllText(filePath);
+        //     List<Enemy> enemies = JsonSerializer.Deserialize<List<Enemy>>(jsonString);
+
+        //     foreach (var enemy in enemies)
+        //     {
+        //         Console.WriteLine($"Name: {enemy.Name} | Health: {enemy.Health} | Attack: {enemy.Attack} | Defense: {enemy.Defense} | Magic Attack: {enemy.MagicAttack} | Magic Defense: {enemy.MagicDefense} | Speed: {enemy.Speed} | Exp: {enemy.Exp} | Possibility of Drop: {enemy.PossibilityOfDrop}");
+        //         enemy.InitializeCurrentStat();
+        //         enemy.CurrentStat.PrintStats();
+
+        //         // enemy.CurrentStat = new Stat(enemy.Health, enemy.Attack, enemy.Defense, enemy.MagicAttack, enemy.MagicDefense, enemy.Speed);
+        //         // enemy.InitializeCurrentStat();
+        //         // enemy.CurrentStat.Health = enemy.Health;
+        //         // enemy.CurrentStat.Attack = enemy.Attack;
+        //         // enemy.CurrentStat.Defense = enemy.Defense;
+        //         // enemy.CurrentStat.MagicAttack = enemy.MagicAttack;
+        //         // enemy.CurrentStat.MagicDefense = enemy.MagicDefense;
+        //         // enemy.CurrentStat.Speed = enemy.Speed;
+
+        //         // enemy.CurrentStat.PrintStats();
+        //         Console.WriteLine("----------------");
+        //     }
+        // }
+        // else
+        // {
+        //     Console.WriteLine("File not found!");
+        // }
+    
+    
 
         //TEST !!
         // Adding items to inventory test

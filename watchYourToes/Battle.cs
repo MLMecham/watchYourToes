@@ -53,14 +53,14 @@ public class Battle
             // Now you can access Character-specific methods and properties
             Console.WriteLine($"{charCombatant.Name} - Speed: {charCombatant.Stats.CurrentStats.Speed}");
             // Call other methods specific to 'Character'
-            charCombatant.Attack();  // Assuming Character has an Attack method
+            charCombatant.BasicAttack();  // Assuming Character has an Attack method
         }
         else if (combatant is Enemy enemy)
         {
             // Handle the case for non-Character combatants (e.g., Enemy)
             Console.WriteLine($"{enemy.Name} - Speed: {enemy.CurrentStat.Speed} is not a character.");
         }
-
+            
         }
 
         // Battle loop

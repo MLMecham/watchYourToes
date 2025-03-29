@@ -423,7 +423,7 @@ public void PrintCurrentStats()
     Stats.PrintCurrentStats();
 }
 
-public override void Attack()
+public override void BasicAttack()
 {
     Console.WriteLine("the character doesn't know how to fight!");
 }

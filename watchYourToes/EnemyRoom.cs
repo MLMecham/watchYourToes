@@ -70,18 +70,18 @@ public class EnemyRoom : Room{
 
             foreach(EnemyEntry enemyEntry in selectedEnemies)
             {
-                enemiesList.Add(new Enemy(
-                    enemyEntry.name,
-                    enemyEntry.healthpoint, 
-                    enemyEntry.attackpoint, 
-                    enemyEntry.defencepoint, 
-                    enemyEntry.magicattackpoint, 
-                    enemyEntry.magicdefencepoint, 
-                    enemyEntry.speed, 
-                    enemyEntry.exp, 
-                    new List<Gear>(), // for now, no gear 
-                    enemyEntry.possibilityOfDrop,
-                    this.floorNumber));
+                // enemiesList.Add(new Enemy(
+                //     enemyEntry.name,
+                //     enemyEntry.healthpoint, 
+                //     enemyEntry.attackpoint, 
+                //     enemyEntry.defencepoint, 
+                //     enemyEntry.magicattackpoint, 
+                //     enemyEntry.magicdefencepoint, 
+                //     enemyEntry.speed, 
+                //     enemyEntry.exp, 
+                //     new List<Gear>(), // for now, no gear 
+                //     enemyEntry.possibilityOfDrop,
+                //     this.floorNumber));
             }
         }
         catch (Exception e)

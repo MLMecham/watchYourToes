@@ -82,6 +82,7 @@ public static class JsonManager
         }
 
         // Select a random enemy from the list
+        
         int randomIndex = random.Next(JsonEnemyList.Count);
         // Console.WriteLine(JsonEnemyList.Count);
         Enemy originalEnemy = JsonEnemyList[randomIndex];

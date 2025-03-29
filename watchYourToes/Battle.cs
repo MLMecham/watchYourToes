@@ -69,11 +69,11 @@ public class Battle
         Console.WriteLine("");
 
         // Battle loop
-        while (character.Stats.BaseStats.Health > 0 && enemies.Count > 0){ // while character is alive and there are enemies left
+        while (character.Stats.CurrentStats.Health > 0 && enemies.Count > 0){ // while character is alive and there are enemies left
             
             foreach (var combatant in combatants.ToList()) //copy of combatants list
             {
-            if (character.Stats.BaseStats.Health <= 0 || combatants.Count == 1) break;  //stops battle if over
+            if (character.Stats.CurrentStats.Health <= 0 || combatants.Count == 1) break;  //stops battle if over
 
             if (combatant is Character charCombatant)
                 {
@@ -94,16 +94,22 @@ public class Battle
         }
 
         // Battle result
-        if (character.Stats.BaseStats.Health <= 0)
+        if (enemies.Count == 0 && character.Stats.CurrentStats.Health > 0)
         {
-            Console.WriteLine($"{character.Name} has been defeated...");
-            // 1. The character will be send back to the village
-            // 2. Update the character's inventory to null
-            // 3. Update the character's current stats to the base stats
+            Console.WriteLine($"{character.Name} has won the battle!");
+            Console.WriteLine($"Victory! {character.Name} defeated all enemies!");
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadLine();
         }
         else
         {
-            Console.WriteLine($"Victory! {character.Name} defeated all enemies!");
+            Console.WriteLine($"{character.Name} has been defeated...");
+            Console.WriteLine("Game Over! You have been defeated!");
+            Console.ReadLine();
+            character.Stats.CurrentStats.Health = 0; // Set character's health to 0
+            // 1. The character will be send back to the village
+            // 2. Update the character's inventory to null
+            // 3. Update the character's current stats to the base stats
         }
     }
 

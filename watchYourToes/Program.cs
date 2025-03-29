@@ -530,7 +530,6 @@ class Program
         while (true)
 {
     Console.Clear();
-    myCharacter.TakeDamage(30);
     Console.WriteLine($"Day {myCharacter.Days}: You wake up to another day in the village.");
     Console.WriteLine("What would you like to do?");
     Console.WriteLine("1. See Stats");
@@ -767,10 +766,15 @@ class Program
                         Console.WriteLine("Goodbye!");
                         break;
                     }
+                    else if (actionResult == 3) //Quit the game
+                    {
+                        Console.WriteLine("Dying with the last breath, the faces of important ones start to fade...");
+                        return;
+                    }
                     
                 }
             }
-            break;
+            continue; // need to figure out how can sent the character back to the village after it dies
 
         case ConsoleKey.D7:
         case ConsoleKey.NumPad7:

@@ -8,6 +8,7 @@ public static class JsonManager
     // Static list of enemies, accessible globally
     public static List<Enemy> JsonEnemyList { get; set; } = new List<Enemy>();
     public static List<Gear> JsonGearList { get; set; } = new List<Gear>();
+    public static List<Consumable> JsonConsumableList { get; set; } = new List<Consumable>();
     private static Random random = new Random();
 
     // Method to load the enemies from a JSON file
@@ -146,5 +147,49 @@ public static class JsonManager
 
         int randomIndex = random.Next(JsonGearList.Count);
         return JsonGearList[randomIndex];  // Return a randomly selected gear
+    }
+
+     public static void LoadConsumablesFromJson(string filePathConsumable)
+    {
+        try
+        {
+            if (File.Exists(filePathConsumable))
+            {
+                string jsonString = File.ReadAllText(filePathConsumable);
+
+                // Deserialize JSON into a list of Consumable objects
+                JsonConsumableList = JsonSerializer.Deserialize<List<Consumable>>(jsonString);
+
+                Console.WriteLine("Consumables loaded successfully!");
+
+                // Print all loaded consumables (Optional)
+                // foreach (var consumable in JsonConsumableList)
+                // {
+                //     consumable.PrintConsumable();
+                //     Console.WriteLine("----------------");
+                // }
+            }
+            else
+            {
+                Console.WriteLine("Consumable file does not exist.");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error loading consumables from file: {ex.Message}");
+        }
+    }
+
+    public static Consumable GetRandomConsumable()
+    {
+        if (JsonConsumableList.Count == 0)
+        {
+            Console.WriteLine("Consumable list is empty. Cannot generate a random consumable.");
+            return null;
+        }
+
+        Random random = new Random();
+        int randomIndex = random.Next(JsonConsumableList.Count);
+        return JsonConsumableList[randomIndex];  // Return a random consumable
     }
 }

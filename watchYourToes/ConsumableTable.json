@@ -1,0 +1,1042 @@
+[
+    {
+      "Name": "Healing Draught",
+      "Description": "A common red potion that restores a moderate amount of health.",
+      "Effects": {
+        "Health": 250,
+        "Attack": 0,
+        "Defense": 0,
+        "MagicAttack": 0,
+        "MagicDefense": 0,
+        "Speed": 0
+      },
+      "Temporary": false
+    },
+    {
+      "Name": "Swift Step Elixir",
+      "Description": "A fizzy yellow liquid that temporarily increases movement speed.",
+      "Effects": {
+        "Health": 0,
+        "Attack": 0,
+        "Defense": 0,
+        "MagicAttack": 0,
+        "MagicDefense": 0,
+        "Speed": 150
+      },
+      "Temporary": true
+    },
+    {
+      "Name": "Warrior's Brew",
+      "Description": "A robust concoction that permanently enhances physical strength.",
+      "Effects": {
+        "Health": 0,
+        "Attack": 75,
+        "Defense": 0,
+        "MagicAttack": 0,
+        "MagicDefense": 0,
+        "Speed": 0
+      },
+      "Temporary": false
+    },
+    {
+      "Name": "Bulwark Tonic",
+      "Description": "A metallic-tasting potion that permanently increases defensive capabilities.",
+      "Effects": {
+        "Health": 0,
+        "Attack": 0,
+        "Defense": 100,
+        "MagicAttack": 0,
+        "MagicDefense": 0,
+        "Speed": 0
+      },
+      "Temporary": false
+    },
+    {
+      "Name": "Minor Combat Elixir",
+      "Description": "A balanced formula that temporarily boosts combat abilities.",
+      "Effects": {
+        "Health": 0,
+        "Attack": 50,
+        "Defense": 30,
+        "MagicAttack": 0,
+        "MagicDefense": 0,
+        "Speed": 20
+      },
+      "Temporary": true
+    },
+    {
+      "Name": "Life Essence",
+      "Description": "A vibrant green liquid that permanently increases maximum health.",
+      "Effects": {
+        "Health": 150,
+        "Attack": 0,
+        "Defense": 0,
+        "MagicAttack": 0,
+        "MagicDefense": 0,
+        "Speed": 0
+      },
+      "Temporary": false
+    },
+    {
+      "Name": "Mage's Draught",
+      "Description": "A glowing blue potion that permanently enhances magical attack power.",
+      "Effects": {
+        "Health": 0,
+        "Attack": 0,
+        "Defense": 0,
+        "MagicAttack": 80,
+        "MagicDefense": 0,
+        "Speed": 0
+      },
+      "Temporary": false
+    },
+    {
+      "Name": "Arcane Shield Potion",
+      "Description": "A shimmering purple liquid that permanently increases resistance to magical attacks.",
+      "Effects": {
+        "Health": 0,
+        "Attack": 0,
+        "Defense": 0,
+        "MagicAttack": 0,
+        "MagicDefense": 90,
+        "Speed": 0
+      },
+      "Temporary": false
+    },
+    {
+      "Name": "Berserker's Tonic",
+      "Description": "A blood-red mixture that temporarily boosts attack power but lowers defense.",
+      "Effects": {
+        "Health": 0,
+        "Attack": 120,
+        "Defense": -40,
+        "MagicAttack": 0,
+        "MagicDefense": 0,
+        "Speed": 0
+      },
+      "Temporary": true
+    },
+    {
+      "Name": "Turtle Shell Elixir",
+      "Description": "A thick brown potion that temporarily grants significant defensive power at the cost of speed.",
+      "Effects": {
+        "Health": 0,
+        "Attack": 0,
+        "Defense": 150,
+        "MagicAttack": 0,
+        "MagicDefense": 0,
+        "Speed": -50
+      },
+      "Temporary": true
+    },
+    {
+      "Name": "Balanced Growth Serum",
+      "Description": "A golden liquid that permanently provides modest improvements to all attributes.",
+      "Effects": {
+        "Health": 50,
+        "Attack": 20,
+        "Defense": 20,
+        "MagicAttack": 20,
+        "MagicDefense": 20,
+        "Speed": 10
+      },
+      "Temporary": false
+    },
+    {
+      "Name": "Quicksilver Solution",
+      "Description": "A mercury-like fluid that temporarily grants extraordinary speed but reduces defense.",
+      "Effects": {
+        "Health": 0,
+        "Attack": 0,
+        "Defense": -30,
+        "MagicAttack": 0,
+        "MagicDefense": 0,
+        "Speed": 200
+      },
+      "Temporary": true
+    },
+    {
+      "Name": "Iron Heart Extract",
+      "Description": "A dark red potion that permanently increases both health and defense.",
+      "Effects": {
+        "Health": 100,
+        "Attack": 0,
+        "Defense": 50,
+        "MagicAttack": 0,
+        "MagicDefense": 0,
+        "Speed": 0
+      },
+      "Temporary": false
+    },
+    {
+      "Name": "Mystic Mind Potion",
+      "Description": "A sparkling indigo elixir that permanently enhances magical abilities.",
+      "Effects": {
+        "Health": 0,
+        "Attack": 0,
+        "Defense": 0,
+        "MagicAttack": 60,
+        "MagicDefense": 40,
+        "Speed": 0
+      },
+      "Temporary": false
+    },
+    {
+      "Name": "Ethereal Sight",
+      "Description": "A cloudy white potion that temporarily boosts all magical attributes.",
+      "Effects": {
+        "Health": 0,
+        "Attack": 0,
+        "Defense": 0,
+        "MagicAttack": 90,
+        "MagicDefense": 70,
+        "Speed": 0
+      },
+      "Temporary": true
+    },
+    {
+      "Name": "Minor Healing Potion",
+      "Description": "A common remedy that restores a small amount of health.",
+      "Effects": {
+        "Health": 100,
+        "Attack": 0,
+        "Defense": 0,
+        "MagicAttack": 0,
+        "MagicDefense": 0,
+        "Speed": 0
+      },
+      "Temporary": false
+    },
+    {
+      "Name": "Gladiator's Essence",
+      "Description": "A spicy crimson liquid that temporarily enhances physical combat abilities.",
+      "Effects": {
+        "Health": 0,
+        "Attack": 80,
+        "Defense": 50,
+        "MagicAttack": 0,
+        "MagicDefense": 0,
+        "Speed": 0
+      },
+      "Temporary": true
+    },
+    {
+      "Name": "Elven Vitality",
+      "Description": "A sweet forest-green elixir that permanently enhances health and speed.",
+      "Effects": {
+        "Health": 75,
+        "Attack": 0,
+        "Defense": 0,
+        "MagicAttack": 0,
+        "MagicDefense": 0,
+        "Speed": 30
+      },
+      "Temporary": false
+    },
+    {
+      "Name": "Dwarven Fortitude",
+      "Description": "A stout, earthy brew that permanently increases health and defense.",
+      "Effects": {
+        "Health": 80,
+        "Attack": 0,
+        "Defense": 60,
+        "MagicAttack": 0,
+        "MagicDefense": 0,
+        "Speed": -10
+      },
+      "Temporary": false
+    },
+    {
+      "Name": "Archmage's Insight",
+      "Description": "A shimmering blue-purple liquid that permanently enhances magical power.",
+      "Effects": {
+        "Health": 0,
+        "Attack": -20,
+        "Defense": 0,
+        "MagicAttack": 120,
+        "MagicDefense": 40,
+        "Speed": 0
+      },
+      "Temporary": false
+    },
+    {
+      "Name": "Moderate Healing Potion",
+      "Description": "A reliable remedy that restores a good amount of health.",
+      "Effects": {
+        "Health": 350,
+        "Attack": 0,
+        "Defense": 0,
+        "MagicAttack": 0,
+        "MagicDefense": 0,
+        "Speed": 0
+      },
+      "Temporary": false
+    },
+    {
+      "Name": "Storm Elixir",
+      "Description": "A crackling blue liquid that temporarily grants increased attack speed and magic power.",
+      "Effects": {
+        "Health": 0,
+        "Attack": 30,
+        "Defense": 0,
+        "MagicAttack": 70,
+        "MagicDefense": 0,
+        "Speed": 80
+      },
+      "Temporary": true
+    },
+    {
+      "Name": "Rock Skin Tonic",
+      "Description": "A gritty gray potion that temporarily turns the skin stone-like, greatly increasing defense.",
+      "Effects": {
+        "Health": 0,
+        "Attack": 0,
+        "Defense": 180,
+        "MagicAttack": 0,
+        "MagicDefense": 0,
+        "Speed": -60
+      },
+      "Temporary": true
+    },
+    {
+      "Name": "Spark of Life",
+      "Description": "A rare red-gold potion that permanently increases maximum health and provides vitality.",
+      "Effects": {
+        "Health": 200,
+        "Attack": 10,
+        "Defense": 10,
+        "MagicAttack": 0,
+        "MagicDefense": 0,
+        "Speed": 10
+      },
+      "Temporary": false
+    },
+    {
+      "Name": "Viper Strike Venom",
+      "Description": "A potent green liquid that temporarily increases attack power and speed.",
+      "Effects": {
+        "Health": 0,
+        "Attack": 70,
+        "Defense": -20,
+        "MagicAttack": 0,
+        "MagicDefense": 0,
+        "Speed": 90
+      },
+      "Temporary": true
+    },
+    {
+      "Name": "Mana Infusion",
+      "Description": "A deep blue elixir that permanently enhances magical capabilities.",
+      "Effects": {
+        "Health": 0,
+        "Attack": 0,
+        "Defense": 0,
+        "MagicAttack": 40,
+        "MagicDefense": 40,
+        "Speed": 0
+      },
+      "Temporary": false
+    },
+    {
+      "Name": "Troll Blood",
+      "Description": "A murky green fluid that permanently improves health regeneration and physical strength.",
+      "Effects": {
+        "Health": 150,
+        "Attack": 50,
+        "Defense": 30,
+        "MagicAttack": -20,
+        "MagicDefense": 0,
+        "Speed": -10
+      },
+      "Temporary": false
+    },
+    {
+      "Name": "Phoenix Tear",
+      "Description": "A rare golden-red droplet that restores a large amount of health and grants temporary protection.",
+      "Effects": {
+        "Health": 500,
+        "Attack": 0,
+        "Defense": 40,
+        "MagicAttack": 0,
+        "MagicDefense": 40,
+        "Speed": 0
+      },
+      "Temporary": true
+    },
+    {
+      "Name": "Dragon Scale Extract",
+      "Description": "A powerful concoction that permanently enhances defensive capabilities.",
+      "Effects": {
+        "Health": 0,
+        "Attack": 0,
+        "Defense": 120,
+        "MagicAttack": 0,
+        "MagicDefense": 50,
+        "Speed": -15
+      },
+      "Temporary": false
+    },
+    {
+      "Name": "Sorcerer's Focus",
+      "Description": "A clear purple elixir that temporarily enhances magical offensive power at the cost of physical strength.",
+      "Effects": {
+        "Health": 0,
+        "Attack": -40,
+        "Defense": 0,
+        "MagicAttack": 140,
+        "MagicDefense": 0,
+        "Speed": 0
+      },
+      "Temporary": true
+    },
+    {
+      "Name": "Featherweight Elixir",
+      "Description": "A light blue potion that temporarily reduces weight, increasing speed and jump height.",
+      "Effects": {
+        "Health": 0,
+        "Attack": 0,
+        "Defense": -30,
+        "MagicAttack": 0,
+        "MagicDefense": 0,
+        "Speed": 120
+      },
+      "Temporary": true
+    },
+    {
+      "Name": "Fortified Essence",
+      "Description": "A balanced concoction that permanently enhances overall physical capabilities.",
+      "Effects": {
+        "Health": 60,
+        "Attack": 30,
+        "Defense": 30,
+        "MagicAttack": 0,
+        "MagicDefense": 0,
+        "Speed": 10
+      },
+      "Temporary": false
+    },
+    {
+      "Name": "Shadowstep Potion",
+      "Description": "A dark, inky fluid that temporarily grants exceptional speed and minor invisibility.",
+      "Effects": {
+        "Health": 0,
+        "Attack": 20,
+        "Defense": 0,
+        "MagicAttack": 0,
+        "MagicDefense": 0,
+        "Speed": 160
+      },
+      "Temporary": true
+    },
+    {
+      "Name": "Guardian's Brew",
+      "Description": "A sturdy potion that temporarily enhances defensive attributes.",
+      "Effects": {
+        "Health": 0,
+        "Attack": 0,
+        "Defense": 100,
+        "MagicAttack": 0,
+        "MagicDefense": 80,
+        "Speed": -20
+      },
+      "Temporary": true
+    },
+    {
+      "Name": "Arcane Intellect",
+      "Description": "A luminous purple elixir that permanently enhances magical intelligence.",
+      "Effects": {
+        "Health": 0,
+        "Attack": 0,
+        "Defense": 0,
+        "MagicAttack": 100,
+        "MagicDefense": 50,
+        "Speed": 0
+      },
+      "Temporary": false
+    },
+    {
+      "Name": "Warrior's Heart",
+      "Description": "A bold crimson potion that permanently enhances physical combat abilities.",
+      "Effects": {
+        "Health": 70,
+        "Attack": 60,
+        "Defense": 40,
+        "MagicAttack": 0,
+        "MagicDefense": 0,
+        "Speed": 0
+      },
+      "Temporary": false
+    },
+    {
+      "Name": "Crystal Sight",
+      "Description": "A transparent potion with floating crystals that temporarily enhances perception and magical defense.",
+      "Effects": {
+        "Health": 0,
+        "Attack": 0,
+        "Defense": 0,
+        "MagicAttack": 0,
+        "MagicDefense": 120,
+        "Speed": 30
+      },
+      "Temporary": true
+    },
+    {
+      "Name": "Giant's Strength",
+      "Description": "A thick red elixir that temporarily grants enhanced physical power.",
+      "Effects": {
+        "Health": 0,
+        "Attack": 140,
+        "Defense": 0,
+        "MagicAttack": 0,
+        "MagicDefense": 0,
+        "Speed": -20
+      },
+      "Temporary": true
+    },
+    {
+      "Name": "Faerie Dust Draught",
+      "Description": "A sparkling pink liquid that permanently improves agility and magical protection.",
+      "Effects": {
+        "Health": 0,
+        "Attack": 0,
+        "Defense": 0,
+        "MagicAttack": 0,
+        "MagicDefense": 70,
+        "Speed": 40
+      },
+      "Temporary": false
+    },
+    {
+      "Name": "Elixir of Arcane Might",
+      "Description": "A potent violet brew that temporarily enhances magical damage capabilities.",
+      "Effects": {
+        "Health": 0,
+        "Attack": 0,
+        "Defense": 0,
+        "MagicAttack": 130,
+        "MagicDefense": 0,
+        "Speed": 0
+      },
+      "Temporary": true
+    },
+    {
+      "Name": "Dragon's Breath",
+      "Description": "A smoking orange potion that temporarily enhances attack power and magical prowess.",
+      "Effects": {
+        "Health": 0,
+        "Attack": 90,
+        "Defense": 0,
+        "MagicAttack": 80,
+        "MagicDefense": 0,
+        "Speed": 0
+      },
+      "Temporary": true
+    },
+    {
+      "Name": "Warrior's Legacy",
+      "Description": "An ancient recipe that permanently enhances combat abilities.",
+      "Effects": {
+        "Health": 40,
+        "Attack": 90,
+        "Defense": 50,
+        "MagicAttack": 0,
+        "MagicDefense": 0,
+        "Speed": 0
+      },
+      "Temporary": false
+    },
+    {
+      "Name": "Restoration Tonic",
+      "Description": "A refreshing blue-green mixture that restores health and temporarily improves defense.",
+      "Effects": {
+        "Health": 300,
+        "Attack": 0,
+        "Defense": 60,
+        "MagicAttack": 0,
+        "MagicDefense": 0,
+        "Speed": 0
+      },
+      "Temporary": true
+    },
+    {
+      "Name": "Sorcerer's Legacy",
+      "Description": "An ancient arcane formula that permanently enhances magical capabilities.",
+      "Effects": {
+        "Health": 0,
+        "Attack": 0,
+        "Defense": 0,
+        "MagicAttack": 110,
+        "MagicDefense": 60,
+        "Speed": 0
+      },
+      "Temporary": false
+    },
+    {
+      "Name": "Mystic Balance",
+      "Description": "A swirling blue-red potion that permanently provides balanced improvements to all attributes.",
+      "Effects": {
+        "Health": 50,
+        "Attack": 30,
+        "Defense": 30,
+        "MagicAttack": 30,
+        "MagicDefense": 30,
+        "Speed": 15
+      },
+      "Temporary": false
+    },
+    {
+      "Name": "Forest Guardian's Gift",
+      "Description": "A vibrant green elixir that permanently enhances health and natural defenses.",
+      "Effects": {
+        "Health": 120,
+        "Attack": 0,
+        "Defense": 70,
+        "MagicAttack": 0,
+        "MagicDefense": 30,
+        "Speed": 0
+      },
+      "Temporary": false
+    },
+    {
+      "Name": "Assassin's Draught",
+      "Description": "A dark gray liquid that temporarily enhances speed and attack power.",
+      "Effects": {
+        "Health": 0,
+        "Attack": 100,
+        "Defense": -30,
+        "MagicAttack": 0,
+        "MagicDefense": 0,
+        "Speed": 110
+      },
+      "Temporary": true
+    },
+    {
+      "Name": "Warden's Elixir",
+      "Description": "A defensive potion that temporarily enhances both physical and magical protection.",
+      "Effects": {
+        "Health": 0,
+        "Attack": 0,
+        "Defense": 90,
+        "MagicAttack": 0,
+        "MagicDefense": 90,
+        "Speed": -30
+      },
+      "Temporary": true
+    },
+    {
+      "Name": "Vampire's Vitality",
+      "Description": "A thick crimson elixir that permanently enhances health while slightly reducing defenses.",
+      "Effects": {
+        "Health": 220,
+        "Attack": 30,
+        "Defense": -20,
+        "MagicAttack": 0,
+        "MagicDefense": -20,
+        "Speed": 20
+      },
+      "Temporary": false
+    },
+    {
+      "Name": "Chimera Essence",
+      "Description": "A strange multicolored fluid that permanently grants varied improvements across all attributes.",
+      "Effects": {
+        "Health": 90,
+        "Attack": 40,
+        "Defense": 40,
+        "MagicAttack": 40,
+        "MagicDefense": 40,
+        "Speed": 20
+      },
+      "Temporary": false
+    },
+    {
+      "Name": "Ranger's Focus",
+      "Description": "A clear green potion that temporarily enhances precision, attack, and speed.",
+      "Effects": {
+        "Health": 0,
+        "Attack": 80,
+        "Defense": 0,
+        "MagicAttack": 0,
+        "MagicDefense": 0,
+        "Speed": 70
+      },
+      "Temporary": true
+    },
+    {
+      "Name": "Stone Heart Elixir",
+      "Description": "A gray-brown potion that permanently increases health and defense but reduces speed.",
+      "Effects": {
+        "Health": 150,
+        "Attack": 0,
+        "Defense": 90,
+        "MagicAttack": 0,
+        "MagicDefense": 0,
+        "Speed": -30
+      },
+      "Temporary": false
+    },
+    {
+      "Name": "Spirit Caller's Brew",
+      "Description": "A misty white liquid that temporarily enhances magical abilities and perception.",
+      "Effects": {
+        "Health": 0,
+        "Attack": 0,
+        "Defense": 0,
+        "MagicAttack": 100,
+        "MagicDefense": 80,
+        "Speed": 20
+      },
+      "Temporary": true
+    },
+    {
+      "Name": "Mercenary's Vigor",
+      "Description": "A reliable combat potion that temporarily boosts attack and health.",
+      "Effects": {
+        "Health": 200,
+        "Attack": 60,
+        "Defense": 0,
+        "MagicAttack": 0,
+        "MagicDefense": 0,
+        "Speed": 0
+      },
+      "Temporary": true
+    },
+    {
+      "Name": "Hunter's Precision",
+      "Description": "A forest-green potion that permanently enhances attack and speed.",
+      "Effects": {
+        "Health": 0,
+        "Attack": 70,
+        "Defense": 0,
+        "MagicAttack": 0,
+        "MagicDefense": 0,
+        "Speed": 50
+      },
+      "Temporary": false
+    },
+    {
+      "Name": "Minor Rejuvenation Elixir",
+      "Description": "A light pink potion that restores some health and temporarily boosts recovery rate.",
+      "Effects": {
+        "Health": 150,
+        "Attack": 0,
+        "Defense": 10,
+        "MagicAttack": 0,
+        "MagicDefense": 10,
+        "Speed": 0
+      },
+      "Temporary": true
+    },
+    {
+      "Name": "Dragon Slayer's Courage",
+      "Description": "A crimson potion that temporarily grants significant combat advantages in all areas.",
+      "Effects": {
+        "Health": 100,
+        "Attack": 100,
+        "Defense": 60,
+        "MagicAttack": 0,
+        "MagicDefense": 60,
+        "Speed": 30
+      },
+      "Temporary": true
+    },
+    {
+      "Name": "Monk's Serenity",
+      "Description": "A balanced yellow elixir that permanently enhances health, defense, and speed.",
+      "Effects": {
+        "Health": 80,
+        "Attack": 0,
+        "Defense": 50,
+        "MagicAttack": 0,
+        "MagicDefense": 0,
+        "Speed": 40
+      },
+      "Temporary": false
+    },
+    {
+      "Name": "Icicle Draught",
+      "Description": "A freezing blue potion that temporarily enhances magical attack and defense.",
+      "Effects": {
+        "Health": 0,
+        "Attack": 0,
+        "Defense": 30,
+        "MagicAttack": 120,
+        "MagicDefense": 70,
+        "Speed": -20
+      },
+      "Temporary": true
+    },
+    {
+      "Name": "Templar's Blessing",
+      "Description": "A holy white-gold elixir that temporarily enhances defense and magic resistance.",
+      "Effects": {
+        "Health": 0,
+        "Attack": 20,
+        "Defense": 110,
+        "MagicAttack": 0,
+        "MagicDefense": 110,
+        "Speed": 0
+      },
+      "Temporary": true
+    },
+    {
+      "Name": "Blood of the Mountain",
+      "Description": "A rare mineral-infused potion that permanently enhances health and physical power.",
+      "Effects": {
+        "Health": 180,
+        "Attack": 70,
+        "Defense": 40,
+        "MagicAttack": 0,
+        "MagicDefense": 0,
+        "Speed": -10
+      },
+      "Temporary": false
+    },
+    {
+      "Name": "Warlock's Pact",
+      "Description": "A dark purple elixir that permanently increases magical power at a cost to physical attributes.",
+      "Effects": {
+        "Health": -50,
+        "Attack": -30,
+        "Defense": -20,
+        "MagicAttack": 140,
+        "MagicDefense": 60,
+        "Speed": 0
+      },
+      "Temporary": false
+    },
+    {
+      "Name": "Rogue's Nimbleness",
+      "Description": "A smoky gray liquid that permanently enhances speed and attack.",
+      "Effects": {
+        "Health": 0,
+        "Attack": 60,
+        "Defense": -20,
+        "MagicAttack": 0,
+        "MagicDefense": 0,
+        "Speed": 80
+      },
+      "Temporary": false
+    },
+    {
+      "Name": "Paladin's Oath",
+      "Description": "A blessed golden potion that permanently enhances defensive capabilities.",
+      "Effects": {
+        "Health": 90,
+        "Attack": 20,
+        "Defense": 80,
+        "MagicAttack": 0,
+        "MagicDefense": 60,
+        "Speed": -10
+      },
+      "Temporary": false
+    },
+    {
+      "Name": "Sage's Wisdom",
+      "Description": "An ancient formula that permanently enhances magical abilities.",
+      "Effects": {
+        "Health": 0,
+        "Attack": 0,
+        "Defense": 0,
+        "MagicAttack": 80,
+        "MagicDefense": 80,
+        "Speed": 0
+      },
+      "Temporary": false
+    },
+    {
+      "Name": "Brawler's Tonic",
+      "Description": "A rough amber liquid that temporarily boosts physical attacks and toughness.",
+      "Effects": {
+        "Health": 50,
+        "Attack": 120,
+        "Defense": 40,
+        "MagicAttack": 0,
+        "MagicDefense": 0,
+        "Speed": 0
+      },
+      "Temporary": true
+    },
+    {
+      "Name": "Frostbite Elixir",
+      "Description": "A freezing cold potion that temporarily enhances magic attacks with ice properties.",
+      "Effects": {
+        "Health": 0,
+        "Attack": 0,
+        "Defense": 0,
+        "MagicAttack": 150,
+        "MagicDefense": 30,
+        "Speed": -10
+      },
+      "Temporary": true
+    },
+    {
+      "Name": "Forest Blend",
+      "Description": "A natural green potion that permanently provides balanced enhancement to health and agility.",
+      "Effects": {
+        "Health": 120,
+        "Attack": 0,
+        "Defense": 0,
+        "MagicAttack": 0,
+        "MagicDefense": 0,
+        "Speed": 60
+      },
+      "Temporary": false
+    },
+    {
+      "Name": "Cavalier's Courage",
+      "Description": "A bold red elixir that temporarily enhances attack and speed.",
+      "Effects": {
+        "Health": 0,
+        "Attack": 100,
+        "Defense": 0,
+        "MagicAttack": 0,
+        "MagicDefense": 0,
+        "Speed": 80
+      },
+      "Temporary": true
+    },
+    {
+      "Name": "Acolyte's Insight",
+      "Description": "A clear blue potion that permanently enhances magical ability and protection.",
+      "Effects": {
+        "Health": 0,
+        "Attack": 0,
+        "Defense": 0,
+        "MagicAttack": 70,
+        "MagicDefense": 70,
+        "Speed": 0
+      },
+      "Temporary": false
+    },
+    {
+      "Name": "Flame Wrath Brew",
+      "Description": "A bubbling orange-red liquid that temporarily grants fire-enhanced attacks.",
+      "Effects": {
+        "Health": 0,
+        "Attack": 80,
+        "Defense": 0,
+        "MagicAttack": 90,
+        "MagicDefense": 0,
+        "Speed": 0
+      },
+      "Temporary": true
+    },
+    {
+      "Name": "Knight's Honor",
+      "Description": "A traditional silver-flecked elixir that permanently enhances defensive capabilities.",
+      "Effects": {
+        "Health": 70,
+        "Attack": 30,
+        "Defense": 90,
+        "MagicAttack": 0,
+        "MagicDefense": 0,
+        "Speed": -20
+      },
+      "Temporary": false
+    },
+    {
+      "Name": "Swordmaster's Secret",
+      "Description": "A rare combat potion that permanently enhances physical attack abilities.",
+      "Effects": {
+        "Health": 0,
+        "Attack": 110,
+        "Defense": 0,
+        "MagicAttack": 0,
+        "MagicDefense": 0,
+        "Speed": 30
+      },
+      "Temporary": false
+    },
+    {
+        "Name": "Godspeed Serum",
+        "Description": "A hyper-concentrated formula that vastly increases speed for a short duration.",
+        "Effects": {
+            "Health": 0,
+            "Attack": 0,
+            "Defense": 0,
+            "MagicAttack": 0,
+            "MagicDefense": 0,
+            "Speed": 500
+        },
+        "Temporary": true
+    },
+    {
+        "Name": "Titan's Blood",
+        "Description": "A legendary elixir that permanently increases attack power to insane levels.",
+        "Effects": {
+            "Health": 0,
+            "Attack": 10000,
+            "Defense": 0,
+            "MagicAttack": 0,
+            "MagicDefense": 0,
+            "Speed": 0
+        },
+        "Temporary": false
+    },
+    {
+        "Name": "Guardian's Oath",
+        "Description": "A sacred potion that permanently fortifies your defenses.",
+        "Effects": {
+            "Health": 0,
+            "Attack": 0,
+            "Defense": 5000,
+            "MagicAttack": 0,
+            "MagicDefense": 0,
+            "Speed": 0
+        },
+        "Temporary": false
+    },
+    {
+        "Name": "Elixir of the Cosmos",
+        "Description": "A rare celestial brew that temporarily enhances every stat.",
+        "Effects": {
+            "Health": 500,
+            "Attack": 250,
+            "Defense": 250,
+            "MagicAttack": 250,
+            "MagicDefense": 250,
+            "Speed": 100
+        },
+        "Temporary": true
+    },
+    {
+        "Name": "Absolute Remedy",
+        "Description": "A divine potion that permanently improves all attributes.",
+        "Effects": {
+            "Health": 1000,
+            "Attack": 100,
+            "Defense": 100,
+            "MagicAttack": 100,
+            "MagicDefense": 100,
+            "Speed": 50
+        },
+        "Temporary": false
+    },
+    {
+        "Name": "Mystic Revival Tonic",
+        "Description": "A powerful potion that restores moderate health and boosts magic temporarily.",
+        "Effects": {
+            "Health": 500,
+            "Attack": 0,
+            "Defense": 0,
+            "MagicAttack": 100,
+            "MagicDefense": 50,
+            "Speed": 0
+        },
+        "Temporary": true
+    },
+    {
+        "Name": "Phantom Brew",
+        "Description": "A cursed elixir that grants immense magic power but reduces physical strength permanently.",
+        "Effects": {
+            "Health": -100,
+            "Attack": -200,
+            "Defense": 0,
+            "MagicAttack": 2000,
+            "MagicDefense": 500,
+            "Speed": 0
+        },
+        "Temporary": false
+    }
+]

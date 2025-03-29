@@ -127,6 +127,7 @@ class Program
                             if (myCharacter != null)
                             {
                                 Console.WriteLine($"Character loaded: {myCharacter.Name},Id: {myCharacter.Id}, Class Name: {myCharacter.ClassName}, Level: {myCharacter.Level}");
+                                myCharacter.FullHeal();
                             }
                             else
                             {
@@ -166,13 +167,26 @@ class Program
         // Grab the Json data and store them into static variables.
          string filePath = "EnemyTable.json";  // Path to the enemy json file
          string filePathGear = "GearTable.json";
+         string filePathConsumable = "ConsumableTable.json";
+
+
+        // Load Consumables from JSON
+        JsonManager.LoadConsumablesFromJson(filePathConsumable);
+        Consumable randomConsumable = JsonManager.GetRandomConsumable();
+        if (randomConsumable != null)
+        {
+            Console.WriteLine("Randomly Selected Consumable:");
+            randomConsumable.PrintConsumable();
+        }
+        Console.ReadLine();
+        
+
 
         // Load Gear from Specified file
         JsonManager.LoadGearFromJson(filePathGear);
         Gear randomgear = JsonManager.GetRandomGear();
         myCharacter.AddItemToInventory(randomgear);
         myCharacter.PrintInventory();
-        Console.ReadLine();
 
         // Load enemies from the specified file
         // DO NOT DELETE THIS LINE. THIS IS WHAT LET"S US USE THE STATIC JSON LIST
@@ -235,40 +249,49 @@ class Program
         // while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
 
 
+        // Create some testing items:
+        // Strength Potion (Permanent)
+        Consumable strengthPotionPermanent = new Consumable(
+            "Strength Potion", 
+            "A potion that permanently increases attack by 5.", 
+            new Stat(attack: 5), // Only set attack to 5, others are 0 by default
+            false // Permanent effect
+        );
 
-        // // Load Json Data
-        // string filePath = "EnemyTable.json"; // Make sure this file exists
+        // Strength Potion (Temporary)
+        Consumable strengthPotionTemporary = new Consumable(
+            "Strength Potion (Temporary)", 
+            "A potion that temporarily increases attack by 50.", 
+            new Stat(attack: 300), // Only set attack to 50, others are 0 by default
+            true // Temporary effect
+        );
+
+        Consumable defensePotionPermanent = new Consumable(
+            "Defense Potion", 
+            "A potion that permanently increases defense by 5.", 
+            new Stat(defense: 5), // Only set defense to 5, others are 0 by default
+            false // Permanent effect
+        );
+
+        // Defense Potion (Temporary)
+        Consumable defensePotionTemporary = new Consumable(
+            "Defense Potion (Temporary)", 
+            "A potion that temporarily increases defense by 50.", 
+            new Stat(defense: 50), // Only set defense to 50, others are 0 by default
+            true // Temporary effect
+        );
+
+        // Bandage (Healing)
+        Consumable bandage = new Consumable(
+            "Bandage", 
+            "A bandage that heals 50 health.", 
+            new Stat(health: 50), // Only set health to 50, others are 0 by default
+            true // Temporary healing effect
+        );
 
 
-        // if (File.Exists(filePath))
-        // {
-        //     string jsonString = File.ReadAllText(filePath);
-        //     List<Enemy> enemies = JsonSerializer.Deserialize<List<Enemy>>(jsonString);
 
-        //     foreach (var enemy in enemies)
-        //     {
-        //         Console.WriteLine($"Name: {enemy.Name} | Health: {enemy.Health} | Attack: {enemy.Attack} | Defense: {enemy.Defense} | Magic Attack: {enemy.MagicAttack} | Magic Defense: {enemy.MagicDefense} | Speed: {enemy.Speed} | Exp: {enemy.Exp} | Possibility of Drop: {enemy.PossibilityOfDrop}");
-        //         enemy.InitializeCurrentStat();
-        //         enemy.CurrentStat.PrintStats();
-
-        //         // enemy.CurrentStat = new Stat(enemy.Health, enemy.Attack, enemy.Defense, enemy.MagicAttack, enemy.MagicDefense, enemy.Speed);
-        //         // enemy.InitializeCurrentStat();
-        //         // enemy.CurrentStat.Health = enemy.Health;
-        //         // enemy.CurrentStat.Attack = enemy.Attack;
-        //         // enemy.CurrentStat.Defense = enemy.Defense;
-        //         // enemy.CurrentStat.MagicAttack = enemy.MagicAttack;
-        //         // enemy.CurrentStat.MagicDefense = enemy.MagicDefense;
-        //         // enemy.CurrentStat.Speed = enemy.Speed;
-
-        //         // enemy.CurrentStat.PrintStats();
-        //         Console.WriteLine("----------------");
-        //     }
-        // }
-        // else
-        // {
-        //     Console.WriteLine("File not found!");
-        // }
-    
+        
     
 
         //TEST !!
@@ -276,8 +299,16 @@ class Program
         Console.WriteLine("\n-- Adding Items to Inventory ... --\n");
         myCharacter.AddItemToInventory(sword);
         myCharacter.AddItemToInventory(shield);
-        myCharacter.AddItemToInventory(BigSword);
-        await db.UpdateCharacter(myCharacter); //save new info to db
+        myCharacter.AddItemToInventory(bandage);
+        myCharacter.AddItemToInventory(defensePotionTemporary);
+        myCharacter.AddItemToInventory(defensePotionPermanent);
+        myCharacter.AddItemToInventory(strengthPotionTemporary);
+        myCharacter.AddItemToInventory(strengthPotionPermanent);
+        myCharacter.Equip(sword);
+        myCharacter.PrintBaseStats();
+        myCharacter.PrintCurrentStats();
+        Console.ReadLine();
+        // await db.UpdateCharacter(myCharacter); //save new info to db
     
         Console.WriteLine("\n-- Level Up Test... --\n");
         //Level Up test
@@ -438,20 +469,16 @@ class Program
         Console.Clear(); 
         Console.WriteLine("But how many cycles could you endure before losing yourself completely?");  
 
-        Thread.Sleep(3000); 
+        Thread.Sleep(200); 
         Console.Clear();
 
-        // Start village loop
-        // myCharacter.Days++;
-        // Console.WriteLine("You wake up to another day. How do You feel?");
-        // myCharacter.PrintCurrentStats();
-        // while (Console.ReadKey(true).Key != ConsoleKey.Spacebar) { } // Wait until SPACE is pressed
-        // Console.Clear(); 
+        
 
 
         while (true)
 {
     Console.Clear();
+    myCharacter.TakeDamage(30);
     Console.WriteLine($"Day {myCharacter.Days}: You wake up to another day in the village.");
     Console.WriteLine("What would you like to do?");
     Console.WriteLine("1. See Stats");
@@ -469,63 +496,76 @@ class Program
     {
         case ConsoleKey.D1:
         case ConsoleKey.NumPad1:
+            myCharacter.PrintBaseStats();
             myCharacter.PrintCurrentStats();
             break;
 
         case ConsoleKey.D2: 
         case ConsoleKey.NumPad2:
             while (true)
+    {
+        Console.Clear();
+        myCharacter.PrintInventory(); // Show inventory
+
+        Console.WriteLine("\nSelect an action:");
+        Console.WriteLine("E - Equip Gear");
+        Console.WriteLine("S - Send to Storage");
+        Console.WriteLine("U - Use Consumable");
+        Console.WriteLine("Enter - Exit Inventory");
+
+        ConsoleKeyInfo keyInfo = Console.ReadKey(true);
+        if (keyInfo.Key == ConsoleKey.Enter)
+            break;
+
+        Console.Clear();
+        myCharacter.PrintInventory(); // Refresh inventory display
+
+        Console.Write("\nEnter item number (1-N) or 0 to cancel: ");
+        if (int.TryParse(Console.ReadLine(), out int itemIndex) && itemIndex > 0 && itemIndex <= myCharacter.Inventory.Count)
+        {
+            Item selectedItem = myCharacter.Inventory[itemIndex - 1];
+
+            if (keyInfo.Key == ConsoleKey.E) // Equip Item
             {
-                Console.Clear();
-                myCharacter.PrintInventory(); // Show inventory
-
-                Console.WriteLine("\nSelect an item to:");
-                Console.WriteLine("E - Equip Item");
-                Console.WriteLine("S - Send to Storage");
-                Console.WriteLine("Enter - Exit Inventory");
-
-                ConsoleKeyInfo keyInfo = Console.ReadKey(true);
-                if (keyInfo.Key == ConsoleKey.Enter)
-                    break;
-
-                Console.Clear();
-                myCharacter.PrintInventory(); // Refresh inventory display
-
-                Console.Write("\nEnter item number (1-N) or 0 to cancel: ");
-                if (int.TryParse(Console.ReadLine(), out int itemIndex) && itemIndex > 0 && itemIndex <= myCharacter.Inventory.Count)
+                if (selectedItem is Gear gearItem)
                 {
-                    Item selectedItem = myCharacter.Inventory[itemIndex - 1];
-
-                    if (keyInfo.Key == ConsoleKey.E) // Equip Item
-                    {
-                        if (selectedItem is Gear gearItem)
-                        {
-                            myCharacter.Equip(gearItem);
-                            Console.WriteLine($"{gearItem.Name} equipped!");
-                        }
-                        else
-                        {
-                            Console.WriteLine("You can only equip gear items.");
-                        }
-                    }
-                    else if (keyInfo.Key == ConsoleKey.S) // Store Item
-                    {
-                        myCharacter.StoreItemInStorage(selectedItem);
-                    }
-                    else
-                    {
-                        Console.WriteLine("Invalid choice.");
-                    }
+                    myCharacter.Equip(gearItem);
+                    Console.WriteLine($"{gearItem.Name} equipped!");
                 }
                 else
                 {
-                    Console.WriteLine("Invalid selection.");
+                    Console.WriteLine("You can only equip gear items.");
                 }
-
-                Console.WriteLine("\nPress any key to continue...");
-                Console.ReadKey(true);
             }
-            break;
+            else if (keyInfo.Key == ConsoleKey.S) // Store Item
+            {
+                myCharacter.StoreItemInStorage(selectedItem);
+            }
+            else if (keyInfo.Key == ConsoleKey.U) // Use Consumable
+            {
+                if (selectedItem is Consumable consumableItem)
+                {
+                    myCharacter.UseConsumable(consumableItem);
+                }
+                else
+                {
+                    Console.WriteLine("You can only use consumable items.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Invalid choice.");
+            }
+        }
+        else
+        {
+            Console.WriteLine("Invalid selection.");
+        }
+
+        Console.WriteLine("\nPress any key to continue...");
+        Console.ReadKey(true);
+    }
+    break;
 
         case ConsoleKey.D3:
         case ConsoleKey.NumPad3:
@@ -683,7 +723,7 @@ class Program
         case ConsoleKey.D7:
         case ConsoleKey.NumPad7:
             Console.WriteLine("You decide to rest and prepare for another loop.");
-            myCharacter.Stats.CurrentStats = myCharacter.Stats.BaseStats;
+            myCharacter.FullHeal();
             myCharacter.Days++;
 
 
@@ -712,70 +752,10 @@ bool ConfirmAction(string message)
         
         
 
-        // Let player go to shops / save / change class / go to storage / heal
-        // Let players go into the dungeon
-
-            // dungeon stuff
-            // dungeon stuff
-            // dungeon stuff
-            // dungeon stuff
-
-
-        // When the player dies or finishes the dungeon, they wake up at the start of the village loop.
+       
 
     }
 }
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// // Add items to inventory
-// character.AddItemToInventory(sword);
-// character.AddItemToInventory(shield);
-// character.AddItemToInventory(BigSword);
-
-// character.MoveAllInventoryToStorage();
-
-// Console.WriteLine("\n-- Inventory Updated --\n");
-
-// // Equip sword (removes it from inventory)
-// character.Equip(sword);
-// Console.WriteLine("\nSword equipped.\n");
-
-// // Equip shield (removes it from inventory)
-// character.Equip(shield);
-// Console.WriteLine("\nShield equipped.\n");
-
-// character.PrintEquippedItems();
-// Console.WriteLine();
-// character.PrintBaseStats();
-// character.PrintCurrentStats();
-// Console.WriteLine();
-
-// // Remove sword (returns it to inventory)
-// character.RemoveItem("weapon");
-// Console.WriteLine("\nSword removed from equipment.\n");
-
-// character.PrintInventory();
-// Console.WriteLine();
-// character.PrintEquippedItems();
-// Console.WriteLine();
-// character.PrintBaseStats();
-// character.PrintCurrentStats();
-// Console.WriteLine();

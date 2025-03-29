@@ -141,6 +141,8 @@ public class Character : Combatant
 
             // Get total equipment buffs
             Stat equipmentBonus = Equipment.GetEquipmentStats();
+            equipmentBonus.PrintStats();
+            Console.ReadLine();
 
             // Apply equipment buffs after leveling up
             Stats.CurrentStats.Health += equipmentBonus.Health;
@@ -221,12 +223,117 @@ public class Character : Combatant
     }
 }
 
+            // Stats.CurrentStats.Health  = Stats.BaseStats.Health;
+            // Stats.CurrentStats.Attack = Stats.BaseStats.Attack;
+            // Stats.CurrentStats.Defense = Stats.BaseStats.Defense;
+            // Stats.CurrentStats.MagicAttack = Stats.BaseStats.MagicAttack;
+            // Stats.CurrentStats.MagicDefense = Stats.BaseStats.MagicDefense;
+            // Stats.CurrentStats.Speed = Stats.BaseStats.Speed;
+    }
+
+    public void FullHeal()
+{
             Stats.CurrentStats.Health  = Stats.BaseStats.Health;
             Stats.CurrentStats.Attack = Stats.BaseStats.Attack;
             Stats.CurrentStats.Defense = Stats.BaseStats.Defense;
             Stats.CurrentStats.MagicAttack = Stats.BaseStats.MagicAttack;
             Stats.CurrentStats.MagicDefense = Stats.BaseStats.MagicDefense;
             Stats.CurrentStats.Speed = Stats.BaseStats.Speed;
+
+            ReaddEquipmentBonuses();
+
+            ResetActiveEffects();
+}
+
+    public void ResetActiveEffects()
+    {
+        ActiveEffects.Clear();
+    }
+
+    public void UseConsumable(Consumable consumable)
+    {
+        // Check if the consumable is in the player's inventory
+        if (Inventory.Contains(consumable))
+        {
+            // If the consumable has health effects (e.g., healing item)
+            if (consumable.Effects.Health > 0 && consumable.Temporary) 
+            {
+                int maxHealth = Stats.BaseStats.Health; // Maximum possible health
+                if (Stats.CurrentStats.Health >= maxHealth)
+                {
+                    Console.WriteLine("Your health is already full. You cannot use this item.");
+                    return;
+                }
+
+                // Calculate how much can actually be healed
+                int healAmount = Math.Min(consumable.Effects.Health, maxHealth - Stats.CurrentStats.Health);
+                Stats.CurrentStats.Health += healAmount;
+
+                Console.WriteLine($"{consumable.Name} healed you for {healAmount} health. You now have {Stats.CurrentStats.Health} HP");
+            }
+            else if (consumable.Temporary)
+            {
+                // Apply temporary effects to CurrentStats only
+                ApplyTemporaryEffects(consumable);
+            }
+            else
+            {
+                // Apply permanent effects to both BaseStats and CurrentStats
+                ApplyPermanentEffects(consumable);
+            }
+
+            // Remove the consumable from inventory after use
+            RemoveItemFromInventory(consumable);
+
+            Console.WriteLine($"{consumable.Name} has been used.");
+        }
+        else
+        {
+            Console.WriteLine("You do not have this consumable in your inventory.");
+        }
+    }
+
+    // Method to apply temporary effects to current stats
+    private void ApplyTemporaryEffects(Consumable consumable)
+    {
+        // Only update CurrentStats, do not modify BaseStats
+        Stats.CurrentStats.Attack += consumable.Effects.Attack;
+        Stats.CurrentStats.Defense += consumable.Effects.Defense;
+        Stats.CurrentStats.MagicAttack += consumable.Effects.MagicAttack;
+        Stats.CurrentStats.MagicDefense += consumable.Effects.MagicDefense;
+        Stats.CurrentStats.Speed += consumable.Effects.Speed;
+
+        Console.WriteLine($"{consumable.Name} has temporarily boosted your stats.");
+    }
+
+    // Method to apply permanent effects to base stats and current stats
+    private void ApplyPermanentEffects(Consumable consumable)
+    {
+        // Update BaseStats with permanent changes
+        Stats.BaseStats.Health += consumable.Effects.Health;
+        Stats.BaseStats.Attack += consumable.Effects.Attack;
+        Stats.BaseStats.Defense += consumable.Effects.Defense;
+        Stats.BaseStats.MagicAttack += consumable.Effects.MagicAttack;
+        Stats.BaseStats.MagicDefense += consumable.Effects.MagicDefense;
+        Stats.BaseStats.Speed += consumable.Effects.Speed;
+
+        // Apply the same changes to CurrentStats
+        UpdateCurrentStats();
+        
+        Console.WriteLine($"{consumable.Name} has permanently boosted your stats.");
+    }
+
+    // Method to apply changes to CurrentStats (reflecting BaseStats after permanent changes)
+    private void UpdateCurrentStats()
+    {
+        Stats.CurrentStats.Health = Stats.BaseStats.Health;
+        Stats.CurrentStats.Attack = Stats.BaseStats.Attack;
+        Stats.CurrentStats.Defense = Stats.BaseStats.Defense;
+        Stats.CurrentStats.MagicAttack = Stats.BaseStats.MagicAttack;
+        Stats.CurrentStats.MagicDefense = Stats.BaseStats.MagicDefense;
+        Stats.CurrentStats.Speed = Stats.BaseStats.Speed;
+
+        ReaddEquipmentBonuses();
     }
 
     // Equip the item and update stats accordingly
@@ -257,6 +364,20 @@ public void Equip(Gear gear)
 
     // Update stats based on the item being equipped
     ApplyStatChanges(gear, isEquipping: true);
+}
+
+public void ReaddEquipmentBonuses()
+{
+    // Get total equipment buffs
+    Stat equipmentBonus = Equipment.GetEquipmentStats();
+
+    // Apply equipment buffs
+    Stats.CurrentStats.Health += equipmentBonus.Health;
+    Stats.CurrentStats.Attack += equipmentBonus.Attack;
+    Stats.CurrentStats.Defense += equipmentBonus.Defense;
+    Stats.CurrentStats.MagicAttack += equipmentBonus.MagicAttack;
+    Stats.CurrentStats.MagicDefense += equipmentBonus.MagicDefense;
+    Stats.CurrentStats.Speed += equipmentBonus.Speed;
 }
 
 public void RemoveItem(string slot)

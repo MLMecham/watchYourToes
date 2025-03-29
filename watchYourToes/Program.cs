@@ -179,31 +179,7 @@ class Program
             randomConsumable.PrintConsumable();
         }
         Console.ReadLine();
-        myCharacter.AddItemToInventory(randomConsumable);
-        randomConsumable = JsonManager.GetRandomConsumable();
-        if (randomConsumable != null)
-        {
-            Console.WriteLine("Randomly Selected Consumable:");
-            randomConsumable.PrintConsumable();
-        }
-        Console.ReadLine();
-        myCharacter.AddItemToInventory(randomConsumable);
-        randomConsumable = JsonManager.GetRandomConsumable();
-        if (randomConsumable != null)
-        {
-            Console.WriteLine("Randomly Selected Consumable:");
-            randomConsumable.PrintConsumable();
-        }
-        Console.ReadLine();
-        myCharacter.AddItemToInventory(randomConsumable);
-        randomConsumable = JsonManager.GetRandomConsumable();
-        if (randomConsumable != null)
-        {
-            Console.WriteLine("Randomly Selected Consumable:");
-            randomConsumable.PrintConsumable();
-        }
-        Console.ReadLine();
-        myCharacter.AddItemToInventory(randomConsumable);
+        
 
 
         // Load Gear from Specified file

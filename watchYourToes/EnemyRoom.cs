@@ -19,7 +19,7 @@ public class EnemyRoom : Room{
     public List<Enemy> enemiesList {get; set;} = new List<Enemy>();
 
     public EnemyRoom(Character character, int floorNumber = 1) : base("A dark and eerie room filled with enemies.", character) // Call the base class constructor with a default description
-    {
+    {   
         getEnemyList(floorNumber);   // Initialize the enemy list for the room
     }
 
@@ -40,6 +40,11 @@ public class EnemyRoom : Room{
         public int speed { get; set; }
         public int exp { get; set; }
         public float possibilityOfDrop { get; set; }
+    }
+
+    public void updateEnemyRoomDescription()
+    {   
+        Description = roomCompleted ? "A dark and eerie room filled with enemies." : "You have cleared the room of enemies.";
     }
 
     public void getEnemyList(int floorNumber)

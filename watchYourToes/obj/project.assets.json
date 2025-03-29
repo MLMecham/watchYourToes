@@ -643,40 +643,24 @@
     ]
   },
   "packageFolders": {
-<<<<<<< HEAD
     "C:\\Users\\calla\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
-=======
-    "/Users/valeriabisso/.nuget/packages/": {}
->>>>>>> 334028c16d1bf94de5d5dcad87c72207d39f8403
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-<<<<<<< HEAD
       "projectUniqueName": "C:\\Users\\calla\\桌面\\programming\\Academic\\CSE 310 Applied Programming\\watchYourToes\\watchYourToes\\watchYourToes.csproj",
       "projectName": "watchYourToes",
       "projectPath": "C:\\Users\\calla\\桌面\\programming\\Academic\\CSE 310 Applied Programming\\watchYourToes\\watchYourToes\\watchYourToes.csproj",
       "packagesPath": "C:\\Users\\calla\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\calla\\桌面\\programming\\Academic\\CSE 310 Applied Programming\\watchYourToes\\watchYourToes\\obj\\",
-=======
-      "projectUniqueName": "/Users/valeriabisso/Desktop/BYUI/cse310/watchYourToes/watchYourToes/watchYourToes.csproj",
-      "projectName": "watchYourToes",
-      "projectPath": "/Users/valeriabisso/Desktop/BYUI/cse310/watchYourToes/watchYourToes/watchYourToes.csproj",
-      "packagesPath": "/Users/valeriabisso/.nuget/packages/",
-      "outputPath": "/Users/valeriabisso/Desktop/BYUI/cse310/watchYourToes/watchYourToes/obj/",
->>>>>>> 334028c16d1bf94de5d5dcad87c72207d39f8403
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-<<<<<<< HEAD
         "C:\\Users\\calla\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config"
-=======
-        "/Users/valeriabisso/.nuget/NuGet/NuGet.Config"
->>>>>>> 334028c16d1bf94de5d5dcad87c72207d39f8403
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -699,8 +683,7 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      },
-      "SdkAnalysisLevel": "9.0.200"
+      }
     },
     "frameworks": {
       "net8.0": {
@@ -726,31 +709,21 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[8.0.13, 8.0.13]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Host.osx-arm64",
-            "version": "[8.0.13, 8.0.13]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Ref",
-            "version": "[8.0.13, 8.0.13]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
         },
-<<<<<<< HEAD
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.401/PortableRuntimeIdentifierGraph.json"
-=======
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.200/PortableRuntimeIdentifierGraph.json"
->>>>>>> 334028c16d1bf94de5d5dcad87c72207d39f8403
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file C:\\Users\\calla\\桌面\\programming\\Academic\\CSE 310 Applied Programming\\watchYourToes\\watchYourToes\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+    }
+  ]
 }

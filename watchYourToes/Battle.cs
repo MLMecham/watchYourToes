@@ -38,7 +38,7 @@ public class Battle
         // Display the combatants turn order
         
     }
-    public async Task StartBattle()
+    public void StartBattle()
     {
         Console.WriteLine($"Battle starts! {character.Name} vs {enemies.Count} enemie(s)!");
      
@@ -72,11 +72,11 @@ public class Battle
 
             if (combatant is Character charCombatant)
                 {
-                    await PlayerTurn(charCombatant);
+                    PlayerTurn(charCombatant);
                 }
             else if (combatant is Enemy enemy)
                 {
-                    await EnemyTurn(enemy);
+                    EnemyTurn(enemy);
                 }
 
             //removes dead enemies from combatants & enemies list
@@ -103,7 +103,7 @@ public class Battle
     }
 
     //player's turn - they choose who to attack
-    public async Task PlayerTurn(Character charCombatant)
+    public void PlayerTurn(Character charCombatant)
     {
         if (enemies.Count == 0) return;  //if no enemies left
 
@@ -154,11 +154,11 @@ public class Battle
             Console.WriteLine($"Remaining enemies: {enemies.Count}");
         }
 
-        await Task.Delay(1000);
+        Task.Delay(1000);
     }
 
     //enemy just attacks character, no choice
-    public async Task EnemyTurn(Enemy enemy)
+    public void EnemyTurn(Enemy enemy)
     {
         if (character.Stats.BaseStats.Health <= 0) {
             // the dead emeny already gets removed in the Battle loop
@@ -168,7 +168,7 @@ public class Battle
         damage = Math.Max(damage, 1); // Ensures at least 1 damage is dealt
         character.TakeDamage(damage);
 
-        await Task.Delay(1000);
+        Task.Delay(1000);
     }
         
       

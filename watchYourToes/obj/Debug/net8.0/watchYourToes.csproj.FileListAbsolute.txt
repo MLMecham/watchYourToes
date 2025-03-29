@@ -122,5 +122,58 @@ C:/Users/calla/桌面/programming/Academic/CSE 310 Applied Programming/watchYour
 C:/Users/calla/桌面/programming/Academic/CSE 310 Applied Programming/watchYourToes/watchYourToes/obj/Debug/net8.0/watchYourToes.genruntimeconfig.cache
 C:/Users/calla/桌面/programming/Academic/CSE 310 Applied Programming/watchYourToes/watchYourToes/obj/Debug/net8.0/ref/watchYourToes.dll
 /Users/loganlay/Documents/watchYourToes/watchYourToes/bin/Debug/net8.0/Newtonsoft.Json.dll
+<<<<<<< HEAD
 C:/Users/mecha/Learning to Program/watchYourToes/watchyourtoes/bin/Debug/net8.0/Newtonsoft.Json.dll
 /Users/valeriabisso/Desktop/BYUI/cse310/watchYourToes/watchYourToes/bin/Debug/net8.0/Newtonsoft.Json.dll
+=======
+C:\Users\mecha\Learning to Program\watchYourToes\watchyourtoes\bin\Debug\net8.0\watchYourToes.exe
+C:\Users\mecha\Learning to Program\watchYourToes\watchyourtoes\bin\Debug\net8.0\watchYourToes.deps.json
+C:\Users\mecha\Learning to Program\watchYourToes\watchyourtoes\bin\Debug\net8.0\watchYourToes.runtimeconfig.json
+C:\Users\mecha\Learning to Program\watchYourToes\watchyourtoes\bin\Debug\net8.0\watchYourToes.dll
+C:\Users\mecha\Learning to Program\watchYourToes\watchyourtoes\bin\Debug\net8.0\watchYourToes.pdb
+C:\Users\mecha\Learning to Program\watchYourToes\watchyourtoes\bin\Debug\net8.0\DnsClient.dll
+C:\Users\mecha\Learning to Program\watchYourToes\watchyourtoes\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\mecha\Learning to Program\watchYourToes\watchyourtoes\bin\Debug\net8.0\MongoDB.Bson.dll
+C:\Users\mecha\Learning to Program\watchYourToes\watchyourtoes\bin\Debug\net8.0\MongoDB.Driver.dll
+C:\Users\mecha\Learning to Program\watchYourToes\watchyourtoes\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\Users\mecha\Learning to Program\watchYourToes\watchyourtoes\bin\Debug\net8.0\SharpCompress.dll
+C:\Users\mecha\Learning to Program\watchYourToes\watchyourtoes\bin\Debug\net8.0\Snappier.dll
+C:\Users\mecha\Learning to Program\watchYourToes\watchyourtoes\bin\Debug\net8.0\ZstdSharp.dll
+C:\Users\mecha\Learning to Program\watchYourToes\watchyourtoes\obj\Debug\net8.0\watchYourToes.csproj.AssemblyReference.cache
+C:\Users\mecha\Learning to Program\watchYourToes\watchyourtoes\obj\Debug\net8.0\watchYourToes.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\mecha\Learning to Program\watchYourToes\watchyourtoes\obj\Debug\net8.0\watchYourToes.AssemblyInfoInputs.cache
+C:\Users\mecha\Learning to Program\watchYourToes\watchyourtoes\obj\Debug\net8.0\watchYourToes.AssemblyInfo.cs
+C:\Users\mecha\Learning to Program\watchYourToes\watchyourtoes\obj\Debug\net8.0\watchYourToes.csproj.CoreCompileInputs.cache
+C:\Users\mecha\Learning to Program\watchYourToes\watchyourtoes\obj\Debug\net8.0\watchYourToes.sourcelink.json
+C:\Users\mecha\Learning to Program\watchYourToes\watchyourtoes\obj\Debug\net8.0\watchYou.066B0038.Up2Date
+C:\Users\mecha\Learning to Program\watchYourToes\watchyourtoes\obj\Debug\net8.0\watchYourToes.dll
+C:\Users\mecha\Learning to Program\watchYourToes\watchyourtoes\obj\Debug\net8.0\refint\watchYourToes.dll
+C:\Users\mecha\Learning to Program\watchYourToes\watchyourtoes\obj\Debug\net8.0\watchYourToes.pdb
+C:\Users\mecha\Learning to Program\watchYourToes\watchyourtoes\obj\Debug\net8.0\watchYourToes.genruntimeconfig.cache
+C:\Users\mecha\Learning to Program\watchYourToes\watchyourtoes\obj\Debug\net8.0\ref\watchYourToes.dll
+C:\Users\calla\桌面\programming\Academic\CSE 310 Applied Programming\watchYourToes\watchYourToes\bin\Debug\net8.0\watchYourToes.exe
+C:\Users\calla\桌面\programming\Academic\CSE 310 Applied Programming\watchYourToes\watchYourToes\bin\Debug\net8.0\watchYourToes.deps.json
+C:\Users\calla\桌面\programming\Academic\CSE 310 Applied Programming\watchYourToes\watchYourToes\bin\Debug\net8.0\watchYourToes.runtimeconfig.json
+C:\Users\calla\桌面\programming\Academic\CSE 310 Applied Programming\watchYourToes\watchYourToes\bin\Debug\net8.0\watchYourToes.dll
+C:\Users\calla\桌面\programming\Academic\CSE 310 Applied Programming\watchYourToes\watchYourToes\bin\Debug\net8.0\watchYourToes.pdb
+C:\Users\calla\桌面\programming\Academic\CSE 310 Applied Programming\watchYourToes\watchYourToes\bin\Debug\net8.0\DnsClient.dll
+C:\Users\calla\桌面\programming\Academic\CSE 310 Applied Programming\watchYourToes\watchYourToes\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\calla\桌面\programming\Academic\CSE 310 Applied Programming\watchYourToes\watchYourToes\bin\Debug\net8.0\MongoDB.Bson.dll
+C:\Users\calla\桌面\programming\Academic\CSE 310 Applied Programming\watchYourToes\watchYourToes\bin\Debug\net8.0\MongoDB.Driver.dll
+C:\Users\calla\桌面\programming\Academic\CSE 310 Applied Programming\watchYourToes\watchYourToes\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\Users\calla\桌面\programming\Academic\CSE 310 Applied Programming\watchYourToes\watchYourToes\bin\Debug\net8.0\SharpCompress.dll
+C:\Users\calla\桌面\programming\Academic\CSE 310 Applied Programming\watchYourToes\watchYourToes\bin\Debug\net8.0\Snappier.dll
+C:\Users\calla\桌面\programming\Academic\CSE 310 Applied Programming\watchYourToes\watchYourToes\bin\Debug\net8.0\ZstdSharp.dll
+C:\Users\calla\桌面\programming\Academic\CSE 310 Applied Programming\watchYourToes\watchYourToes\obj\Debug\net8.0\watchYourToes.csproj.AssemblyReference.cache
+C:\Users\calla\桌面\programming\Academic\CSE 310 Applied Programming\watchYourToes\watchYourToes\obj\Debug\net8.0\watchYourToes.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\calla\桌面\programming\Academic\CSE 310 Applied Programming\watchYourToes\watchYourToes\obj\Debug\net8.0\watchYourToes.AssemblyInfoInputs.cache
+C:\Users\calla\桌面\programming\Academic\CSE 310 Applied Programming\watchYourToes\watchYourToes\obj\Debug\net8.0\watchYourToes.AssemblyInfo.cs
+C:\Users\calla\桌面\programming\Academic\CSE 310 Applied Programming\watchYourToes\watchYourToes\obj\Debug\net8.0\watchYourToes.csproj.CoreCompileInputs.cache
+C:\Users\calla\桌面\programming\Academic\CSE 310 Applied Programming\watchYourToes\watchYourToes\obj\Debug\net8.0\watchYourToes.sourcelink.json
+C:\Users\calla\桌面\programming\Academic\CSE 310 Applied Programming\watchYourToes\watchYourToes\obj\Debug\net8.0\watchYou.066B0038.Up2Date
+C:\Users\calla\桌面\programming\Academic\CSE 310 Applied Programming\watchYourToes\watchYourToes\obj\Debug\net8.0\watchYourToes.dll
+C:\Users\calla\桌面\programming\Academic\CSE 310 Applied Programming\watchYourToes\watchYourToes\obj\Debug\net8.0\refint\watchYourToes.dll
+C:\Users\calla\桌面\programming\Academic\CSE 310 Applied Programming\watchYourToes\watchYourToes\obj\Debug\net8.0\watchYourToes.pdb
+C:\Users\calla\桌面\programming\Academic\CSE 310 Applied Programming\watchYourToes\watchYourToes\obj\Debug\net8.0\watchYourToes.genruntimeconfig.cache
+C:\Users\calla\桌面\programming\Academic\CSE 310 Applied Programming\watchYourToes\watchYourToes\obj\Debug\net8.0\ref\watchYourToes.dll
+>>>>>>> 77b2c1a636611be472fd837219d1f36a5eef4965

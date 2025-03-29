@@ -168,6 +168,9 @@ class Program
          string filePathGear = "GearTable.json";
 
         // Load Gear from Specified file
+        JsonManager.LoadGearFromJson(filePathGear);
+
+        Console.ReadLine();
 
         // Load enemies from the specified file
         // DO NOT DELETE THIS LINE. THIS IS WHAT LET"S US USE THE STATIC JSON LIST

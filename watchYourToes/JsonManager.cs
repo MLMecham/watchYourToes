@@ -7,6 +7,7 @@ public static class JsonManager
 {
     // Static list of enemies, accessible globally
     public static List<Enemy> JsonEnemyList { get; set; } = new List<Enemy>();
+    public static List<Gear> JsonGearList { get; set; } = new List<Gear>();
     private static Random random = new Random();
 
     // Method to load the enemies from a JSON file
@@ -102,5 +103,48 @@ public static class JsonManager
         newEnemy.InitializeCurrentStat();
 
         return newEnemy;
+    }
+
+    public static void LoadGearFromJson(string filePathGear)
+    {
+        try
+        {
+            if (File.Exists(filePathGear))
+            {
+                string jsonString = File.ReadAllText(filePathGear);
+                
+                // Deserialize the gear list
+                JsonGearList = JsonSerializer.Deserialize<List<Gear>>(jsonString);
+                
+                Console.WriteLine("Gear loaded successfully!");
+
+                // Print all loaded gear
+                foreach (var gear in JsonGearList)
+                {
+                    Console.WriteLine($"Name: {gear.Name} | Slot: {gear.Slot} | Health: {gear.HealthChange} | Attack: {gear.AttackChange} | Defense: {gear.DefenseChange} | Magic Attack: {gear.MagicAttackChange} | Magic Defense: {gear.MagicDefenseChange} | Speed: {gear.SpeedChange}");
+                    Console.WriteLine("----------------");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Gear file does not exist.");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error loading gear from file: {ex.Message}");
+        }
+    }
+
+    public static Gear GetRandomGear()
+    {
+        if (JsonGearList.Count == 0)
+        {
+            Console.WriteLine("Gear list is empty. Cannot generate a random gear.");
+            return null;
+        }
+
+        int randomIndex = random.Next(JsonGearList.Count);
+        return JsonGearList[randomIndex];  // Return a randomly selected gear
     }
 }

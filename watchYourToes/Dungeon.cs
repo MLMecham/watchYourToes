@@ -342,7 +342,13 @@ public int Action()
     {
 
         Console.Clear();
-        grid[currentCoord].RoomEffect();
+        if (!grid[currentCoord].roomCompleted)
+        {
+            grid[currentCoord].RoomEffect();
+            grid[currentCoord].roomCompleted = true;
+
+        }
+        
 
 
         Console.WriteLine( grid[currentCoord].Description);

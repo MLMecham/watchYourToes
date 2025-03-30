@@ -338,16 +338,13 @@ class Program
         // await battle.StartBattle();
 
 
-        // //VILLAGER CHATBOT TEST!!
-        Console.WriteLine("\n-- Villager Chatbot --\n");
+        // //Shopkeeper SHOP CHATBOT TEST!!
+        Console.WriteLine("\n-- Shopkeeper Chatbot --\n");
         Console.WriteLine("Days: " +  myCharacter.Days);
-
-    
-        Console.ReadLine();
 
         while (true)
         {
-            Console.WriteLine("Do you want to talk to the villager?");
+            Console.WriteLine("\nDo you want to talk to the Shopkeeper?");
             Console.WriteLine("1. Yes");
             Console.WriteLine("2. No");
             Console.Write("Choose an option: ");
@@ -357,15 +354,33 @@ class Program
             {
                 Console.WriteLine("Enter a question (or type 'shop' to see and purchase items, or 'exit' to leave):");
                 string user_query = Console.ReadLine();
+                
+                VillagerMessage villagerMessage = new VillagerMessage(user_query,myCharacter.Days);
+                using HttpClient client = new HttpClient { BaseAddress = new Uri("http://127.0.0.1:8000/") };
+                string jsonMessage = JsonSerializer.Serialize(villagerMessage);
+                StringContent content = new StringContent(jsonMessage, Encoding.UTF8, "application/json");
+                try
+                {
+                    HttpResponseMessage response = await client.PostAsync("villager_chat", content);
+                    response.EnsureSuccessStatusCode();
+                    string result = await response.Content.ReadAsStringAsync();
+                    Console.WriteLine("Shopkeeper: " + result);
+                }
+                catch (HttpRequestException e)
+                {
+                    Console.WriteLine("Error communicating with Villager AI: " + e.Message);
+                }
+            
+
                 if (user_query.ToLower() == "exit")
                 {
-                    Console.WriteLine("You finished talking to the villager.");
+                    Console.WriteLine("You finished talking to the shopkeeper.");
                     break; 
                 }
                 else if (user_query.ToLower() == "shop")
                 {
                     List<Consumable> randomConsumables = JsonManager.GetRandomConsumablesList(5);
-                    Console.WriteLine("\nShopkeeper: Here’s what I have for sale:");
+                    Console.WriteLine("Here’s what I have for sale:");
                     for (int i = 0; i < randomConsumables.Count; i++)
                     {
                         var consumable = randomConsumables[i];
@@ -397,24 +412,9 @@ class Program
                     
 
                 }
-                else{
-                VillagerMessage villagerMessage = new VillagerMessage(user_query,myCharacter.Days);
-                using HttpClient client = new HttpClient { BaseAddress = new Uri("http://127.0.0.1:8000/") };
-                string jsonMessage = JsonSerializer.Serialize(villagerMessage);
-                StringContent content = new StringContent(jsonMessage, Encoding.UTF8, "application/json");
-
-                try
-                {
-                    HttpResponseMessage response = await client.PostAsync("villager_chat", content);
-                    response.EnsureSuccessStatusCode();
-                    string result = await response.Content.ReadAsStringAsync();
-                    Console.WriteLine("Villager: " + result);
-                }
-                catch (HttpRequestException e)
-                {
-                    Console.WriteLine("Error communicating with Villager AI: " + e.Message);
-                }
-            }}
+                
+            
+            }
             else if (user_input == "2")
             {
                 Console.WriteLine("You decide not to approach the villager. BYE!");

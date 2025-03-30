@@ -194,24 +194,29 @@ public static class JsonManager
         return JsonConsumableList[randomIndex];  // Return a random consumable
     }
 
-    public static List<Consumable> GetRandomConsumablesList(int numberOfItems)
+   public static List<Consumable> GetRandomConsumablesList(int numberOfItems)
+{
+    List<Consumable> randomConsumables = new List<Consumable>();
+    if (JsonConsumableList.Count == 0)
     {
-        List<Consumable> randomConsumables = new List<Consumable>();
-        if (JsonConsumableList.Count == 0)
-        {
-            Console.WriteLine("Consumable list is empty.");
-            return randomConsumables;
-        }
-       
+        Console.WriteLine("Consumable list is empty.");
+        return randomConsumables;
+    }
+
+    //so we don’t try to get more items than available
+    int itemsToSelect = Math.Min(numberOfItems, JsonConsumableList.Count);
+    while (randomConsumables.Count < itemsToSelect)
+    {
         Consumable randomConsumable = JsonConsumableList[random.Next(JsonConsumableList.Count)];
         if (!randomConsumables.Contains(randomConsumable))
         {
             randomConsumables.Add(randomConsumable);
         }
-        
-
-        return randomConsumables;
     }
+
+    return randomConsumables;
+}
+
 }
 
 

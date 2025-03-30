@@ -10,6 +10,7 @@ public class Warrior : Character
         this.Exp = character.Exp;
         this.Stats = character.Stats;
         this.Days = character.Days;
+        this.Gold = character.Gold;
     }
 
     public override int BonusPoints { get; } = 6;

@@ -8,6 +8,7 @@ public class CustomClass : Character
         this.Exp = character.Exp;
         this.Stats = character.Stats;
         this.Days = character.Days;
+        this.Gold = character.Gold;
         
     }
 

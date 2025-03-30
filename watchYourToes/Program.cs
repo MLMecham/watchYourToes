@@ -341,6 +341,10 @@ class Program
         // //VILLAGER CHATBOT TEST!!
         Console.WriteLine("\n-- Villager Chatbot --\n");
         Console.WriteLine("Days: " +  myCharacter.Days);
+
+    
+        Console.ReadLine();
+
         while (true)
         {
             Console.WriteLine("Do you want to talk to the villager?");
@@ -351,14 +355,49 @@ class Program
 
             if (user_input == "1")
             {
-                Console.WriteLine("Enter a question (or type 'exit' to stop chatting):");
+                Console.WriteLine("Enter a question (or type 'shop' to see and purchase items, or 'exit' to leave):");
                 string user_query = Console.ReadLine();
                 if (user_query.ToLower() == "exit")
                 {
                     Console.WriteLine("You finished talking to the villager.");
                     break; 
                 }
+                else if (user_query.ToLower() == "shop")
+                {
+                    List<Consumable> randomConsumables = JsonManager.GetRandomConsumablesList(5);
+                    Console.WriteLine("\nShopkeeper: Here’s what I have for sale:");
+                    for (int i = 0; i < randomConsumables.Count; i++)
+                    {
+                        var consumable = randomConsumables[i];
+                        Console.WriteLine($"{i + 1}. {consumable.Name} - {consumable.Description} (Cost: 10 gold)");
+                    }
 
+                    Console.WriteLine("-----------------------------");
+                    Console.WriteLine($"You have {myCharacter.Gold} gold.");
+                    Console.Write("Enter the number of the item to buy: ");
+                    int itemChoice;
+                    if (!int.TryParse(Console.ReadLine(), out itemChoice) || itemChoice < 1 || itemChoice > randomConsumables.Count)
+                    {
+                        Console.WriteLine("Invalid item choice. Please try again.");
+                        continue;
+                    }
+                    // Checks if the user has enough gold
+                    if (myCharacter.Gold >= 10)  //assuming each item costs 10 gold!!
+                    {
+                        Consumable selectedItem = randomConsumables[itemChoice - 1];  // Get the selected item from the random list
+                        myCharacter.Gold -= 10;
+                        myCharacter.AddItemToInventory(selectedItem);
+                        Console.WriteLine($"You purchased {selectedItem.Name} for 10 gold. You now have {myCharacter.Gold} gold and {myCharacter.Inventory.Count} items in your inventory.");
+                        Console.WriteLine("-----------------------------");
+                    }
+                    else
+                    {
+                        Console.WriteLine("You don't have enough gold to buy that item.");
+                    }
+                    
+
+                }
+                else{
                 VillagerMessage villagerMessage = new VillagerMessage(user_query,myCharacter.Days);
                 using HttpClient client = new HttpClient { BaseAddress = new Uri("http://127.0.0.1:8000/") };
                 string jsonMessage = JsonSerializer.Serialize(villagerMessage);
@@ -375,7 +414,7 @@ class Program
                 {
                     Console.WriteLine("Error communicating with Villager AI: " + e.Message);
                 }
-            }
+            }}
             else if (user_input == "2")
             {
                 Console.WriteLine("You decide not to approach the villager. BYE!");

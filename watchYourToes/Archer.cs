@@ -8,6 +8,7 @@ public class Archer : Character
         this.Level = character.Level;
         this.Exp = character.Exp;
         this.Stats = character.Stats;
+        this.Gold = character.Gold;
     }
 
     public override int BonusPoints { get; } = 4;

@@ -14,7 +14,7 @@ public class Room
         roomCompleted = false;
     }
 
-    public virtual void RoomEffect()
+    public async virtual void RoomEffect()
     {
         Console.WriteLine("Normal room");
     }

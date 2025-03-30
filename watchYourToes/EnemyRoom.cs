@@ -101,11 +101,11 @@ public class EnemyRoom : Room{
         // }
     }
 
-    public override void RoomEffect()
+    public async override void RoomEffect()
     {
         Console.WriteLine($"This is an enemy room.");
         enemiesList.Add(JsonManager.GetRandomEnemy(floorNumber));
         Battle newBattle = new Battle(character, enemiesList);
-        newBattle.StartBattle(); // Start the battle with the enemies in the room
+        await newBattle.StartBattle(); // Start the battle with the enemies in the room
     }
 }

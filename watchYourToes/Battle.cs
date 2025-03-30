@@ -5,6 +5,7 @@ using System.Text.Json;
 using System.Net.Http;
 using System.Linq;
 using System.Text;
+using System.Runtime.CompilerServices;
 
 public class Battle
 {
@@ -87,9 +88,9 @@ public class Battle
             //removes dead enemies from combatants & enemies list
             // It's better to remove enemy here instead of in character's turn to avoid modifying the list while iterating
             // it also has the flexibility if the enemy can receive damage from other sources (e.g., effect, etc.)
-            combatants = combatants.Where(c => !(c is Enemy e && e.IsDefeated())).ToList();
-            enemies = enemies.Where(e => !e.IsDefeated()).ToList();
-            
+                combatants = combatants.Where(c => !(c is Enemy e && e.IsDefeated())).ToList();
+                enemies = enemies.Where(e => !e.IsDefeated()).ToList();
+                // Task.Delay(3000);
             }
         }
 
@@ -160,9 +161,10 @@ public class Battle
         //Calling Battle chatbot
         // Console.WriteLine($"{charCombatant.Name} uses {attackType} attack on {target.Name} for {damage} damage!");
         
-        await PrintBattleMessage(charCombatant.Name, charCombatant.ClassName, attackType, target.Name, target.Name);
+        string message = Task.Run(() =>PrintBattleMessage(charCombatant.Name, charCombatant.ClassName, attackType, target.Name, target.Name)).GetAwaiter().GetResult();
+        Console.WriteLine(message);
         target.TakeDamage(damage);
-        await Task.Delay(1000);  
+        // Task.Delay(3000);  
         Console.WriteLine("");
 
         if (target.IsDefeated())
@@ -171,7 +173,7 @@ public class Battle
             Console.WriteLine($"Remaining enemies: {enemies.Count}");
         }
 
-        Task.Delay(1000);
+        // Task.Delay(100);
     }
 
     //enemy just attacks character, no choice
@@ -184,13 +186,14 @@ public class Battle
         int damage = enemy.CurrentStat.Attack - character.Stats.BaseStats.Defense;
         damage = Math.Max(damage, 1); // Ensures at least 1 damage is dealt
         //Calling Battle chatbot
-        await PrintBattleMessage(enemy.Name,enemy.Name, "Attack", character.Name, character.ClassName);
+        string message = Task.Run(() => PrintBattleMessage(enemy.Name,enemy.Name, "Attack", character.Name, character.ClassName)).GetAwaiter().GetResult();
+        Console.WriteLine(message);
         character.TakeDamage(damage);
-        await Task.Delay(1000);
+        // Task.Delay(100);
         Console.WriteLine("");
     }
 
-    public async Task PrintBattleMessage(string name, string name_class, string action, string target, string target_class)
+    public async Task<string> PrintBattleMessage(string name, string name_class, string action, string target, string target_class)
 
     {
         BattleMessage battleMessage = new BattleMessage(name, name_class,action, target, target_class);
@@ -201,11 +204,12 @@ public class Battle
             HttpResponseMessage response = await client.PostAsync("battle_chat", content);
             response.EnsureSuccessStatusCode();
             string result = await response.Content.ReadAsStringAsync();
-            Console.WriteLine("Narrator: " + result);
+            return ("Narrator: " + result);
         }
         catch (HttpRequestException e)
         {
-            Console.WriteLine("Error communicating with Battle AI: " + e.Message);
+            return ("Error communicating with Battle AI: " + e.Message);
+            
         }
     }
         

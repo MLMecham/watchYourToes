@@ -699,7 +699,66 @@ class Program
 
         case ConsoleKey.D4:
         case ConsoleKey.NumPad4:
-            Console.WriteLine("not built yet"); // Placeholder for store functionality
+             Console.WriteLine("Enter a question (or type 'shop' to see and purchase items, or 'exit' to leave):");
+                string user_query = Console.ReadLine();
+                
+                VillagerMessage villagerMessage = new VillagerMessage(user_query,myCharacter.Days);
+                HttpClient client = new HttpClient { BaseAddress = new Uri("http://127.0.0.1:8000/") };
+                string jsonMessage = JsonSerializer.Serialize(villagerMessage);
+                StringContent content = new StringContent(jsonMessage, Encoding.UTF8, "application/json");
+                try
+                {
+                    HttpResponseMessage response = await client.PostAsync("villager_chat", content);
+                    response.EnsureSuccessStatusCode();
+                    string result = await response.Content.ReadAsStringAsync();
+                    Console.WriteLine("Shopkeeper: " + result);
+                }
+                catch (HttpRequestException e)
+                {
+                    Console.WriteLine("Error communicating with Villager AI: " + e.Message);
+                }
+            
+
+                if (user_query.ToLower() == "exit")
+                {
+                    Console.WriteLine("You finished talking to the shopkeeper.");
+                    break; 
+                }
+                else if (user_query.ToLower() == "shop")
+                {
+                    List<Consumable> randomConsumables = JsonManager.GetRandomConsumablesList(5);
+                    Console.WriteLine("Here’s what I have for sale:");
+                    for (int i = 0; i < randomConsumables.Count; i++)
+                    {
+                        var consumable = randomConsumables[i];
+                        Console.WriteLine($"{i + 1}. {consumable.Name} - {consumable.Description} (Cost: 10 gold)");
+                    }
+
+                    Console.WriteLine("-----------------------------");
+                    Console.WriteLine($"You have {myCharacter.Gold} gold.");
+                    Console.Write("Enter the number of the item to buy: ");
+                    int itemChoice;
+                    if (!int.TryParse(Console.ReadLine(), out itemChoice) || itemChoice < 1 || itemChoice > randomConsumables.Count)
+                    {
+                        Console.WriteLine("Invalid item choice. Please try again.");
+                        continue;
+                    }
+                    // Checks if the user has enough gold
+                    if (myCharacter.Gold >= 10)  //assuming each item costs 10 gold!!
+                    {
+                        Consumable selectedItem = randomConsumables[itemChoice - 1];  // Get the selected item from the random list
+                        myCharacter.Gold -= 10;
+                        myCharacter.AddItemToInventory(selectedItem);
+                        Console.WriteLine($"You purchased {selectedItem.Name} for 10 gold. You now have {myCharacter.Gold} gold and {myCharacter.Inventory.Count} items in your inventory.");
+                        Console.WriteLine("-----------------------------");
+                    }
+                    else
+                    {
+                        Console.WriteLine("You don't have enough gold to buy that item.");
+                    }
+                    
+
+                }; // Placeholder for store functionality
             break;
 
         case ConsoleKey.D5:
